@@ -23,8 +23,9 @@ describe('Molecule: InputGroup', () => {
   it('should NOT show the Badge when value is empty', () => {
     render(<InputGroup {...defaultProps} value="" />);
     
-    // El Badge no debe estar en el DOM si no hay texto
-    expect(screen.queryByClass('badge-count')).not.toBeInTheDocument();
+    // Buscamos por el label de accesibilidad que genera el átomo Badge
+    const badge = screen.queryByLabelText(/notificaciones/i);
+    expect(badge).not.toBeInTheDocument();
   });
 
   it('should show the Badge with correct remaining count when typing', () => {
@@ -53,10 +54,17 @@ describe('Molecule: InputGroup', () => {
   });
 
   it('should hide the Badge when the limit is reached (remaining = 0)', () => {
-    // Debido a que nuestro Átomo Badge retorna null si count <= 0
-    render(<InputGroup {...defaultProps} value="12345678901234567890" maxLength={20} />);
+    const maxLength = 20;
+    render(
+      <InputGroup 
+        {...defaultProps} 
+        value="12345678901234567890" 
+        maxLength={maxLength} 
+      />
+    );
     
-    const badge = screen.queryByClass('badge-count');
+    // Como remaining es 0, el Badge no debe renderizarse
+    const badge = screen.queryByLabelText(/notificaciones/i);
     expect(badge).not.toBeInTheDocument();
   });
 });
