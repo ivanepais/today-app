@@ -1,10 +1,19 @@
+import { StyledTypography, TypographyVariant } from './Typography.styles';
+
 interface TypographyProps {
-  variant?: 'title' | 'body' | 'label';
+  variant?: TypographyVariant;
   children: React.ReactNode;
-  as?: 'h1' | 'h2' | 'p' | 'span';
+  as?: 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'label';
 }
 
-export const Typography = ({ variant = 'body', children, as = 'p' }: TypographyProps) => {
-  const Component = as;
-  return <Component className={`text-${variant}`}>{children}</Component>;
+export const Typography = ({ 
+  variant = 'body', 
+  children, 
+  as = 'p' 
+}: TypographyProps) => {
+  return (
+    <StyledTypography as={as} $variant={variant}>
+      {children}
+    </StyledTypography>
+  );
 };

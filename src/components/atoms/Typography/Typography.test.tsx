@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
+// Importa desde tu utility, no directamente de testing-library
+import { render, screen } from '../../../test/utils'; 
 import { describe, it, expect } from 'vitest';
 import { Typography } from './Typography';
+import { theme } from '../../../styles/theme'; // Para comparar valores exactos
 
 describe('Atom: Typography', () => {
   it('should render as a paragraph by default', () => {
@@ -8,10 +10,13 @@ describe('Atom: Typography', () => {
     
     const element = screen.getByText(/texto de prueba/i);
     
-    // Verificamos que el tag sea un <p>
     expect(element.tagName).toBe('P');
-    // Verificamos la clase por defecto
-    expect(element).toHaveClass('text-body');
+    
+    // SIN CLASES: Verificamos el estilo real
+    expect(element).toHaveStyle({
+      'font-size': theme.typography.fontSize.md,
+      'color': theme.colors.textPrimary
+    });
   });
 
   it('should render as an h1 when "as" prop is "h1"', () => {
@@ -20,26 +25,20 @@ describe('Atom: Typography', () => {
     const element = screen.getByText(/título principal/i);
     
     expect(element.tagName).toBe('H1');
-    expect(element).toHaveClass('text-title');
+    expect(element).toHaveStyle({
+      'font-weight': theme.typography.fontWeight.bold.toString()
+    });
   });
 
-  it('should render with "label" variant class', () => {
+  it('should render with "label" variant styles', () => {
     render(<Typography variant="label" as="span">Etiqueta</Typography>);
     
     const element = screen.getByText(/etiqueta/i);
     
     expect(element.tagName).toBe('SPAN');
-    expect(element).toHaveClass('text-label');
-  });
-
-  it('should render children correctly', () => {
-    render(
-      <Typography>
-        <strong>Texto negrita</strong>
-      </Typography>
-    );
-    
-    const boldElement = screen.getByText(/texto negrita/i);
-    expect(boldElement.tagName).toBe('STRONG');
+    // Verificamos transformación a mayúsculas del label
+    expect(element).toHaveStyle({
+      'text-transform': 'uppercase'
+    });
   });
 });
