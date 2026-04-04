@@ -1,22 +1,32 @@
-import React from 'react';
+import { 
+  CheckboxContainer, 
+  HiddenCheckbox, 
+  StyledCheckbox, 
+  LabelText 
+} from './Checkbox.styles';
 
 interface CheckboxProps {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  disabled?: boolean;
 }
 
-export const Checkbox = ({ checked, onChange, label }: CheckboxProps) => {
+export const Checkbox = ({ 
+  checked, 
+  onChange, 
+  label, 
+  disabled = false 
+}: CheckboxProps) => {
   return (
-    <label className="checkbox-wrapper" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-      <input 
-        type="checkbox" 
+    <CheckboxContainer>
+      <HiddenCheckbox 
         checked={checked} 
-        onChange={onChange}
-        // El input es el que maneja el foco y el evento
+        onChange={onChange} 
+        disabled={disabled}
       />
-      <span className="checkmark" />
-      {label && <span>{label}</span>}
-    </label>
+      <StyledCheckbox $checked={checked} aria-hidden="true" />
+      {label && <LabelText>{label}</LabelText>}
+    </CheckboxContainer>
   );
 };
