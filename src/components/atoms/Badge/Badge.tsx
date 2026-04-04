@@ -1,16 +1,25 @@
+import { StyledBadge } from './Badge.styles';
+
 interface BadgeProps {
   count: number;
   overflowCount?: number;
 }
 
-export const Badge = ({ count, overflowCount = 99 }: BadgeProps) => {
+export const Badge = ({ 
+  count, 
+  overflowCount = 99 
+}: BadgeProps) => {
+  // Si no hay nada que mostrar, el átomo es invisible
   if (count <= 0) return null;
 
   const displayCount = count > overflowCount ? `${overflowCount}+` : count;
 
   return (
-    <span className="badge-count" aria-label={`${count} notificaciones`}>
+    <StyledBadge 
+      aria-label={`${count} notificaciones`}
+      role="status"
+    >
       {displayCount}
-    </span>
+    </StyledBadge>
   );
 };

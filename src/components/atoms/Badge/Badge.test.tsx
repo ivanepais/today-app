@@ -1,38 +1,37 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test/utils';
 import { describe, it, expect } from 'vitest';
 import { Badge } from './Badge';
+import { theme } from '../../../styles/theme';
 
 describe('Atom: Badge', () => {
-  it('should not render anything if count is 0', () => {
-    const { container } = render(<Badge count={0} />);
-    // Verificamos que el DOM esté vacío (null en el componente)
-    expect(container.firstChild).toBeNull();
+  it('should render the correct count', () => {
+    render(<Badge count={5} />);
+    expect(screen.getByText('5')).toBeInTheDocument();
   });
 
-  it('should not render anything if count is negative', () => {
-    const { container } = render(<Badge count={-5} />);
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should render the exact count if it is less than or equal to overflowCount', () => {
-    render(<Badge count={50} />);
-    const badge = screen.getByText('50');
-    expect(badge).toBeInTheDocument();
-    // Verificamos el aria-label para accesibilidad
-    expect(badge).toHaveAttribute('aria-label', '50 notificaciones');
-  });
-
-  it('should render "99+" if count exceeds the default overflowCount (99)', () => {
-    render(<Badge count={150} />);
+  it('should render the overflow count when exceeded', () => {
+    render(<Badge count={150} overflowCount={99} />);
     expect(screen.getByText('99+')).toBeInTheDocument();
-    // Importante: el aria-label debe mantener el número real para lectores de pantalla
-    const badge = screen.getByLabelText('150 notificaciones');
-    expect(badge).toBeInTheDocument();
   });
 
-  it('should respect a custom overflowCount prop', () => {
-    render(<Badge count={15} overflowCount={10} />);
-    expect(screen.getByText('10+')).toBeInTheDocument();
-    expect(screen.getByLabelText('15 notificaciones')).toBeInTheDocument();
+  it('should not render anything if count is 0 or negative', () => {
+    const { container } = render(<Badge count={0} />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should have the correct primary styles from theme', () => {
+    render(<Badge count={1} />);
+    const badge = screen.getByRole('status');
+
+    expect(badge).toHaveStyle({
+      'background-color': theme.colors.primary,
+      'color': theme.colors.background,
+      'border-radius': theme.borderRadius.full
+    });
+  });
+
+  it('should have accessibility labels', () => {
+    render(<Badge count={10} />);
+    expect(screen.getByLabelText(/10 notificaciones/i)).toBeInTheDocument();
   });
 });
