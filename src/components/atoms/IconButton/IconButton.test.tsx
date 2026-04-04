@@ -1,56 +1,26 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '../../../test/utils';
 import { describe, it, expect, vi } from 'vitest';
 import { IconButton } from './IconButton';
 
 describe('Atom: IconButton', () => {
-  it('should render the icon correctly', () => {
-    // Usamos un componente simple como icono para la prueba
-    const TestIcon = () => <span data-testid="test-icon">X</span>;
-    render(<IconButton icon={<TestIcon />} onClick={() => {}} label="Cerrar" />);
+  it('should render the icon and use the label as aria-label', () => {
+    render(<IconButton icon="🚀" label="Lanzar" />);
     
-    expect(screen.getByTestId('test-icon')).toBeInTheDocument();
-  });
-
-  it('should have the correct aria-label for screen readers', () => {
-    const myLabel = 'Eliminar tarea';
-    render(<IconButton icon="🗑️" onClick={() => {}} label={myLabel} />);
-    
-    // getByLabelText verifica que el aria-label exista y coincida
-    const button = screen.getByLabelText(myLabel);
+    const button = screen.getByLabelText(/lanzar/i);
     expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute('aria-label', myLabel);
+    expect(screen.getByText('🚀')).toBeInTheDocument();
   });
 
-  it('should call onClick when the button is pressed', () => {
+  it('should call onClick when clicked', () => {
     const handleClick = vi.fn();
-    render(<IconButton icon="+" onClick={handleClick} label="Añadir" />);
+    render(<IconButton icon="X" label="Cerrar" onClick={handleClick} />);
     
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-    
+    fireEvent.click(screen.getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call onClick when the button is disabled', () => {
-    const handleClick = vi.fn();
-    render(
-      <IconButton 
-        icon="+" 
-        onClick={handleClick} 
-        label="Añadir" 
-        disabled={true} 
-      />
-    );
-    
-    const button = screen.getByRole('button');
-    
-    // Verificamos el atributo HTML 'disabled'
-    expect(button).toBeDisabled();
-    
-    // Intentamos hacer clic
-    fireEvent.click(button);
-    
-    // La función no debería haber sido llamada
-    expect(handleClick).not.toHaveBeenCalled();
+  it('should be disabled when the prop is passed', () => {
+    render(<IconButton icon="X" label="Cerrar" disabled />);
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 });

@@ -1,14 +1,22 @@
-interface IconButtonProps {
+import { StyledIconButton } from './IconButton.styles';
+
+interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: React.ReactNode;
-  onClick: () => void;
-  label: string; // Crucial para accesibilidad (screen readers)
-  disabled?: boolean;
+  label: string; // Obligatorio para accesibilidad
 }
 
-export const IconButton = ({ icon, onClick, label, disabled }: IconButtonProps) => {
+export const IconButton = ({ 
+  icon, 
+  label, 
+  ...props 
+}: IconButtonProps) => {
   return (
-    <button onClick={onClick} aria-label={label} disabled={disabled}>
+    <StyledIconButton 
+      {...props} 
+      aria-label={label}
+      title={label} // Agrega un tooltip nativo del navegador
+    >
       {icon}
-    </button>
+    </StyledIconButton>
   );
 };
