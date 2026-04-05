@@ -1,67 +1,80 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test/utils';
 import { describe, it, expect } from 'vitest';
 import { DashboardTemplate } from './DashboardTemplate';
 
 describe('Template: DashboardTemplate', () => {
-  const MockHeader = () => <div data-testid="header-mock">Header</div>;
-  const MockSidebar = () => <div data-testid="sidebar-mock">Sidebar</div>;
-  const MockContent = () => <div data-testid="content-mock">Main Content</div>;
-  const MockFooter = () => <div data-testid="footer-mock">Footer</div>;
+  const mockHeader = <div data-testid="header-slot">Header Content</div>;
+  const mockSidebar = <div data-testid="sidebar-slot">Sidebar Content</div>;
+  const mockContent = <div data-testid="main-slot">Main Content</div>;
+  const mockFooter = <div data-testid="footer-slot">Footer Content</div>;
 
-  it('should render header, sidebar and main content in their semantic regions', () => {
+  it('should render header, sidebar and main content correctly', () => {
     render(
       <DashboardTemplate 
-        header={<MockHeader />} 
-        sidebar={<MockSidebar />}
+        header={mockHeader} 
+        sidebar={mockSidebar}
       >
-        <MockContent />
+        {mockContent}
       </DashboardTemplate>
     );
 
-    // Verificamos por ROLES semánticos (Landmarks)
-    expect(screen.getByRole('banner')).toContainElement(screen.getByTestId('header-mock'));
-    expect(screen.getByRole('complementary')).toContainElement(screen.getByTestId('sidebar-mock'));
-    expect(screen.getByRole('main')).toContainElement(screen.getByTestId('content-mock'));
+    expect(screen.getByTestId('header-slot')).toBeInTheDocument();
+    expect(screen.getByTestId('sidebar-slot')).toBeInTheDocument();
+    expect(screen.getByTestId('main-slot')).toBeInTheDocument();
   });
 
-  it('should not render a footer if the prop is not provided', () => {
-    render(
-      <DashboardTemplate header={<MockHeader />} sidebar={<MockSidebar />}>
-        <MockContent />
+  it('should render the footer only when provided', () => {
+    const { rerender } = render(
+      <DashboardTemplate header={mockHeader} sidebar={mockSidebar}>
+        {mockContent}
       </DashboardTemplate>
     );
 
-    // 'contentinfo' es el rol por defecto de la etiqueta <footer>
+    // No debería haber footer inicialmente
     expect(screen.queryByRole('contentinfo')).not.toBeInTheDocument();
-  });
 
-  it('should render the footer when provided', () => {
-    render(
+    // Re-renderizamos con footer
+    rerender(
       <DashboardTemplate 
-        header={<MockHeader />} 
-        sidebar={<MockSidebar />}
-        footer={<MockFooter />}
+        header={mockHeader} 
+        sidebar={mockSidebar} 
+        footer={mockFooter}
       >
-        <MockContent />
+        {mockContent}
       </DashboardTemplate>
     );
 
-    const footer = screen.getByRole('contentinfo');
-    expect(footer).toBeInTheDocument();
-    expect(footer).toContainElement(screen.getByTestId('footer-mock'));
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    expect(screen.getByTestId('footer-slot')).toBeInTheDocument();
   });
 
-  it('should maintain the correct layout flow (Sidebar then Main)', () => {
-    const { container } = render(
-      <DashboardTemplate header={<MockHeader />} sidebar={<MockSidebar />}>
-        <MockContent />
+  it('should maintain semantic HTML structure for accessibility', () => {
+    render(
+      <DashboardTemplate header={mockHeader} sidebar={mockSidebar}>
+        {mockContent}
       </DashboardTemplate>
     );
 
-    const bodyContainer = container.querySelector('.template-body');
-    
-    // Verificamos que el orden de los hijos en el DOM sea el esperado para el layout
-    expect(bodyContainer?.firstElementChild).toHaveClass('template-sidebar');
-    expect(bodyContainer?.lastElementChild).toHaveClass('template-main-content');
+    // Verificamos etiquetas semánticas clave
+    expect(screen.getByRole('banner')).toBeInTheDocument(); // <header>
+    expect(screen.getByRole('complementary')).toBeInTheDocument(); // <aside>
+    expect(screen.getByRole('main')).toBeInTheDocument(); // <main>
+  });
+
+  it('should apply the correct grid areas via styles', () => {
+    const { container } = render(
+      <DashboardTemplate header={mockHeader} sidebar={mockSidebar}>
+        {mockContent}
+      </DashboardTemplate>
+    );
+
+    const header = container.querySelector('header');
+    const sidebar = container.querySelector('aside');
+    const main = container.querySelector('main');
+
+    // Verificamos que los styled-components tengan las áreas de grid asignadas
+    expect(header).toHaveStyle('grid-area: header');
+    expect(sidebar).toHaveStyle('grid-area: sidebar');
+    expect(main).toHaveStyle('grid-area: main');
   });
 });

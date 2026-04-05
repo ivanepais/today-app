@@ -1,9 +1,16 @@
 import React from 'react';
+import { 
+  TemplateWrapper, 
+  StyledHeader, 
+  StyledSidebar, 
+  StyledMain, 
+  StyledFooter 
+} from './DashboardTemplate.styles';
 
 interface DashboardTemplateProps {
   header: React.ReactNode;
   sidebar: React.ReactNode;
-  children: React.ReactNode; // El contenido principal
+  children: React.ReactNode;
   footer?: React.ReactNode;
 }
 
@@ -14,30 +21,24 @@ export const DashboardTemplate = ({
   footer 
 }: DashboardTemplateProps) => {
   return (
-    <div className="template-dashboard">
-      {/* Región del Header */}
-      <header className="template-header">
+    <TemplateWrapper>
+      <StyledHeader>
         {header}
-      </header>
+      </StyledHeader>
 
-      <div className="template-body" style={{ display: 'flex' }}>
-        {/* Región Lateral */}
-        <aside className="template-sidebar">
-          {sidebar}
-        </aside>
+      <StyledSidebar>
+        {sidebar}
+      </StyledSidebar>
 
-        {/* Región de Contenido Principal */}
-        <main className="template-main-content">
-          {children}
-        </main>
-      </div>
+      <StyledMain>
+        {children}
+      </StyledMain>
 
-      {/* Región del Footer Opcional */}
       {footer && (
-        <footer className="template-footer">
+        <StyledFooter>
           {footer}
-        </footer>
+        </StyledFooter>
       )}
-    </div>
+    </TemplateWrapper>
   );
 };
