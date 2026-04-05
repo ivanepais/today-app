@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { DashboardTemplate } from '../../templates/DashboardTemplate/DashboardTemplate';
 import { FilterPanel } from '../../organisms/FilterPanel/FilterPanel';
+import { Typography } from '../../atoms/Typography/Typography';
+import { 
+  PageContainer, 
+  LoadingWrapper, 
+  MainContentView 
+} from './DashboardPage.styles';
 
-// Simulamos tipos de datos de una API
 interface Category {
   id: string;
   label: string;
@@ -14,17 +19,16 @@ export const DashboardPage = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 1. Efecto para cargar datos reales (Simulado)
   useEffect(() => {
     const fetchData = async () => {
-      // Simulamos un retraso de 100ms para que el test pueda ver el loading
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Simulación de carga de API
+      await new Promise(resolve => setTimeout(resolve, 800));
 
-      // Imagina que esto viene de tu Backend
       const data = [
         { id: '1', label: 'Frontend', count: 45 },
         { id: '2', label: 'Backend', count: 32 },
         { id: '3', label: 'DevOps', count: 12 },
+        { id: '4', label: 'UX/UI Design', count: 28 },
       ];
       setCategories(data);
       setIsLoading(false);
@@ -33,21 +37,20 @@ export const DashboardPage = () => {
     fetchData();
   }, []);
 
-  // 2. Lógica de negocio (manejo de selección)
   const handleToggleCategory = (id: string) => {
     setSelectedIds(prev => 
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
 
-  // 3. Definimos los componentes para los "slots" del Template
-  const header = (
-    <nav className="page-nav">
-      <h1>Mi Dashboard Pro</h1>
-    </nav>
+  // Preparamos los slots para la Template
+  const headerContent = (
+    <Typography variant="h2" color="primary">
+      Tech Learning Dashboard
+    </Typography>
   );
 
-  const sidebar = (
+  const sidebarContent = (
     <FilterPanel
       categories={categories}
       selectedIds={selectedIds}
@@ -56,16 +59,39 @@ export const DashboardPage = () => {
     />
   );
 
-  if (isLoading) return <div>Cargando sistema...</div>;
+  if (isLoading) {
+    return (
+      <LoadingWrapper>
+        <span>Iniciando Sistema...</span>
+      </LoadingWrapper>
+    );
+  }
 
   return (
-    <DashboardTemplate header={header} sidebar={sidebar}>
-      <section className="main-content-view">
-        <h2>Resultados ({selectedIds.length} filtros activos)</h2>
-        <p>Aquí se mostraría la lista de cursos filtrada...</p>
-        
-        {/* Aquí irían otros organismos como un ProductGrid */}
-      </section>
-    </DashboardTemplate>
+    <PageContainer>
+      <DashboardTemplate 
+        header={headerContent} 
+        sidebar={sidebarContent}
+        footer={<Typography variant="body">© 2026 Liquid Glass Systems</Typography>}
+      >
+        <MainContentView>
+          <header>
+            <Typography variant="h1">Cursos Disponibles</Typography>
+            <Typography variant="body" color="textSecondary">
+              Explora nuestra selección basada en {selectedIds.length} filtros activos.
+            </Typography>
+          </header>
+
+          {/* Aquí iría un Grid de tarjetas, por ejemplo */}
+          <div style={{ marginTop: '2rem' }}>
+            <Typography variant="body">
+              {selectedIds.length > 0 
+                ? "Mostrando resultados personalizados..." 
+                : "Selecciona una categoría para filtrar."}
+            </Typography>
+          </div>
+        </MainContentView>
+      </DashboardTemplate>
+    </PageContainer>
   );
 };
