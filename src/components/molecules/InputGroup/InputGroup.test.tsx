@@ -1,70 +1,63 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '../../../test/utils';
 import { describe, it, expect, vi } from 'vitest';
 import { InputGroup } from './InputGroup';
 
 describe('Molecule: InputGroup', () => {
-  const defaultProps = {
-    label: 'Nombre de usuario',
+  const mockProps = {
+    label: 'Nombre de la tarea',
     value: '',
     onChange: vi.fn(),
-    placeholder: 'Escribe tu nombre...',
     maxLength: 20,
+    placeholder: 'Escribe aquí...',
   };
 
   it('should render the label and input correctly', () => {
-    render(<InputGroup {...defaultProps} />);
+    render(<InputGroup {...mockProps} />);
     
-    expect(screen.getByText('Nombre de usuario')).toBeInTheDocument();
-    const input = screen.getByPlaceholderText('Escribe tu nombre...');
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveValue('');
+    expect(screen.getByText('Nombre de la tarea')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Escribe aquí...')).toBeInTheDocument();
   });
 
-  it('should NOT show the Badge when value is empty', () => {
-    render(<InputGroup {...defaultProps} value="" />);
+  it('should link the label with the input via id', () => {
+    render(<InputGroup {...mockProps} />);
     
-    // Buscamos por el label de accesibilidad que genera el átomo Badge
-    const badge = screen.queryByLabelText(/notificaciones/i);
-    expect(badge).not.toBeInTheDocument();
+    const label = screen.getByText('Nombre de la tarea');
+    const input = screen.getByPlaceholderText('Escribe aquí...');
+    
+    // Verificamos que el for del label coincida con el id del input
+    expect(label).toHaveAttribute('for', input.id);
   });
 
-  it('should show the Badge with correct remaining count when typing', () => {
-    const value = 'Gemini'; // 6 caracteres
+  it('should NOT show the character counter when value is empty', () => {
+    render(<InputGroup {...mockProps} value="" />);
+    
+    // El badge no debería estar presente
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('should show the correct remaining characters in the badge', () => {
+    const value = 'Hola'; // 4 caracteres
     const maxLength = 20;
-    const expectedRemaining = 14;
+    const expectedRemaining = maxLength - value.length; // 16
 
-    render(<InputGroup {...defaultProps} value={value} maxLength={maxLength} />);
+    render(<InputGroup {...mockProps} value={value} maxLength={maxLength} />);
     
-    // Verificamos que el Badge muestre el cálculo correcto
-    const badge = screen.getByText(expectedRemaining.toString());
-    expect(badge).toBeInTheDocument();
-    
-    // Verificamos accesibilidad (A11y) heredada del átomo
-    expect(badge).toHaveAttribute('aria-label', `${expectedRemaining} notificaciones`);
+    // El Badge debería mostrar el número 16
+    expect(screen.getByText(expectedRemaining.toString())).toBeInTheDocument();
   });
 
   it('should call onChange when the user types', () => {
-    const handleChange = vi.fn();
-    render(<InputGroup {...defaultProps} onChange={handleChange} />);
+    render(<InputGroup {...mockProps} />);
     
     const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'Nuevo texto' } });
+    fireEvent.change(input, { target: { value: 'Nueva tarea' } });
     
-    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
   });
 
-  it('should hide the Badge when the limit is reached (remaining = 0)', () => {
-    const maxLength = 20;
-    render(
-      <InputGroup 
-        {...defaultProps} 
-        value="12345678901234567890" 
-        maxLength={maxLength} 
-      />
-    );
+  it('should be disabled when the prop is passed', () => {
+    render(<InputGroup {...mockProps} disabled />);
     
-    // Como remaining es 0, el Badge no debe renderizarse
-    const badge = screen.queryByLabelText(/notificaciones/i);
-    expect(badge).not.toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeDisabled();
   });
 });

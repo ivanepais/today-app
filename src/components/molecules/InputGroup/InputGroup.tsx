@@ -1,48 +1,11 @@
-/*
-import { Badge } from '../../atoms/Badge/Badge';
-
-interface InputGroupProps {
-  label: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxLength?: number;
-  placeholder?: string;
-}
-
-export const InputGroup = ({ 
-  label, 
-  value, 
-  onChange, 
-  maxLength = 100, 
-  placeholder 
-}: InputGroupProps) => {
-  const remaining = maxLength - value.length;
-
-  return (
-    <div className="input-group">
-      <div className="input-group-header">
-        <label className="input-label">{label}</label>
-        {value.length > 0 && (
-          <Badge count={remaining} overflowCount={maxLength} />
-        )}
-      </div>
-      
-      <input
-        type="text"
-        value={value}
-        onChange={onChange}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        className="input-field"
-      />
-    </div>
-  );
-};
-
-*/
-
 import { useId } from 'react';
 import { Badge } from '../../atoms/Badge/Badge';
+import { 
+  GroupContainer, 
+  GroupHeader, 
+  StyledLabel, 
+  StyledInput 
+} from './InputGroup.styles';
 
 interface InputGroupProps {
   label: string;
@@ -50,6 +13,7 @@ interface InputGroupProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export const InputGroup = ({ 
@@ -57,32 +21,37 @@ export const InputGroup = ({
   value, 
   onChange, 
   maxLength = 100, 
-  placeholder 
+  placeholder,
+  disabled = false
 }: InputGroupProps) => {
+  const inputId = useId();
   const remaining = maxLength - value.length;
-  const inputId = useId(); // Generamos un ID único
 
   return (
-    <div className="input-group">
-      <div className="input-group-header">
-        {/* Vinculamos el label con el id del input */}
-        <label htmlFor={inputId} className="input-label">
+    <GroupContainer>
+      <GroupHeader>
+        <StyledLabel htmlFor={inputId}>
           {label}
-        </label>
+        </StyledLabel>
+        
+        {/* Mostramos el contador solo si el usuario ha empezado a escribir */}
         {value.length > 0 && (
-          <Badge count={remaining} overflowCount={maxLength} />
+          <Badge 
+            count={remaining} 
+            overflowCount={maxLength} 
+          />
         )}
-      </div>
+      </GroupHeader>
       
-      <input
-        id={inputId} // Asignamos el ID al input
+      <StyledInput
+        id={inputId}
         type="text"
         value={value}
         onChange={onChange}
         maxLength={maxLength}
         placeholder={placeholder}
-        className="input-field"
+        disabled={disabled}
       />
-    </div>
+    </GroupContainer>
   );
 };
