@@ -1,6 +1,13 @@
 import { useState, useId } from 'react';
 import { FilterItem } from '../../molecules/FilterItem/FilterItem';
 import { InputGroup } from '../../molecules/InputGroup/InputGroup';
+import { 
+  PanelContainer, 
+  PanelHeader, 
+  PanelContent, 
+  CategoryList, 
+  EmptyState 
+} from './FilterPanel.styles';
 
 interface Category {
   id: string;
@@ -22,29 +29,27 @@ export const FilterPanel = ({
   title = "Filtros" 
 }: FilterPanelProps) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const titleId = useId(); // Genera un ID único para vincular el título con la lista
+  const titleId = useId();
 
   const filteredCategories = categories.filter((cat) =>
     cat.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <aside className="filter-panel" aria-labelledby={titleId}>
-      <div className="filter-panel-header">
+    <PanelContainer aria-labelledby={titleId}>
+      <PanelHeader>
         <h2 id={titleId}>{title}</h2>
         <InputGroup
           label="Filtrar por nombre"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Buscar..."
+          placeholder="Buscar categorías..."
+          maxLength={30}
         />
-      </div>
+      </PanelHeader>
 
-      <div className="filter-panel-content">
-        <ul 
-          aria-label="Lista de categorías" 
-          style={{ listStyle: 'none', padding: 0 }}
-        >
+      <PanelContent>
+        <CategoryList aria-label="Lista de categorías">
           {filteredCategories.map((category) => (
             <li key={category.id}>
               <FilterItem
@@ -55,14 +60,14 @@ export const FilterPanel = ({
               />
             </li>
           ))}
-        </ul>
+        </CategoryList>
 
         {filteredCategories.length === 0 && (
-          <p role="status" className="filter-empty-state">
+          <EmptyState role="status">
             No hay coincidencias para "{searchTerm}"
-          </p>
+          </EmptyState>
         )}
-      </div>
-    </aside>
+      </PanelContent>
+    </PanelContainer>
   );
 };
