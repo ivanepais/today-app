@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useMemo } from 'react';
 import { taskReducer, initialState } from '@/store/task.reducer';
 import { storageService } from '@/services/storage.service';
-import { TaskFilter } from '@/core/task.entity';
+import type { TaskFilter } from '@/core/task.entity';
 
 export const useTasks = () => {
   // 1. Inicializamos el estado cargando desde el storage

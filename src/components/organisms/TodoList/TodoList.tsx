@@ -1,6 +1,7 @@
 import { TodoItem } from '../../molecules/TodoItem/TodoItem';
 import { Typography } from '../../atoms/Typography/Typography';
 import { ListWrapper, StyledList, EmptyState } from './TodoList.styles';
+import type { Task } from '@/core/task.entity';
 
 interface Todo {
   id: string;
@@ -9,7 +10,7 @@ interface Todo {
 }
 
 interface TodoListProps {
-  todos: Todo[];
+  todos: Task[];
   onToggleTodo: (id: string) => void;
   onDeleteTodo: (id: string) => void;
 }
@@ -38,8 +39,8 @@ export const TodoList = ({
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
-              text={todo.text}
-              completed={todo.completed}
+              text={todo.content}
+              completed={todo.isCompleted}
               onToggle={() => onToggleTodo(todo.id)}
               onDelete={() => onDeleteTodo(todo.id)}
             />

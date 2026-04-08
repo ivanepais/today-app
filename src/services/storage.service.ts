@@ -1,4 +1,4 @@
-import { Task } from '@/core/task.entity';
+import type { Task } from '@/core/task.entity';
 
 const STORAGE_KEY = 'v1_tasks_data';
 

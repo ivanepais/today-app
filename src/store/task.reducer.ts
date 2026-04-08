@@ -1,4 +1,4 @@
-import { Task, TaskFilter } from '@/core/task.entity';
+import type { Task, TaskFilter } from '@/core/task.entity';
 import * as TaskLogic from '@/core/task.logic';
 
 // Definimos el estado global de esta característica

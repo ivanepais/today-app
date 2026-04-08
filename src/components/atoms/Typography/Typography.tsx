@@ -1,4 +1,4 @@
-import { StyledTypography, TypographyVariant } from './Typography.styles';
+import { StyledTypography, type TypographyVariant } from './Typography.styles';
 
 interface TypographyProps {
   variant?: TypographyVariant;

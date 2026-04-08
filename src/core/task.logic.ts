@@ -1,4 +1,4 @@
-import { Task } from './task.entity';
+import type { Task } from './task.entity';
 
 /**
  * Fábrica de tareas. 

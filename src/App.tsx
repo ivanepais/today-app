@@ -1,14 +1,14 @@
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import { GlobalStyles } from './styles/GlobalStyles';
-import { DashboardPage } from './components/pages/DashboardPage';
+import { TodoPage } from './components/pages/TodoPage/TodoPage';
 
 function App() {
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <DashboardPage />
+      <TodoPage />
     </ThemeProvider>
   )
 }
