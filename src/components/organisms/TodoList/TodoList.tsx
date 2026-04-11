@@ -3,12 +3,6 @@ import { Typography } from '../../atoms/Typography/Typography';
 import { ListWrapper, StyledList, EmptyState } from './TodoList.styles';
 import type { Task } from '@/core/task.entity';
 
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-}
-
 interface TodoListProps {
   todos: Task[];
   onToggleTodo: (id: string) => void;
