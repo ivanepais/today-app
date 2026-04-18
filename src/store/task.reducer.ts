@@ -5,6 +5,7 @@ import * as TaskLogic from '@/core/task.logic';
 export interface TaskState {
   tasks: Task[];
   filter: TaskFilter;
+  searchQuery: string;
 }
 
 // Discriminante de acciones: El compilador sabrá qué payload tiene cada una
@@ -13,11 +14,13 @@ export type TaskAction =
   | { type: 'TOGGLE_TASK'; payload: string }
   | { type: 'REMOVE_TASK'; payload: string }
   | { type: 'SET_FILTER'; payload: TaskFilter }
+  | { type: 'SET_SEARCH_QUERY'; payload: string }
   | { type: 'CLEAR_COMPLETED' };
 
   export const initialState: TaskState = {
   tasks: [],
   filter: 'all',
+  searchQuery: '',
 };
 
 export const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
@@ -49,6 +52,9 @@ export const taskReducer = (state: TaskState, action: TaskAction): TaskState => 
         filter: action.payload,
       };
 
+    case 'SET_SEARCH_QUERY':
+      return { ...state, searchQuery: action.payload };
+       
     case 'CLEAR_COMPLETED':
       return {
         ...state,

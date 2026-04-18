@@ -77,6 +77,7 @@ export const TodoPage = () => {
 
 */
 
+/*
 import { useMemo } from 'react';
 import { useTasks } from '../../../hooks/useTasks';
 import { DashboardTemplate } from '../../templates/DashboardTemplate/DashboardTemplate';
@@ -114,7 +115,7 @@ export const TodoPage = () => {
             title="Categorías"
           />
           
-          {/* Bonus: Limpiar completadas al final del sidebar */}
+          Bonus: Limpiar completadas al final del sidebar
           {stats.completed > 0 && (
             <Button 
               variant="secondary" 
@@ -127,7 +128,7 @@ export const TodoPage = () => {
         </div>
       }
     >
-      {/* El contenido principal usa el TodoTemplate para el layout interno */}
+      El contenido principal usa el TodoTemplate para el layout interno
       <TodoTemplate
         header={
           <div style={{ marginBottom: '1rem' }}>
@@ -147,6 +148,105 @@ export const TodoPage = () => {
             todos={tasks} 
             onToggleTodo={toggle} 
             onDeleteTodo={remove} 
+          />
+        }
+      />
+    </DashboardTemplate>
+  );
+};
+
+*/
+
+import { useMemo } from 'react';
+import { useTasks } from '../../../hooks/useTasks';
+import { DashboardTemplate } from '../../templates/DashboardTemplate/DashboardTemplate';
+import { TodoTemplate } from '../../templates/TodoTemplate/TodoTemplate';
+import { TaskSidebar } from '../../organisms/TaskSidebar/TaskSidebar'; // 👈 Cambiado por el nuevo
+import { TodoList } from '../../organisms/TodoList/TodoList';
+import { TodoInput } from '../../molecules/TodoInput/TodoInput';
+import { Typography } from '../../atoms/Typography/Typography';
+import { Button } from '../../atoms/Button/Button';
+
+export const TodoPage = () => {
+  // 1. Extraemos todo del hook, incluyendo las nuevas funciones de búsqueda
+  const { 
+    tasks, 
+    add, 
+    toggle, 
+    remove, 
+    filter, 
+    setFilter, 
+    searchQuery,
+    setSearchQuery,
+    stats, 
+    clearCompleted 
+  } = useTasks();
+
+  // 2. Mapeamos las categorías para el CategoryFilter
+  const categories = useMemo(() => [
+    { id: 'all', label: 'Todas', count: stats.total },
+    { id: 'pending', label: 'Pendientes', count: stats.pending },
+    { id: 'completed', label: 'Completadas', count: stats.completed },
+  ], [stats]);
+
+  return (
+    <DashboardTemplate
+      header={
+        <Typography variant="h2" color="white">Liquid Task</Typography>
+      }
+      sidebar={
+        /* Usamos un wrapper flex para que el Sidebar ocupe el espacio 
+          y el botón de "Borrar" quede siempre al final.
+        */
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <TaskSidebar 
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            categories={categories}
+            activeFilterId={filter}
+            onFilterChange={(id) => setFilter(id as any)}
+          />
+          
+          {/* Botón de acción global del sidebar */}
+          {stats.completed > 0 && (
+            <div style={{ padding: '0 1rem 2rem 1rem', marginTop: 'auto' }}>
+              <Button 
+                variant="secondary" 
+                onClick={clearCompleted}
+                style={{ width: '100%' }}
+              >
+                Borrar completadas ({stats.completed})
+              </Button>
+            </div>
+          )}
+        </div>
+      }
+    >
+      <TodoTemplate
+        header={
+          <div style={{ marginBottom: '1.5rem' }}>
+            <Typography variant="h1">
+              {filter === 'all' ? 'Mis Tareas' : filter === 'pending' ? 'Pendientes' : 'Completadas'}
+            </Typography>
+            <Typography variant="body" color="textSecondary">
+              {stats.pending === 0 
+                ? '¡Estás al día! No hay tareas pendientes.' 
+                : `Tienes ${stats.pending} asuntos por resolver hoy.`}
+            </Typography>
+          </div>
+        }
+        inputSlot={
+          <TodoInput onAdd={add} />
+        }
+        listSlot={
+          /* 'tasks' ya viene filtrado por CATEGORÍA 
+             y por BÚSQUEDA gracias al useMemo del hook.
+          */
+          <TodoList 
+            todos={tasks} 
+            onToggleTodo={toggle} 
+            onDeleteTodo={remove} 
+            isSearching={searchQuery.trim().length > 0}
           />
         }
       />
