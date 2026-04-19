@@ -1,14 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import * as TaskLogic from './task.logic';
-import { Task } from './task.entity';
+//import type { Task } from './task.entity';
 
 describe('Task Logic (Domain)', () => {
-  
   describe('createTask', () => {
     it('debería crear una tarea válida con contenido limpio', () => {
       // Arrange
       const content = '  Nueva Tarea  ';
-      
+
       // Act
       const task = TaskLogic.createTask(content);
 
@@ -28,7 +27,7 @@ describe('Task Logic (Domain)', () => {
     it('debería invertir el estado de completado e incluir updatedAt', () => {
       // Arrange
       const initialTask = TaskLogic.createTask('Test');
-      
+
       // Act
       const updatedTask = TaskLogic.toggleStatus(initialTask);
 
@@ -36,7 +35,7 @@ describe('Task Logic (Domain)', () => {
       expect(updatedTask.isCompleted).toBe(true);
       expect(updatedTask.updatedAt).toBeDefined();
       // Prueba de Inmutabilidad:
-      expect(initialTask.isCompleted).toBe(false); 
+      expect(initialTask.isCompleted).toBe(false);
       expect(initialTask).not.toBe(updatedTask); // Son objetos diferentes en memoria
     });
   });
@@ -45,7 +44,7 @@ describe('Task Logic (Domain)', () => {
     it('debería actualizar el contenido si es válido', () => {
       const task = TaskLogic.createTask('Viejo');
       const updated = TaskLogic.updateContent(task, 'Nuevo');
-      
+
       expect(updated.content).toBe('Nuevo');
       expect(updated.updatedAt).toBeDefined();
     });
@@ -53,7 +52,7 @@ describe('Task Logic (Domain)', () => {
     it('no debería actualizar si el nuevo contenido es vacío', () => {
       const task = TaskLogic.createTask('Importante');
       const updated = TaskLogic.updateContent(task, '   ');
-      
+
       expect(updated.content).toBe('Importante'); // Mantiene el original
       expect(updated).toBe(task); // Pragmático: devuelve la misma referencia si no hay cambio
     });
