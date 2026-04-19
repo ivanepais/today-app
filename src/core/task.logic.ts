@@ -1,14 +1,14 @@
 import type { Task } from './task.entity';
 
 /**
- * Fábrica de tareas. 
+ * Fábrica de tareas.
  * Valida reglas de negocio: no tareas vacías, no espacios extra.
  */
 export const createTask = (content: string): Task => {
   const trimmedContent = content.trim();
-  
+
   if (!trimmedContent) {
-    throw new Error("El contenido de la tarea no puede estar vacío.");
+    throw new Error('El contenido de la tarea no puede estar vacío.');
   }
 
   return {
@@ -34,7 +34,7 @@ export const toggleStatus = (task: Task): Task => ({
  */
 export const updateContent = (task: Task, newContent: string): Task => {
   const trimmed = newContent.trim();
-  
+
   if (!trimmed) return task; // Si está vacío, ignoramos el cambio
 
   return {

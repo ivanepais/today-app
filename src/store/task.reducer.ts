@@ -17,13 +17,16 @@ export type TaskAction =
   | { type: 'SET_SEARCH_QUERY'; payload: string }
   | { type: 'CLEAR_COMPLETED' };
 
-  export const initialState: TaskState = {
+export const initialState: TaskState = {
   tasks: [],
   filter: 'all',
   searchQuery: '',
 };
 
-export const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
+export const taskReducer = (
+  state: TaskState,
+  action: TaskAction,
+): TaskState => {
   switch (action.type) {
     case 'ADD_TASK':
       // Usamos nuestra lógica de dominio testeada
@@ -36,7 +39,7 @@ export const taskReducer = (state: TaskState, action: TaskAction): TaskState => 
       return {
         ...state,
         tasks: state.tasks.map((t) =>
-          t.id === action.payload ? TaskLogic.toggleStatus(t) : t
+          t.id === action.payload ? TaskLogic.toggleStatus(t) : t,
         ),
       };
 
@@ -54,7 +57,7 @@ export const taskReducer = (state: TaskState, action: TaskAction): TaskState => 
 
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.payload };
-       
+
     case 'CLEAR_COMPLETED':
       return {
         ...state,

@@ -19,5 +19,5 @@ export const storageService = {
       console.error('Error loading from localStorage', error);
       return [];
     }
-  }
+  },
 };

@@ -16,7 +16,7 @@ describe('Storage Service', () => {
 
     expect(setItemSpy).toHaveBeenCalledWith(
       'v1_tasks_data',
-      JSON.stringify(mockTasks)
+      JSON.stringify(mockTasks),
     );
   });
 

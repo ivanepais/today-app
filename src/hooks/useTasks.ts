@@ -17,35 +17,45 @@ export const useTasks = () => {
 
   // 3. Estado derivado: Filtrado combinado
   const filteredTasks = useMemo(() => {
-    return state.tasks.filter((task) => {
-      // Primero aplicamos el filtro de estado
-      const matchesFilter = 
-        state.filter === 'all' || 
-        (state.filter === 'pending' && !task.isCompleted) || 
-        (state.filter === 'completed' && task.isCompleted);
+    // Pre-procesamos la búsqueda una sola vez por cada cambio de query
+    const cleanQuery = (state.searchQuery || '').toString().toLowerCase();
+    const activeFilter = state.filter;
 
-      // Luego aplicamos el filtro de búsqueda
-      const matchesSearch = (task.content || "") // Fallback por si content es undefined
+    return state.tasks.filter((task) => {
+      // 1. Filtro de estado (muy rápido, comparaciones simples)
+      const matchesFilter =
+        activeFilter === 'all' ||
+        (activeFilter === 'pending' && !task.isCompleted) ||
+        (activeFilter === 'completed' && task.isCompleted);
+
+      // 2. Filtro de búsqueda (usamos cleanQuery ya procesada)
+      const matchesSearch = (task.content || '')
         .toLowerCase()
-        .includes((state.searchQuery || "").toString().toLowerCase()); // Forzamos a string
+        .includes(cleanQuery);
 
       return matchesFilter && matchesSearch;
     });
   }, [state.tasks, state.filter, state.searchQuery]);
 
   // Estadísticas memoizadas
-  const stats = useMemo(() => ({
-    total: state.tasks.length,
-    pending: state.tasks.filter(t => !t.isCompleted).length,
-    completed: state.tasks.filter(t => t.isCompleted).length
-  }), [state.tasks]);
+  const stats = useMemo(
+    () => ({
+      total: state.tasks.length,
+      pending: state.tasks.filter((t) => !t.isCompleted).length,
+      completed: state.tasks.filter((t) => t.isCompleted).length,
+    }),
+    [state.tasks],
+  );
 
   // 4. API pública del Hook (Acciones simplificadas)
-  const add = (content: string) => dispatch({ type: 'ADD_TASK', payload: content });
+  const add = (content: string) =>
+    dispatch({ type: 'ADD_TASK', payload: content });
   const toggle = (id: string) => dispatch({ type: 'TOGGLE_TASK', payload: id });
   const remove = (id: string) => dispatch({ type: 'REMOVE_TASK', payload: id });
-  const setFilter = (filter: TaskFilter) => dispatch({ type: 'SET_FILTER', payload: filter });
-  const setSearchQuery = (query: string) => dispatch({ type: 'SET_SEARCH_QUERY', payload: query });
+  const setFilter = (filter: TaskFilter) =>
+    dispatch({ type: 'SET_FILTER', payload: filter });
+  const setSearchQuery = (query: string) =>
+    dispatch({ type: 'SET_SEARCH_QUERY', payload: query });
   const clearCompleted = () => dispatch({ type: 'CLEAR_COMPLETED' });
 
   return {
@@ -58,6 +68,6 @@ export const useTasks = () => {
     remove,
     setFilter,
     setSearchQuery,
-    clearCompleted
+    clearCompleted,
   };
 };
