@@ -1,9 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-export const FilterContainer = styled.div`
+const popIn = keyframes`
+  from { 
+    transform: scale(0); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+`;
+
+export const FilterContainer = styled.div<{ $isSelected: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   transition: ${({ theme }) => theme.transitions.default};
@@ -14,16 +24,33 @@ export const FilterContainer = styled.div`
   &:hover {
     background: oklch(100% 0 0 / 5%);
   }
+
+  background: ${({ $isSelected }) => 
+    $isSelected ? 'oklch(100% 0 0 / 8%)' : 'transparent'};
 `;
 
-export const BadgeWrapper = styled.div`
+export const BadgeWrapper = styled.div<{ $isVisible: boolean }>`
   display: flex;
   align-items: center;
-  /* Animación de entrada para que el badge aparezca suavemente */
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-  @keyframes popIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+  
+  /* 2. Aplicamos la animación solo cuando es visible */
+  ${({ $isVisible }) => $isVisible ? css`
+    animation: ${popIn} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  ` : css`
+    animation: none;
+  `}
+  
+  /* 3. El estado final/transición para cuando deja de ser visible */
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+  transition: opacity 0.2s ease;
+  
+  /* Evitamos que el badge ocupe espacio si no es visible */
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
+`;
+  
+export const LabelText = styled.span`
+  margin-left: ${({ theme }) => theme.spacing.sm};
+  flex: 1; // Empuja el Badge al final
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
 `;

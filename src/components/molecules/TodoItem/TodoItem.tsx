@@ -1,10 +1,10 @@
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 import { Typography } from '../../atoms/Typography/Typography';
 import { IconButton } from '../../atoms/IconButton/IconButton';
-import { 
-  ItemContainer, 
-  ContentWrapper, 
-  TextContainer 
+import {
+  ItemContainer,
+  ContentWrapper,
+  TextContainer,
 } from './TodoItem.styles';
 
 interface TodoItemProps {
@@ -14,23 +14,25 @@ interface TodoItemProps {
   onDelete: () => void;
 }
 
-export const TodoItem = ({ 
-  text, 
-  completed, 
-  onToggle, 
-  onDelete 
+export const TodoItem = ({
+  text,
+  completed,
+  onToggle,
+  onDelete,
 }: TodoItemProps) => {
   return (
     <ItemContainer $isCompleted={completed}>
       <ContentWrapper>
-        <Checkbox 
-          checked={completed} 
-          onChange={onToggle} 
-          aria-label={completed ? "Marcar como pendiente" : "Marcar como completada"}
+        <Checkbox
+          checked={completed}
+          onChange={onToggle}
+          aria-label={
+            completed ? 'Marcar como pendiente' : 'Marcar como completada'
+          }
         />
         <TextContainer $isCompleted={completed}>
-          <Typography 
-            variant="body" 
+          <Typography
+            variant="body"
             color={completed ? 'textSecondary' : 'textPrimary'}
           >
             {text}
@@ -38,7 +40,7 @@ export const TodoItem = ({
         </TextContainer>
       </ContentWrapper>
 
-      <IconButton 
+      <IconButton
         icon="🗑️" // Aquí luego pondremos un SVG real
         label="Eliminar tarea"
         onClick={onDelete}

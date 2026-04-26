@@ -25,8 +25,8 @@ describe('Atom: Badge', () => {
 
     expect(badge).toHaveStyle({
       'background-color': theme.colors.primary,
-      'color': theme.colors.background,
-      'border-radius': theme.borderRadius.full
+      color: theme.colors.background,
+      'border-radius': theme.borderRadius.full,
     });
   });
 

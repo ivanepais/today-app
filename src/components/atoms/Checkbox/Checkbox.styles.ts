@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { mixins } from '../../../styles/mixins';
 
-export const CheckboxContainer = styled.label`
+export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
@@ -71,4 +71,8 @@ export const LabelText = styled.span`
   color: ${({ theme }) => theme.colors.textPrimary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-family: ${({ theme }) => theme.typography.fontFamily};
+  cursor: pointer; // label efectivo
+  user-select: none; // evita que el texto se sombree en click
+
+  &:empty { display: none; }
 `;

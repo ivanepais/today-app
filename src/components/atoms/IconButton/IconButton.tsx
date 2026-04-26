@@ -5,14 +5,10 @@ interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   label: string; // Obligatorio para accesibilidad
 }
 
-export const IconButton = ({ 
-  icon, 
-  label, 
-  ...props 
-}: IconButtonProps) => {
+export const IconButton = ({ icon, label, ...props }: IconButtonProps) => {
   return (
-    <StyledIconButton 
-      {...props} 
+    <StyledIconButton
+      {...props}
       aria-label={label}
       title={label} // Agrega un tooltip nativo del navegador
     >

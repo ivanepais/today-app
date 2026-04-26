@@ -2,9 +2,10 @@ import { useId } from 'react';
 import { FilterItem } from '../../molecules/FilterItem/FilterItem';
 import { Typography } from '../../atoms/Typography/Typography';
 import { FilterSectionContainer, CategoryList } from './CategoryFilter.styles';
+import type { TaskFilter } from '@/core/task.entity';
 
-interface Category {
-  id: string;
+export interface Category {
+  id: TaskFilter;
   label: string;
   count: number;
 }
@@ -20,23 +21,19 @@ export const CategoryFilter = ({
   categories,
   activeFilterId,
   onFilterChange,
-  title = "Categorías"
+  title = 'Categorías',
 }: CategoryFilterProps) => {
   const titleId = useId();
 
   return (
     <FilterSectionContainer>
-      <Typography 
-        id={titleId} 
-        variant="h3" 
-        style={{ fontSize: '1rem', marginBottom: '12px' }}
-      >
+      <Typography id={titleId} as="h3">
         {title}:
       </Typography>
 
-      <CategoryList aria-labelledby={titleId}>
+      <CategoryList aria-labelledby={titleId} role="list">
         {categories.map((category) => (
-          <li key={category.id}>
+          <li key={category.id} role="listitem">
             <FilterItem
               label={category.label}
               count={category.count}

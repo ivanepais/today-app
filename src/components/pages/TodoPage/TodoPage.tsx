@@ -192,7 +192,7 @@ export const TodoPage = () => {
   return (
     <DashboardTemplate
       header={
-        <Typography variant="h2" color="white">Liquid Task</Typography>
+        <Typography variant="body" color="white">Liquid Task</Typography>
       }
       sidebar={
         /* Usamos un wrapper flex para que el Sidebar ocupe el espacio 
@@ -204,7 +204,7 @@ export const TodoPage = () => {
             onSearchChange={setSearchQuery}
             categories={categories}
             activeFilterId={filter}
-            onFilterChange={(id) => setFilter(id as any)}
+            onFilterChange={(id) => setFilter(id)}
           />
           
           {/* Botón de acción global del sidebar */}
@@ -225,7 +225,7 @@ export const TodoPage = () => {
       <TodoTemplate
         header={
           <div style={{ marginBottom: '1.5rem' }}>
-            <Typography variant="h1">
+            <Typography variant="title">
               {filter === 'all' ? 'Mis Tareas' : filter === 'pending' ? 'Pendientes' : 'Completadas'}
             </Typography>
             <Typography variant="body" color="textSecondary">

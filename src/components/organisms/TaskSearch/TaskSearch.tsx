@@ -5,31 +5,25 @@ import { SearchSectionContainer } from './TaskSearch.styles';
 interface TaskSearchProps {
   value: string;
   onChange: (value: string) => void;
+  onSearch?: () => void;
   title?: string;
   subtitle?: string;
 }
 
-export const TaskSearch = ({ 
-  value, 
-  onChange, 
-  title = "Tareas", 
-  subtitle = "filtrar por tareas" 
+export const TaskSearch = ({
+  value,
+  onChange,
+  onSearch,
+  title = 'Tareas',
 }: TaskSearchProps) => {
   return (
     <SearchSectionContainer>
-      <Typography variant="h2" style={{ fontSize: '1.2rem', marginBottom: '4px' }}>
-        {title}
-      </Typography>
-      <Typography variant="caption" color="textSecondary" style={{ display: 'block', marginBottom: '12px' }}>
-        {subtitle}
-      </Typography>
-      
-      <SearchInput 
-        value={value} 
-        onChange={(e: any) => {
-          const val = typeof e === 'string' ? e : e.target.value;
-          onChange(val);
-        }} 
+      <Typography variant="label">{title}</Typography>
+
+      <SearchInput
+        value={value}
+        onChange={onChange}
+        onSearch={onSearch}
         placeholder="Buscar tareas..."
       />
     </SearchSectionContainer>

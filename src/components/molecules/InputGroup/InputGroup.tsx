@@ -1,10 +1,10 @@
 import { useId } from 'react';
 import { Badge } from '../../atoms/Badge/Badge';
-import { 
-  GroupContainer, 
-  GroupHeader, 
-  StyledLabel, 
-  StyledInput 
+import {
+  GroupContainer,
+  GroupHeader,
+  StyledLabel,
+  StyledInput,
 } from './InputGroup.styles';
 
 interface InputGroupProps {
@@ -16,13 +16,13 @@ interface InputGroupProps {
   disabled?: boolean;
 }
 
-export const InputGroup = ({ 
-  label, 
-  value, 
-  onChange, 
-  maxLength = 100, 
+export const InputGroup = ({
+  label,
+  value,
+  onChange,
+  maxLength = 100,
   placeholder,
-  disabled = false
+  disabled = false,
 }: InputGroupProps) => {
   const inputId = useId();
   const remaining = maxLength - value.length;
@@ -30,19 +30,14 @@ export const InputGroup = ({
   return (
     <GroupContainer>
       <GroupHeader>
-        <StyledLabel htmlFor={inputId}>
-          {label}
-        </StyledLabel>
-        
+        <StyledLabel htmlFor={inputId}>{label}</StyledLabel>
+
         {/* Mostramos el contador solo si el usuario ha empezado a escribir */}
         {value.length > 0 && (
-          <Badge 
-            count={remaining} 
-            overflowCount={maxLength} 
-          />
+          <Badge count={remaining} overflowCount={maxLength} />
         )}
       </GroupHeader>
-      
+
       <StyledInput
         id={inputId}
         type="text"
