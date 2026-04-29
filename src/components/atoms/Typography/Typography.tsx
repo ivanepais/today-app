@@ -5,6 +5,7 @@ interface TypographyProps {
   variant?: TypographyVariant;
   children: React.ReactNode;
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'label';
+  htmlFor?: string;
 }
 
 export const Typography = ({
@@ -12,9 +13,10 @@ export const Typography = ({
   variant = 'body',
   children,
   as = 'p',
+  htmlFor,
 }: TypographyProps) => {
   return (
-    <StyledTypography id={id} as={as} $variant={variant}>
+    <StyledTypography id={id} as={as} $variant={variant} htmlFor={htmlFor}>
       {children}
     </StyledTypography>
   );

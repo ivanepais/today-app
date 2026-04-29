@@ -59,11 +59,11 @@ interface TodoListProps {
   isSearching: boolean;
 }
 
-export const TodoList = ({ 
-  todos, 
-  onToggleTodo, 
+export const TodoList = ({
+  todos,
+  onToggleTodo,
   onDeleteTodo,
-  isSearching // 👈 La recibimos aquí
+  isSearching,
 }: TodoListProps) => {
   const hasTodos = todos.length > 0;
 
@@ -75,19 +75,15 @@ export const TodoList = ({
           <span style={{ fontSize: '3rem', marginBottom: '1rem' }}>
             {isSearching ? '🔍' : '📝'}
           </span>
-          
-          <Typography variant="h3" color="textSecondary">
-            {isSearching 
-              ? "No hay coincidencias" 
-              : "No hay tareas pendientes"
-            }
+
+          <Typography variant="body">
+            {isSearching ? 'No hay coincidencias' : 'No hay tareas pendientes'}
           </Typography>
-          
-          <Typography variant="body" color="textSecondary" style={{ marginTop: '8px' }}>
-            {isSearching 
-              ? "Prueba con otros términos o limpia el buscador." 
-              : "¡Añade algo para empezar el día!"
-            }
+
+          <Typography variant="body" style={{ marginTop: '8px' }}>
+            {isSearching
+              ? 'Prueba con otros términos o limpia el buscador.'
+              : '¡Añade algo para empezar el día!'}
           </Typography>
         </EmptyState>
       ) : (
@@ -95,10 +91,11 @@ export const TodoList = ({
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
+              id={todo.id}
               text={todo.content}
               completed={todo.isCompleted}
-              onToggle={() => onToggleTodo(todo.id)}
-              onDelete={() => onDeleteTodo(todo.id)}
+              onToggle={onToggleTodo}
+              onDelete={onDeleteTodo}
             />
           ))}
         </StyledList>

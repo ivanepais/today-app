@@ -5,6 +5,7 @@ import { theme } from '../../../styles/theme';
 
 describe('Molecule: TodoItem', () => {
   const mockProps = {
+    id: 'task-123',
     text: 'Aprender Styled Components',
     completed: false,
     onToggle: vi.fn(),
@@ -16,25 +17,35 @@ describe('Molecule: TodoItem', () => {
     expect(screen.getByText(mockProps.text)).toBeInTheDocument();
   });
 
-  it('should call onToggle when clicking the checkbox', () => {
+  it('should link the checkbox with its label via ID', () => {
     render(<TodoItem {...mockProps} />);
 
-    // Buscamos el checkbox por su rol
+    const expectedId = `todo-check-${mockProps.id}`;
+    const checkbox = screen.getByRole('checkbox');
+    const label = screen.getByText(mockProps.text).closest('label');
+
+    expect(checkbox).toHaveAttribute('id', expectedId);
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveAttribute('for', expectedId);
+  });
+
+  it('should call onToggle with the correct ID when clicking the checkbox', () => {
+    render(<TodoItem {...mockProps} />);
+
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);
 
-    expect(mockProps.onToggle).toHaveBeenCalledTimes(1);
+    expect(mockProps.onToggle).toHaveBeenCalledWith(mockProps.id);
   });
 
-  it('should call onDelete when clicking the delete button', () => {
+  it('should call onDelete with the correct ID when clicking the delete button', () => {
     render(<TodoItem {...mockProps} />);
 
-    // Buscamos el botón de eliminar por su aria-label
     const deleteButton = screen.getByLabelText(/eliminar tarea/i);
     fireEvent.click(deleteButton);
 
-    expect(mockProps.onDelete).toHaveBeenCalledTimes(1);
-  });
+    expect(mockProps.onDelete).toHaveBeenCalledWith(mockProps.id);
+  });  
 
   it('should apply "line-through" and lower opacity when completed', () => {
     render(<TodoItem {...mockProps} completed={true} />);

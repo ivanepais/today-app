@@ -49,7 +49,7 @@ import {
 interface CheckboxProps {
   id: string;
   checked: boolean;
-  onChange: (checked: boolean) => void; // 👈 Contrato limpio: boolean
+  onChange: (checked: boolean) => void;
   label?: string;
   disabled?: boolean;
 }
@@ -74,7 +74,7 @@ export const Checkbox = ({
         checked={checked}
         onChange={handleChange}
         disabled={disabled}
-        type="checkbox" // Garantizamos el tipo
+        type="checkbox"
       />
       <StyledCheckbox
         $checked={checked}

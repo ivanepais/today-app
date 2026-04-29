@@ -8,42 +8,45 @@ import {
 } from './TodoItem.styles';
 
 interface TodoItemProps {
+  id: string;
   text: string;
   completed: boolean;
-  onToggle: () => void;
-  onDelete: () => void;
+  onToggle: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 export const TodoItem = ({
+  id,
   text,
   completed,
   onToggle,
   onDelete,
 }: TodoItemProps) => {
+  const checkboxId = `todo-check-${id}`;
+  
+  const handleToggle = () => onToggle(id);
+  const handleDelete = () => onDelete(id);
+
   return (
     <ItemContainer $isCompleted={completed}>
       <ContentWrapper>
         <Checkbox
+          id={checkboxId}
           checked={completed}
-          onChange={onToggle}
+          onChange={handleToggle}
           aria-label={
             completed ? 'Marcar como pendiente' : 'Marcar como completada'
           }
         />
         <TextContainer $isCompleted={completed}>
-          <Typography
-            variant="body"
-            color={completed ? 'textSecondary' : 'textPrimary'}
-          >
-            {text}
-          </Typography>
+          <Typography variant="body" as="label" htmlFor={checkboxId}>{text}</Typography>
         </TextContainer>
       </ContentWrapper>
 
       <IconButton
         icon="🗑️" // Aquí luego pondremos un SVG real
         label="Eliminar tarea"
-        onClick={onDelete}
+        onClick={handleDelete}
       />
     </ItemContainer>
   );

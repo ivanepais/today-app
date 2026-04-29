@@ -57,4 +57,19 @@ describe('Atom: Typography', () => {
 
     expect(element.id).toBe(customId);
   });
+
+  it('should render with "for" attribute when as="label" and htmlFor is provided', () => {
+    const inputId = 'input-test-id';
+    render(
+      <Typography as="label" htmlFor={inputId}>
+        Nombre de usuario
+      </Typography>,
+    );
+
+    const element = screen.getByText(/nombre de usuario/i);
+
+    expect(element.tagName).toBe('LABEL');
+    // En el DOM de JS, el atributo 'for' se accede como 'htmlFor' o vía getAttribute
+    expect(element).toHaveAttribute('for', inputId);
+  });
 });

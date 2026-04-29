@@ -29,7 +29,7 @@ export const TodoInput = ({
     <StyledForm onSubmit={handleSubmit} aria-label="todo-form">
       <Input
         value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}
+        onChange={setTaskText}
         placeholder={placeholder}
       />
       <Button type="submit" variant="primary" disabled={!taskText.trim()}>
