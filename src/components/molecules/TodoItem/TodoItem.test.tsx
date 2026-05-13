@@ -12,12 +12,17 @@ describe('Molecule: TodoItem', () => {
     onDelete: vi.fn(),
   };
 
+  // Limpiamos los mocks antes de cada test para evitar interferencias
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('should render the task text correctly', () => {
     render(<TodoItem {...mockProps} />);
     expect(screen.getByText(mockProps.text)).toBeInTheDocument();
   });
 
-  it('should link the checkbox with its label via ID', () => {
+  it('should link the checkbox with its label via ID for accessibility', () => {
     render(<TodoItem {...mockProps} />);
 
     const expectedId = `todo-check-${mockProps.id}`;
@@ -25,45 +30,51 @@ describe('Molecule: TodoItem', () => {
     const label = screen.getByText(mockProps.text).closest('label');
 
     expect(checkbox).toHaveAttribute('id', expectedId);
-    expect(label).toBeInTheDocument();
     expect(label).toHaveAttribute('for', expectedId);
   });
 
-  it('should call onToggle with the correct ID when clicking the checkbox', () => {
+  it('should call onToggle when clicking anywhere in the task area (text or background)', () => {
     render(<TodoItem {...mockProps} />);
 
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
+    const taskText = screen.getByText(mockProps.text);
+    fireEvent.click(taskText);
 
     expect(mockProps.onToggle).toHaveBeenCalledWith(mockProps.id);
   });
 
-  it('should call onDelete with the correct ID when clicking the delete button', () => {
+  it('should delete the task WITHOUT toggling it (Stop Propagation check)', () => {
     render(<TodoItem {...mockProps} />);
 
     const deleteButton = screen.getByLabelText(/eliminar tarea/i);
     fireEvent.click(deleteButton);
 
+    // Verificamos que se ejecute la eliminación pero se bloquee el toggle
     expect(mockProps.onDelete).toHaveBeenCalledWith(mockProps.id);
-  });  
+    expect(mockProps.onToggle).not.toHaveBeenCalled();
+  });
 
-  it('should apply "line-through" and lower opacity when completed', () => {
+  it('should have a pointer cursor on the interaction area', () => {
+    render(<TodoItem {...mockProps} />);
+
+    const labelArea = screen.getByText(mockProps.text).closest('label');
+    expect(labelArea).toHaveStyle({ cursor: 'pointer' });
+  });
+
+  it('should apply completed styles when task is done', () => {
     render(<TodoItem {...mockProps} completed={true} />);
 
     const textElement = screen.getByText(mockProps.text).parentElement;
 
-    // Verificamos que los estilos de "completado" definidos en el Styled Component se apliquen
     expect(textElement).toHaveStyle({
       'text-decoration': 'line-through',
       opacity: '0.5',
     });
   });
 
-  it('should have a glassmorphism container', () => {
+  it('should maintain glassmorphism styles in the container', () => {
     const { container } = render(<TodoItem {...mockProps} />);
     const listItem = container.firstChild;
 
-    // Verificamos que tenga el fondo traslúcido del mixin glass
     expect(listItem).toHaveStyle({
       'background-color': theme.colors.glass,
       'backdrop-filter': 'blur(12px)',

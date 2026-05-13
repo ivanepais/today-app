@@ -21,6 +21,7 @@ export const TemplateWrapper = styled.div`
       "main"
       "footer";
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
   }
 `;
 
@@ -44,6 +45,16 @@ export const StyledSidebar = styled.aside`
   height: calc(100vh - 80px); /* Ajuste según altura del header */
   position: sticky;
   top: 80px;
+
+  height: calc(100vh - 80px);
+
+  @media (max-width: 1024px) {
+    position: relative; /* Quitamos el sticky para que fluya hacia abajo */
+    top: 0;
+    height: auto;       /* Que crezca según su contenido */
+    border-right: none;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.glassBorder};
+  }
 `;
 
 export const StyledMain = styled.main`

@@ -4,11 +4,18 @@ export const SidebarContainer = styled.aside`
   display: flex;
   flex-direction: column;
   
-  /* Definimos un ancho sólido pero fluido para el sidebar */
-  width: 300px;
+  /* Ancho responsivo */
+  width: 100%; 
+  max-width: 100%;
   height: 100%;
-  min-height: 100vh;
   
+  min-height: auto;
+
+  @media (min-width: 1025px) {
+    width: 300px;
+    min-height: 100vh;
+  }
+
   /* Aplicamos el efecto Liquid Glass */
   background-color: ${({ theme }) => theme.colors.glass};
   backdrop-filter: blur(${({ theme }) => theme.effects.blur});

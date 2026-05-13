@@ -32,12 +32,14 @@ export const ItemContainer = styled.li<StyledItemProps>`
     `}
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.label`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
   flex: 1;
   min-width: 0; /* Evita que el texto rompa el layout */
+  cursor: pointer;
+  padding: 8px;
 `;
 
 interface TextProps {

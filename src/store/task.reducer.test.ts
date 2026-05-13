@@ -77,6 +77,41 @@ describe('Task Reducer', () => {
     expect(newState.filter).toBe('completed');
   });
 
+  it('debería volver al filtro "all" si se selecciona el filtro que ya está activo', () => {
+    /**
+     * Arrange: Partimos de un estado donde el filtro ya es 'pending'
+     */
+    const stateWithFilter: TaskState = {
+      ...initialState,
+      filter: 'pending',
+    };
+
+    const action = {
+      type: 'SET_FILTER' as const,
+      payload: 'pending' as const,
+    };
+
+    // Act
+    const newState = taskReducer(stateWithFilter, action);
+
+    /**
+     * Assert: Al ser el mismo, el reducer debe "apagarlo"
+     * y devolvernos al origen ('all')
+     */
+    expect(newState.filter).toBe('all');
+  });
+
+  it('debería mantenerse en "all" si se selecciona "all" estando ya en "all"', () => {
+    const action = {
+      type: 'SET_FILTER' as const,
+      payload: 'all' as const,
+    };
+
+    const newState = taskReducer(initialState, action);
+
+    expect(newState.filter).toBe('all');
+  });
+
   it('debería manejar SET_SEARCH_QUERY actualizando el texto de búsqueda', () => {
     const action = {
       type: 'SET_SEARCH_QUERY' as const,

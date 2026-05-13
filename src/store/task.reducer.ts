@@ -49,12 +49,16 @@ export const taskReducer = (
         tasks: state.tasks.filter((t) => t.id !== action.payload),
       };
 
-    case 'SET_FILTER':
+    case 'SET_FILTER': {
+      const nextFilter =
+        state.filter === action.payload ? 'all' : action.payload;
+
       return {
         ...state,
-        filter: action.payload,
+        filter: nextFilter,
       };
-
+    }
+    
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.payload };
 

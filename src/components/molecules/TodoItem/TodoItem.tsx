@@ -23,13 +23,18 @@ export const TodoItem = ({
   onDelete,
 }: TodoItemProps) => {
   const checkboxId = `todo-check-${id}`;
-  
+
   const handleToggle = () => onToggle(id);
-  const handleDelete = () => onDelete(id);
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onDelete(id);
+  };
 
   return (
     <ItemContainer $isCompleted={completed}>
-      <ContentWrapper>
+      <ContentWrapper as="label" htmlFor={checkboxId}>
         <Checkbox
           id={checkboxId}
           checked={completed}
@@ -39,7 +44,7 @@ export const TodoItem = ({
           }
         />
         <TextContainer $isCompleted={completed}>
-          <Typography variant="body" as="label" htmlFor={checkboxId}>{text}</Typography>
+          <Typography variant="body">{text}</Typography>
         </TextContainer>
       </ContentWrapper>
 
