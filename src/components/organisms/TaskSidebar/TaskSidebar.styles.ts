@@ -6,14 +6,16 @@ export const SidebarContainer = styled.aside`
   
   /* Ancho responsivo */
   width: 100%; 
-  max-width: 100%;
-  height: 100%;
-  
+  height: fit-content;
   min-height: auto;
 
-  @media (min-width: 1025px) {
-    width: 300px;
-    min-height: 100vh;
+  box-shadow: 
+    0 30px 60px oklch(0% 0 0 / 30%),
+    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+  }
+
+  @media (min-width: 800px) {
+    width: 280px;
   }
 
   /* Aplicamos el efecto Liquid Glass */
@@ -22,11 +24,9 @@ export const SidebarContainer = styled.aside`
   -webkit-backdrop-filter: blur(${({ theme }) => theme.effects.blur});
   
   /* Borde sutil para separar del contenido principal */
-  border-right: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  
-  /* Sombra profunda para dar relieve */
-  box-shadow: ${({ theme }) => theme.effects.shadow};
-  
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.glassBorder};
+    
   /* Espaciado interno general */
   padding: ${({ theme }) => theme.spacing.lg} 0;
   

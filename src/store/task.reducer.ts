@@ -29,7 +29,7 @@ export const taskReducer = (
 ): TaskState => {
   switch (action.type) {
     case 'ADD_TASK':
-      // Usamos nuestra lógica de dominio testeada
+      // Usamos lógica de dominio
       return {
         ...state,
         tasks: [...state.tasks, TaskLogic.createTask(action.payload)],

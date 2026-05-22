@@ -52,5 +52,5 @@ export const LabelText = styled.span`
   margin-left: ${({ theme }) => theme.spacing.sm};
   flex: 1; // Empuja el Badge al final
   color: ${({ theme }) => theme.colors.textPrimary};
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-size: ${({ theme }) => theme.typography.fontSize.md};
 `;

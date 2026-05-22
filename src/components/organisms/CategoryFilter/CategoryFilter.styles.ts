@@ -4,9 +4,8 @@ export const FilterSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  
-  /* Mantenemos el mismo padding que el buscador para que todo alinee perfectamente */
   padding: ${({ theme }) => theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing.sm};
 `;
 
 export const CategoryList = styled.ul`

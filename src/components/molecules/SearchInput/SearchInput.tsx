@@ -27,7 +27,7 @@ export const SearchInput = ({
   value,
   onChange,
   onSearch,
-  placeholder = 'buscar tareas...',
+  placeholder = 'Buscar tareas...',
 }: SearchInputProps) => {
   return (
     <SearchContainer>

@@ -34,6 +34,5 @@ export const StyledTypography = styled.p<StyledProps>`
   /* Aplicamos el estilo según la variante */
   ${({ $variant }) => variantStyles[$variant]}
 
-  /* Ejemplo: Si queremos que el texto nunca rompa el layout */
-  ${mixins.textTruncate}
+  min-width: 0;
 `;

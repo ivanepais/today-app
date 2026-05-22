@@ -7,16 +7,7 @@ export const ListWrapper = styled.section`
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.lg} 0;
-  
-  /* Animación de entrada para la lista */
-  animation: fadeIn 0.5s ease-out;
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
+  `;
 
 export const EmptyState = styled.div`
   display: flex;
@@ -58,4 +49,5 @@ export const StyledList = styled.ul`
   &::-webkit-scrollbar-thumb:hover {
     background: ${({ theme }) => theme.colors.primary}80;
   }
+
 `;

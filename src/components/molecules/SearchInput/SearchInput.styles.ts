@@ -9,7 +9,7 @@ export const SearchContainer = styled.div`
 
 export const SearchIcon = styled.span`
   position: absolute;
-  left: 12px;
+  left: 8px;
   font-size: 0.9rem;
   opacity: 0.5;
   pointer-events: none; // Para que no interfiera al hacer click en el input

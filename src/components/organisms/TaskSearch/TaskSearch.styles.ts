@@ -7,7 +7,8 @@ export const SearchSectionContainer = styled.section`
   
   /* Usamos el espaciado md (1rem) para dar aire interno */
   padding: ${({ theme }) => theme.spacing.md};
-  
+  gap: ${({ theme }) => theme.spacing.sm};
+
   /* Efecto Liquid: 
      Podemos añadir una transición suave por si el contenedor 
      cambia de estado o tamaño 

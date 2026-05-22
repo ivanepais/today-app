@@ -8,11 +8,10 @@ interface StyledItemProps {
 export const ItemContainer = styled.li<StyledItemProps>`
   ${mixins.glass}
   ${mixins.flexCenter}
-  justify-content:空间-between;
+  justify-content: space-between;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   gap: ${({ theme }) => theme.spacing.md};
-  transition: ${({ theme }) => theme.transitions.default};
   list-style: none;
   width: 100%;
 
@@ -51,7 +50,7 @@ export const TextContainer = styled.div<TextProps>`
   transition: all 0.3s ease;
   text-decoration: ${({ $isCompleted }) => ($isCompleted ? 'line-through' : 'none')};
   opacity: ${({ $isCompleted }) => ($isCompleted ? 0.5 : 1)};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 `;

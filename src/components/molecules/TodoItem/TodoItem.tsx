@@ -49,7 +49,7 @@ export const TodoItem = ({
       </ContentWrapper>
 
       <IconButton
-        icon="🗑️" // Aquí luego pondremos un SVG real
+        icon="🗑️" // SVG
         label="Eliminar tarea"
         onClick={handleDelete}
       />

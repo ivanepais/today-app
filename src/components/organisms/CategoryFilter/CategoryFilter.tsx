@@ -27,7 +27,7 @@ export const CategoryFilter = ({
 
   return (
     <FilterSectionContainer>
-      <Typography id={titleId} as="h3">
+      <Typography variant="label" id={titleId} as="h3">
         {title}:
       </Typography>
 

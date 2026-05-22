@@ -3,67 +3,86 @@ import styled from 'styled-components';
 export const TemplateWrapper = styled.div`
   display: grid;
   grid-template-areas: 
-    "header header"
-    "sidebar main"
-    "footer footer";
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 300px 1fr;
+    "header"
+    "main"
+    "sidebar"
+    "footer";
+  grid-template-columns: minmax(0, 1fr);
   min-height: 100vh;
   width: 100%;
-  background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.textPrimary};
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.glassBorder};
+  
+  box-shadow: 
+    0 30px 60px oklch(0% 0 0 / 30%),
+    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+  }
 
-  /* Responsividad: En móviles, el sidebar pasa arriba o se oculta */
-  @media (max-width: 1024px) {
+  @media (min-width: 800px) {
     grid-template-areas: 
-      "header"
-      "sidebar"
-      "main"
-      "footer";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+      "header header"
+      "sidebar main"
+      "footer footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr);
   }
 `;
 
 export const StyledHeader = styled.header`
   grid-area: header;
-  position: sticky;
   top: 0;
   z-index: 100;
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => theme.colors.glass};
-  backdrop-filter: blur(12px);
+  border-radius: 16px 16px 0px 0px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.glassBorder};
+
+  box-shadow: 
+    0 30px 60px oklch(0% 0 0 / 30%),
+    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+  }
+
+  @media (min-width: 800px) {
+    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  }
 `;
 
 export const StyledSidebar = styled.aside`
   grid-area: sidebar;
-  padding: ${({ theme }) => theme.spacing.xl};
-  background: oklch(0% 0 0 / 10%); /* Un tono más oscuro para el lateral */
-  border-right: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  overflow-y: auto;
-  height: calc(100vh - 80px); /* Ajuste según altura del header */
-  position: sticky;
-  top: 80px;
+  padding: ${({ theme }) => theme.spacing.md};
+  position: relative;
+  border-top: 1px solid ${({ theme }) => theme.colors.glassBorder};
+  align-self: start;
+  justify-self: center;
+  width: 100%;
 
-  height: calc(100vh - 80px);
-
-  @media (max-width: 1024px) {
-    position: relative; /* Quitamos el sticky para que fluya hacia abajo */
-    top: 0;
-    height: auto;       /* Que crezca según su contenido */
-    border-right: none;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.glassBorder};
+  @media (min-width: 800px) {
+    border-top: none;
+    border-right: 1px solid ${({ theme }) => theme.colors.glassBorder};
+    align-self: stretch;
+    justify-self: stretch;
+    padding: ${({ theme }) => theme.spacing.xl};
+    width: auto;
   }
 `;
 
 export const StyledMain = styled.main`
   grid-area: main;
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.md};
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  width: 100%;
+
+  @media (min-width: 800px) {
+    padding: ${({ theme }) => theme.spacing.xl};
+    
+    & > * {
+      width: 100%;
+      max-width: 800px; /* Evita que la lista de todos se vuelva gigante */
+    }
+  }
 `;
 
 export const StyledFooter = styled.footer`

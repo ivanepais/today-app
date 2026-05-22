@@ -18,13 +18,13 @@ export const TaskSearch = ({
 }: TaskSearchProps) => {
   return (
     <SearchSectionContainer>
-      <Typography variant="label">{title}</Typography>
+      <Typography variant="label">{title}:</Typography>
 
       <SearchInput
         value={value}
         onChange={onChange}
         onSearch={onSearch}
-        placeholder="Buscar tareas..."
+        placeholder="  Buscar..."
       />
     </SearchSectionContainer>
   );
