@@ -10,7 +10,7 @@ export const CheckboxContainer = styled.div`
   position: relative;
 `;
 
-/* Ocultamos el input pero mantenemos su accesibilidad */
+/* hide input, maintain its accessibility */
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
@@ -36,14 +36,14 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   align-items: center;
   justify-content: center;
 
-  /* Estado No Seleccionado: Efecto Cristal */
+  /* Unselected State */
   ${mixins.glass}
   background: ${({ $checked, theme }) => 
     $checked ? theme.colors.primary : 'oklch(100% 0 0 / 5%)'};
   border-color: ${({ $checked, theme }) => 
     $checked ? theme.colors.primary : theme.colors.glassBorder};
 
-  /* El "Tick" (la palomita) */
+  /* "Tick" */
   &::after {
     content: '';
     width: 6px;
@@ -55,7 +55,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
     opacity: ${({ $checked }) => ($checked ? 1 : 0)};
   }
 
-  /* Brillo al estar seleccionado o en focus */
+  /* Brightness when selected or in focus */
   ${HiddenCheckbox}:focus-visible + & {
     outline: 2px solid ${({ theme }) => theme.colors.primary};
     outline-offset: 2px;
@@ -71,8 +71,8 @@ export const LabelText = styled.span`
   color: ${({ theme }) => theme.colors.textPrimary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  cursor: pointer; // label efectivo
-  user-select: none; // evita que el texto se sombree en click
+  cursor: pointer; // Label
+  user-select: none; // Prevents text from being highlighted on click
 
   &:empty { display: none; }
 `;

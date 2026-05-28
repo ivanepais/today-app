@@ -1,5 +1,9 @@
+/*
 import { render, screen, fireEvent } from '../../../test/utils';
 import { describe, it, expect, vi } from 'vitest';
+import { TodoList } from './TodoList';
+import { render, screen, fireEvent } from '../../../test/utils';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TodoList } from './TodoList';
 import type { Task } from '@/core/task.entity';
 
@@ -12,45 +16,47 @@ describe('Organism: TodoList', () => {
   const mockOnToggle = vi.fn();
   const mockOnDelete = vi.fn();
 
+  // 1. DUMMY DATA: Datos de relleno para satisfacer a TypeScript
+  // en los tests donde el estado vacío no nos interesa.
+  const dummyEmptyProps = {
+    emptyIcon: '📦',
+    emptyTitle: 'Título dummy',
+    emptyDescription: 'Descripción dummy',
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('should render the normal empty state when not searching', () => {
+  // 2. NUEVA PRUEBA DEL CONTRATO: Valida que el componente pinte exactamente lo que recibe
+  it('should render the injected empty state content when todos array is empty', () => {
     render(
       <TodoList
         todos={[]}
         onToggleTodo={mockOnToggle}
         onDeleteTodo={mockOnDelete}
-        isSearching={false}
+        emptyIcon="🎯"
+        emptyTitle="Título de Prueba Personalizado"
+        emptyDescription="Descripción de Prueba Personalizada"
       />,
     );
 
-    expect(screen.getByText(/no hay tareas pendientes/i)).toBeInTheDocument();
-    expect(screen.getByText(/📝/)).toBeInTheDocument();
-  });
-
-  it('should render the search empty state when isSearching is true', () => {
-    render(
-      <TodoList
-        todos={[]}
-        onToggleTodo={mockOnToggle}
-        onDeleteTodo={mockOnDelete}
-        isSearching={true}
-      />,
-    );
-
-    expect(screen.getByText(/no hay coincidencias/i)).toBeInTheDocument();
-    expect(screen.getByText(/🔍/)).toBeInTheDocument();
+    expect(
+      screen.getByText('Título de Prueba Personalizado'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Descripción de Prueba Personalizada'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('🎯')).toBeInTheDocument();
   });
 
   it('should render a list of TodoItems when todos are provided', () => {
     render(
       <TodoList
-        todos={mockTodos as Task}
+        todos={mockTodos} // Corregido el cast erróneo del archivo original
         onToggleTodo={mockOnToggle}
         onDeleteTodo={mockOnDelete}
-        isSearching={false}
+        {...dummyEmptyProps} // Pasamos los props obligatorios usando spread
       />,
     );
 
@@ -65,14 +71,13 @@ describe('Organism: TodoList', () => {
         todos={mockTodos}
         onToggleTodo={mockOnToggle}
         onDeleteTodo={mockOnDelete}
-        isSearching={false}
+        {...dummyEmptyProps}
       />,
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
     fireEvent.click(checkboxes[0]);
 
-    // Verificamos que la delegación funcionó: el ID '1' viajó de vuelta
     expect(mockOnToggle).toHaveBeenCalledWith('1');
   });
 
@@ -82,54 +87,13 @@ describe('Organism: TodoList', () => {
         todos={mockTodos}
         onToggleTodo={mockOnToggle}
         onDeleteTodo={mockOnDelete}
-        isSearching={false}
+        {...dummyEmptyProps}
       />,
     );
 
     const deleteButtons = screen.getAllByLabelText(/eliminar tarea/i);
     fireEvent.click(deleteButtons[1]);
 
-    // Verificamos que la delegación funcionó: el ID '2' viajó de vuelta
-    expect(mockOnDelete).toHaveBeenCalledWith('2');
-  });
-
-  it('should propagate the toggle event to the correct item', () => {
-    render(
-      <TodoList
-        todos={mockTodos}
-        onToggleTodo={mockOnToggle}
-        onDeleteTodo={mockOnDelete}
-        isSearching={false}
-      />,
-    );
-
-    // Obtenemos todos los checkboxes (hay 2 según mockTodos)
-    const checkboxes = screen.getAllByRole('checkbox');
-
-    // Simulamos click en el primero
-    fireEvent.click(checkboxes[0]);
-
-    // Verificamos que se llamó con el ID correcto ('1')
-    expect(mockOnToggle).toHaveBeenCalledWith('1');
-  });
-
-  it('should propagate the delete event to the correct item', () => {
-    render(
-      <TodoList
-        todos={mockTodos}
-        onToggleTodo={mockOnToggle}
-        onDeleteTodo={mockOnDelete}
-        isSearching={false}
-      />,
-    );
-
-    // Obtenemos los botones de eliminar por su label de accesibilidad
-    const deleteButtons = screen.getAllByLabelText(/eliminar tarea/i);
-
-    // Simulamos click en el segundo botón
-    fireEvent.click(deleteButtons[1]);
-
-    // Verificamos que se llamó con el ID correcto ('2')
     expect(mockOnDelete).toHaveBeenCalledWith('2');
   });
 });

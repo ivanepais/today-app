@@ -2,7 +2,7 @@ import { StyledIconButton } from './IconButton.styles';
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: React.ReactNode;
-  label: string; // Obligatorio para accesibilidad
+  label: string; // accessibility
 }
 
 export const IconButton = ({ icon, label, ...props }: IconButtonProps) => {
@@ -10,7 +10,7 @@ export const IconButton = ({ icon, label, ...props }: IconButtonProps) => {
     <StyledIconButton
       {...props}
       aria-label={label}
-      title={label} // Agrega un tooltip nativo del navegador
+      title={label} // Add a native browser tooltip
     >
       {icon}
     </StyledIconButton>

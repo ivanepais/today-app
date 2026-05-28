@@ -4,21 +4,21 @@ import { Typography } from './Typography';
 import { theme } from '../../../styles/theme'; // Para comparar valores exactos
 
 describe('Atom: Typography', () => {
-  it('should render as a paragraph by default', () => {
+  it('render as a paragraph by default', () => {
     render(<Typography>Texto de prueba</Typography>);
 
     const element = screen.getByText(/texto de prueba/i);
 
     expect(element.tagName).toBe('P');
 
-    // SIN CLASES: Verificamos el estilo real
+    // Check the style
     expect(element).toHaveStyle({
       'font-size': theme.typography.fontSize.md,
       color: theme.colors.textPrimary,
     });
   });
 
-  it('should render as an h1 when "as" prop is "h1"', () => {
+  it('render as an h1 when "as" prop is "h1"', () => {
     render(
       <Typography as="h1" variant="title">
         Título Principal
@@ -33,7 +33,7 @@ describe('Atom: Typography', () => {
     });
   });
 
-  it('should render with "label" variant styles', () => {
+  it('render with "label" variant styles', () => {
     render(
       <Typography variant="label" as="span">
         Etiqueta
@@ -43,7 +43,7 @@ describe('Atom: Typography', () => {
     const element = screen.getByText(/etiqueta/i);
 
     expect(element.tagName).toBe('SPAN');
-    // Verificamos transformación a mayúsculas del label
+    // Verify the transformation of the label to uppercase
     expect(element).toHaveStyle({
       'text-transform': 'uppercase',
     });
@@ -58,7 +58,7 @@ describe('Atom: Typography', () => {
     expect(element.id).toBe(customId);
   });
 
-  it('should render with "for" attribute when as="label" and htmlFor is provided', () => {
+  it('render with "for" attribute when as="label" and htmlFor is provided', () => {
     const inputId = 'input-test-id';
     render(
       <Typography as="label" htmlFor={inputId}>
@@ -69,7 +69,7 @@ describe('Atom: Typography', () => {
     const element = screen.getByText(/nombre de usuario/i);
 
     expect(element.tagName).toBe('LABEL');
-    // En el DOM de JS, el atributo 'for' se accede como 'htmlFor' o vía getAttribute
+    // JS DOM: the 'for' attribute is accessed as 'htmlFor' or via getAttribute
     expect(element).toHaveAttribute('for', inputId);
   });
 });

@@ -6,7 +6,7 @@ interface BadgeProps {
 }
 
 export const Badge = ({ count, overflowCount = 99 }: BadgeProps) => {
-  // Si no hay nada que mostrar, el átomo es invisible
+  // if nothing to show, invisible.
   if (count <= 0) return null;
 
   const displayCount = count > overflowCount ? `${overflowCount}+` : count;

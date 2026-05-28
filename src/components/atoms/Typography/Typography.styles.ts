@@ -31,7 +31,7 @@ const variantStyles = {
 };
 
 export const StyledTypography = styled.p<StyledProps>`
-  /* Aplicamos el estilo según la variante */
+  /* Style according to varian */
   ${({ $variant }) => variantStyles[$variant]}
 
   min-width: 0;

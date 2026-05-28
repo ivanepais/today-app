@@ -69,11 +69,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
   width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
   gap: ${({ theme }) => theme.spacing.sm};
 
-  /* Variantes y Tamaños */
+  /* Variant and size */
   ${({ $variant }) => variantStyles[$variant]}
   ${({ $size }) => sizeStyles[$size]}
 
-  /* Estado Deshabilitado */
+  /* State */
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;

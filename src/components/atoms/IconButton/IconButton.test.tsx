@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { IconButton } from './IconButton';
 
 describe('Atom: IconButton', () => {
-  it('should render the icon and use the label as aria-label', () => {
+  it('render the icon and use the label as aria-label', () => {
     render(<IconButton icon="🚀" label="Lanzar" />);
     
     const button = screen.getByLabelText(/lanzar/i);
@@ -11,7 +11,7 @@ describe('Atom: IconButton', () => {
     expect(screen.getByText('🚀')).toBeInTheDocument();
   });
 
-  it('should call onClick when clicked', () => {
+  it('call onClick when clicked', () => {
     const handleClick = vi.fn();
     render(<IconButton icon="X" label="Cerrar" onClick={handleClick} />);
     
@@ -19,7 +19,7 @@ describe('Atom: IconButton', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should be disabled when the prop is passed', () => {
+  it('disabled when the prop is passed', () => {
     render(<IconButton icon="X" label="Cerrar" disabled />);
     expect(screen.getByRole('button')).toBeDisabled();
   });

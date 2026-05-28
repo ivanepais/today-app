@@ -7,14 +7,18 @@ interface TodoListProps {
   todos: Task[];
   onToggleTodo: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  isSearching: boolean;
+  emptyIcon: string;
+  emptyTitle: string;
+  emptyDescription: string;
 }
 
 export const TodoList = ({
   todos,
   onToggleTodo,
   onDeleteTodo,
-  isSearching,
+  emptyIcon,
+  emptyTitle,
+  emptyDescription,
 }: TodoListProps) => {
   const hasTodos = todos.length > 0;
 
@@ -22,19 +26,20 @@ export const TodoList = ({
     <ListWrapper>
       {!hasTodos ? (
         <EmptyState>
-          {/* Cambiamos el icono y el texto según si es búsqueda o lista vacía */}
-          <span style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-            {isSearching ? '🔍' : '📝'}
+          <span
+            style={{ fontSize: '3rem', marginBottom: '1rem' }}
+            role="img"
+            aria-label="estado-vacio"
+          >
+            {emptyIcon}
           </span>
 
-          <Typography variant="body">
-            {isSearching ? 'No hay coincidencias' : 'No hay tareas pendientes'}
+          <Typography variant="body" style={{ fontWeight: 'bold' }}>
+            {emptyTitle}
           </Typography>
 
-          <Typography variant="body" style={{ marginTop: '8px' }}>
-            {isSearching
-              ? 'Prueba con otros términos o limpia el buscador.'
-              : '¡Añade algo para empezar el día!'}
+          <Typography variant="body" style={{ marginTop: '8px', opacity: 0.8 }}>
+            {emptyDescription}
           </Typography>
         </EmptyState>
       ) : (

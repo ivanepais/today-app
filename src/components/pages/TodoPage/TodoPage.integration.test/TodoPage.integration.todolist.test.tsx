@@ -8,8 +8,8 @@ vi.mock('../../../../hooks/useTasks');
 describe('TodoPage <-> TodoList Integration', () => {
   const useTasksMock = vi.mocked(useTasksHook.useTasks);
 
-  it('should pass isSearching=true to TodoList when there is a search query', () => {
-    // Simulamos que el hook devuelve una búsqueda activa pero sin resultados
+  it('should display search empty state contents when a search query yields no results', () => {
+    // Simulamos un estado de búsqueda activa pero sin tareas que coincidan
     useTasksMock.mockReturnValue({
       tasks: [],
       searchQuery: 'Tarea inexistente',
@@ -22,19 +22,21 @@ describe('TodoPage <-> TodoList Integration', () => {
       remove: vi.fn(),
       clearCompleted: vi.fn(),
     });
+
     render(<TodoPage />);
 
-    // 1. Buscamos el contenedor específico por Test ID
+    // 1. Aislamos el contenedor que envuelve a la lista presentacional
     const listContainer = screen.getByTestId('todo-list-container');
 
-    // 2. Verificamos que los elementos del EmptyState de búsqueda estén ahí
+    // 2. Evaluamos que TodoPage haya inyectado con éxito los textos de búsqueda
     expect(
       within(listContainer).getByText(/no hay coincidencias/i),
     ).toBeInTheDocument();
     expect(within(listContainer).getByText('🔍')).toBeInTheDocument();
   });
 
-  it('should pass isSearching=false to TodoList when search query is empty', () => {
+  it('should display default empty state contents when search is empty and filter is "all"', () => {
+    // Simulamos la aplicación recién abierta, sin tareas y sin búsquedas
     useTasksMock.mockReturnValue({
       tasks: [],
       searchQuery: '',
@@ -52,10 +54,10 @@ describe('TodoPage <-> TodoList Integration', () => {
 
     const listContainer = screen.getByTestId('todo-list-container');
 
-    // Para el texto "No hay tareas pendientes", usamos regex de coincidencia exacta
-    // para que no choque con "¡Estás al día! No hay tareas pendientes" del Header.
+    // Cambiamos el texto esperado a "No hay tareas" 
+    // para cumplir con el diccionario de configuraciones de la categoría 'all'.
     expect(
-      within(listContainer).getByText(/^no hay tareas pendientes$/i),
+      within(listContainer).getByText(/^no hay tareas$/i),
     ).toBeInTheDocument();
     expect(within(listContainer).getByText('📝')).toBeInTheDocument();
   });

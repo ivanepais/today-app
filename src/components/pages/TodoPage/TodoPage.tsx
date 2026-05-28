@@ -2,14 +2,14 @@ import { useMemo } from 'react';
 import { useTasks } from '../../../hooks/useTasks';
 import { DashboardTemplate } from '../../templates/DashboardTemplate/DashboardTemplate';
 import { TodoTemplate } from '../../templates/TodoTemplate/TodoTemplate';
-import { TaskSidebar } from '../../organisms/TaskSidebar/TaskSidebar'; // 👈 Cambiado por el nuevo
+import { TaskSidebar } from '../../organisms/TaskSidebar/TaskSidebar';
 import { TodoList } from '../../organisms/TodoList/TodoList';
 import { TodoInput } from '../../molecules/TodoInput/TodoInput';
 import { Typography } from '../../atoms/Typography/Typography';
 import { Button } from '../../atoms/Button/Button';
 
 export const TodoPage = () => {
-  // 1. Extraemos todo del hook, con las funciones
+  // Extraemos todo del hook, con las funciones
   const {
     tasks,
     add,
@@ -23,7 +23,7 @@ export const TodoPage = () => {
     clearCompleted,
   } = useTasks();
 
-  // 2. Mapeamos las categorías para el CategoryFilter
+  // Mapeamos las categorías para el CategoryFilter
   const categories = useMemo(
     () => [
       { id: 'all', label: 'Todas', count: stats.total },
@@ -32,6 +32,41 @@ export const TodoPage = () => {
     ],
     [stats],
   );
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  const emptyStateProps = useMemo(() => {
+    // Prioridad Absoluta: Si el usuario escribe en el buscador
+    if (isSearching) {
+      return {
+        icon: '🔍',
+        title: 'No hay coincidencias',
+        description: 'Prueba con otros términos o limpia el buscador.',
+      };
+    }
+
+    // Diccionario de configuración basado en las reglas de negocio del Core
+    const configs = {
+      all: {
+        icon: '📝',
+        title: 'No hay tareas',
+        description: '¡Añade algo para empezar el día!',
+      },
+      pending: {
+        icon: '⚡',
+        title: 'No hay tareas pendientes',
+        description: '¡Estás completamente al día!',
+      },
+      completed: {
+        icon: '✅',
+        title: 'No hay tareas completadas',
+        description: 'Aún no has terminado ninguna tarea.',
+      },
+    };
+
+    return configs[filter];
+  }, [filter, isSearching]); // Solo se vuelve a calcular si cambia el filtro o el estado de búsqueda
+
 
   return (
     <DashboardTemplate
@@ -88,7 +123,9 @@ export const TodoPage = () => {
               todos={tasks}
               onToggleTodo={toggle}
               onDeleteTodo={remove}
-              isSearching={searchQuery.trim().length > 0}
+              emptyIcon={emptyStateProps.icon}
+              emptyTitle={emptyStateProps.title}
+              emptyDescription={emptyStateProps.description}
             />
           </div>
         }
