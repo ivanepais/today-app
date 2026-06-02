@@ -18,7 +18,7 @@ export const EmptyState = styled.div`
   text-align: center;
   gap: ${({ theme }) => theme.spacing.md};
   
-  /* Un toque visual para el estado vacío */
+  /* Empty State */
   opacity: 0.6;
   filter: grayscale(1);
 `;
@@ -31,7 +31,7 @@ export const StyledList = styled.ul`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sm};
   
-  /* Scrollbar minimalista para que no choque con el diseño Glass */
+  /* Scrollbar */
   max-height: 60vh;
   overflow-y: auto;
   padding-right: 8px;

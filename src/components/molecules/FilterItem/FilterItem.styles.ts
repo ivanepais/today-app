@@ -20,7 +20,7 @@ export const FilterContainer = styled.div<{ $isSelected: boolean }>`
   gap: ${({ theme }) => theme.spacing.md};
   cursor: pointer;
 
-  /* Un efecto de fondo muy sutil al pasar el mouse para indicar que es clicable */
+  /* Hover click */
   &:hover {
     background: oklch(100% 0 0 / 5%);
   }
@@ -33,24 +33,24 @@ export const BadgeWrapper = styled.div<{ $isVisible: boolean }>`
   display: flex;
   align-items: center;
   
-  /* 2. Aplicamos la animación solo cuando es visible */
+  /* Visible state */
   ${({ $isVisible }) => $isVisible ? css`
     animation: ${popIn} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   ` : css`
     animation: none;
   `}
   
-  /* 3. El estado final/transición para cuando deja de ser visible */
+  /* Not visible */
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transition: opacity 0.2s ease;
   
-  /* Evitamos que el badge ocupe espacio si no es visible */
+  /* Prevent it from taking up space */
   visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
 `;
   
 export const LabelText = styled.span`
   margin-left: ${({ theme }) => theme.spacing.sm};
-  flex: 1; // Empuja el Badge al final
+  flex: 1; // Push at the final
   color: ${({ theme }) => theme.colors.textPrimary};
   font-size: ${({ theme }) => theme.typography.fontSize.md};
 `;

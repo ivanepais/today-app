@@ -15,36 +15,36 @@ describe('Organism: CategoryFilter', () => {
     onFilterChange: vi.fn(),
   };
 
-  it('debería renderizar el título y todas las categorías', () => {
+  it('render title and all categories', () => {
     render(<CategoryFilter {...defaultProps} title="Mis Tareas" />);
 
-    // Verificamos el título
+    // Check title
     expect(screen.getByText(/mis tareas:/i)).toBeInTheDocument();
 
-    // Verificamos que se rendericen los labels de las categorías
+    // Check label render
     mockCategories.forEach((cat) => {
       expect(screen.getByText(cat.label)).toBeInTheDocument();
     });
   });
 
-  it('debería llamar a onFilterChange con el ID correcto al hacer clic', () => {
+  it('call onFilterChange with the correct id on click', () => {
     const onFilterChange = vi.fn();
     render(
       <CategoryFilter {...defaultProps} onFilterChange={onFilterChange} />,
     );
 
-    // Buscamos el item de "Trabajo" y simulamos click
-    // Nota: Como FilterItem tiene el label dentro de un Checkbox, podemos buscar por el texto
+    // Item and click
+    // Search by text
     const workItem = screen.getByText('Trabajo');
     fireEvent.click(workItem);
 
     expect(onFilterChange).toHaveBeenCalledWith('work');
   });
 
-  it('debería marcar como seleccionada solo la categoría activa', () => {
+  it('mark as selected only the active category', () => {
     render(<CategoryFilter {...defaultProps} activeFilterId="work" />);
 
-    // Buscamos por el rol 'checkbox' y filtramos por su nombre accesible (Regex)
+    // Check by rol and filter (regex)
     const workCheckbox = screen.getByRole('checkbox', {
       name: /trabajo/i,
     }) as HTMLInputElement;
@@ -56,23 +56,20 @@ describe('Organism: CategoryFilter', () => {
     expect(allCheckbox.checked).toBe(false);
   });
 
-  it('debería mostrar el Badge solo en la categoría activa si tiene conteo > 0', () => {
+  it('show badge in active category if count > 0', () => {
     render(<CategoryFilter {...defaultProps} activeFilterId="work" />);
 
-    // El count de "work" es 5, debería verse el badge
+    // Count badge
     expect(screen.getByText('5')).toBeInTheDocument();
-
-    // El count de "personal" es 0, no debería haber badge de personal aunque se seleccionara
-    // (Siguiendo la lógica de FilterItem: isSelected && count > 0)
   });
 
-  it('debería cumplir con la relación de accesibilidad aria-labelledby', () => {
+  it('aria-labelledby accessibility', () => {
     render(<CategoryFilter {...defaultProps} />);
 
     const list = screen.getByRole('list');
     const title = screen.getByText(/categorías:/i);
 
-    // Verificamos que el ID del título coincida con el aria-labelledby de la lista
+    // Check id title equal to aria-labelledby of the list
     expect(list).toHaveAttribute('aria-labelledby', title.id);
   });
 });

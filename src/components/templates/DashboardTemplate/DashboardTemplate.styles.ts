@@ -16,7 +16,7 @@ export const TemplateWrapper = styled.div`
   
   box-shadow: 
     0 30px 60px oklch(0% 0 0 / 30%),
-    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+    inset 0 1px 0px oklch(100% 0 0 / 12%);
   }
 
   @media (min-width: 800px) {
@@ -40,7 +40,7 @@ export const StyledHeader = styled.header`
 
   box-shadow: 
     0 30px 60px oklch(0% 0 0 / 30%),
-    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+    inset 0 1px 0px oklch(100% 0 0 / 12%);
   }
 
   @media (min-width: 800px) {
@@ -80,7 +80,7 @@ export const StyledMain = styled.main`
     
     & > * {
       width: 100%;
-      max-width: 800px; /* Evita que la lista de todos se vuelva gigante */
+      max-width: 800px;
     }
   }
 `;

@@ -1,48 +1,3 @@
-/*
-import { render, screen, fireEvent } from '../../../test/utils';
-import { describe, it, expect, vi } from 'vitest';
-import { SearchInput } from './SearchInput';
-
-describe('Molecule: SearchInput', () => {
-  const defaultProps = {
-    value: '',
-    onChange: vi.fn(),
-    placeholder: 'Buscar tarea...'
-  };
-
-  it('debería renderizar el icono y el input con su placeholder', () => {
-    render(<SearchInput {...defaultProps} />);
-    
-    // Verificamos el input por su accesibilidad (aria-label definido en el átomo)
-    const input = screen.getByPlaceholderText(/buscar tarea/i);
-    expect(input).toBeInTheDocument();
-
-    // Verificamos que el icono visual esté presente
-    expect(screen.getByText('🔍')).toBeInTheDocument();
-  });
-
-  it('debería propagar los cambios al escribir', () => {
-    const handleChange = vi.fn();
-    render(<SearchInput {...defaultProps} onChange={handleChange} />);
-    
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'Nueva tarea' } });
-
-    expect(handleChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('el icono no debe bloquear la interacción del mouse', () => {
-    render(<SearchInput {...defaultProps} />);
-    
-    const icon = screen.getByText('🔍');
-    
-    // Verificamos que tenga pointer-events: none a nivel de estilo
-    // Esto es crítico para que el click pase al input de abajo
-    expect(icon).toHaveStyle({ 'pointer-events': 'none' });
-  });
-});
-*/
-
 import { render, screen, fireEvent } from '../../../test/utils';
 import { describe, it, expect, vi } from 'vitest';
 import { SearchInput } from './SearchInput';
@@ -54,7 +9,7 @@ describe('Molecule: SearchInput', () => {
     placeholder: 'Buscar tarea...',
   };
 
-  it('debería renderizar el icono y el input con su placeholder', () => {
+  it('render the icon and input with its placeholder', () => {
     render(<SearchInput {...defaultProps} />);
 
     const input = screen.getByPlaceholderText(/buscar tarea/i);
@@ -62,17 +17,17 @@ describe('Molecule: SearchInput', () => {
     expect(screen.getByText('🔍')).toBeInTheDocument();
   });
 
-  it('debería propagar el valor como STRING al escribir', () => {
+  it('propagate the value as a string when writing', () => {
     const handleChange = vi.fn();
     render(<SearchInput {...defaultProps} onChange={handleChange} />);
 
     const input = screen.getByRole('textbox');
 
-    // Simulamos el evento del DOM
+    // simulate the DOM event
     fireEvent.change(input, { target: { value: 'Nueva tarea' } });
 
-    // Verificamos que la molécula entregue el dato limpio
-    // Si la comunicación fallara (ej. si pasara el evento por error), esto fallaría.
+    // deliver the clean data
+    // If communication were to fail
     expect(handleChange).toHaveBeenCalledWith('Nueva tarea');
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
@@ -81,28 +36,28 @@ describe('Molecule: SearchInput', () => {
     render(<SearchInput {...defaultProps} />);
     const icon = screen.getByText('🔍');
 
-    // Esto asegura que al hacer click en la lupa, el foco vaya al input
+    // click on the magnifying glass, the focus goes to the input
     expect(icon).toHaveStyle({ 'pointer-events': 'none' });
   });
 
-  // Opcional: Test de accesibilidad
-  it('debería tener las etiquetas de accesibilidad correctas', () => {
+  // accessibility
+  it('correct accessibility labels', () => {
     render(<SearchInput {...defaultProps} />);
     const icon = screen.getByLabelText('Icono de búsqueda');
     expect(icon).toHaveAttribute('role', 'img');
   });
 
-  it('debería llamar a onSearch cuando se presiona Enter en el input', () => {
+  it('call onSearch when Enter is pressed on the input', () => {
     const handleSearch = vi.fn();
 
     render(<SearchInput {...defaultProps} onSearch={handleSearch} />);
 
     const input = screen.getByRole('textbox');
 
-    // Simulamos la tecla Enter
+    // Enter
     fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
 
-    // Verificamos que la molécula propagó la acción correctamente
+    // action
     expect(handleSearch).toHaveBeenCalledTimes(1);
   });
 });

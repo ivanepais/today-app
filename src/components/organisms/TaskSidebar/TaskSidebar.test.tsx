@@ -20,34 +20,34 @@ describe('Organism: TaskSidebar', () => {
     vi.clearAllMocks();
   });
 
-  it('debería renderizar el buscador y el filtro de categorías', () => {
+  it('render search and category', () => {
     render(<TaskSidebar {...mockProps} />);
 
-    // Verificamos que ambos sub-componentes están presentes
-    expect(screen.getByPlaceholderText(/buscar tareas/i)).toBeInTheDocument();
+    // Check components
+    expect(screen.getByPlaceholderText(/buscar.../i)).toBeInTheDocument();
     expect(screen.getByText(/categorías/i)).toBeInTheDocument();
   });
 
-  it('debería propagar los cambios del buscador al llamar a onSearchChange', () => {
+  it('propagate search engine changes by calling onSearchChange', () => {
     render(<TaskSidebar {...mockProps} />);
 
-    const input = screen.getByPlaceholderText(/buscar tareas/i);
+    const input = screen.getByPlaceholderText(/buscar.../i);
     fireEvent.change(input, { target: { value: 'Nueva tarea' } });
 
     expect(mockProps.onSearchChange).toHaveBeenCalledWith('Nueva tarea');
   });
 
-  it('debería propagar el cambio de filtro al hacer clic en una categoría', () => {
+  it('propagate the filter change when clicking on a category', () => {
     render(<TaskSidebar {...mockProps} />);
 
-    // Usamos el rol de checkbox con regex para evitar el "ruido" del badge
+    // Rol checkbox
     const personalFilter = screen.getByRole('checkbox', { name: /personal/i });
     fireEvent.click(personalFilter);
 
     expect(mockProps.onFilterChange).toHaveBeenCalledWith('personal');
   });
 
-  it('debería mostrar el estado de selección correcto basado en activeFilterId', () => {
+  it('display selection status based on activeFilterId', () => {
     render(<TaskSidebar {...mockProps} activeFilterId="work" />);
 
     const workCheckbox = screen.getByRole('checkbox', {

@@ -21,7 +21,7 @@ export const LoadingWrapper = styled.div`
   color: ${({ theme }) => theme.colors.primary};
   gap: ${({ theme }) => theme.spacing.md};
 
-  /* Un efecto de pulso para el texto de carga */
+  /* Txt load effect */
   span {
     font-family: ${({ theme }) => theme.typography.fontFamily};
     letter-spacing: 2px;

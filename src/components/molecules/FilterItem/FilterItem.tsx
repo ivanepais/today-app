@@ -95,19 +95,16 @@ export const FilterItem = ({
   isSelected,
   onToggle,
 }: FilterItemProps) => {
-  // Generamos un ID único y estable para este item
+  // Item id
   const inputId = useId();
 
   return (
-    /** * 1. El contenedor ahora es un LABEL.
-     * Al estar vinculado al ID del checkbox, el click en cualquier
-     * parte (incluyendo el espacio vacío) activa el input.
-     */
+    /* Container label, linked to id; click in anywhere */
     <FilterContainer as="label" htmlFor={inputId} $isSelected={isSelected}>
       <Checkbox
         id={inputId}
         checked={isSelected}
-        onChange={onToggle} // Encaja perfecto: (val) => onToggle()
+        onChange={onToggle}
       />
 
       <LabelText>{label}</LabelText>

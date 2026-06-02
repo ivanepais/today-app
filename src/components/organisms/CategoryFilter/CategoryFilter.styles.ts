@@ -9,7 +9,7 @@ export const FilterSectionContainer = styled.section`
 `;
 
 export const CategoryList = styled.ul`
-  /* Reset de estilos de lista */
+  /* Reset styles of the list */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -17,13 +17,12 @@ export const CategoryList = styled.ul`
   display: flex;
   flex-direction: column;
   
-  /* Espaciado entre cada FilterItem */
   gap: ${({ theme }) => theme.spacing.sm};
 
-  /* Optimizamos para que el scroll (si el sidebar fuera muy largo) sea suave */
+  /* smooth scroll */
   overflow-y: auto;
 
-  /* Estilo opcional para que los li no tengan margen extra */
+  /* li without extra margin */
   li {
     margin: 0;
     padding: 0;

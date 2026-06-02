@@ -43,7 +43,7 @@ export const CategoryList = styled.ul`
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px; /* Espaciado mínimo para que los items se vean compactos */
+  gap: 2px;
 `;
 
 export const EmptyState = styled.p`

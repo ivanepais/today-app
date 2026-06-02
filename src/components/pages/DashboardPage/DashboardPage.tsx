@@ -21,7 +21,7 @@ export const DashboardPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Simulación de carga de API
+      // API
       await new Promise(resolve => setTimeout(resolve, 800));
 
       const data = [
@@ -43,7 +43,7 @@ export const DashboardPage = () => {
     );
   };
 
-  // Preparamos los slots para la Template
+  // Slots
   const headerContent = (
     <Typography variant="h2" color="primary">
       Tech Learning Dashboard
@@ -72,7 +72,7 @@ export const DashboardPage = () => {
       <DashboardTemplate 
         header={headerContent} 
         sidebar={sidebarContent}
-        footer={<Typography variant="body">© 2026 Liquid Glass Systems</Typography>}
+        footer={<Typography variant="body">© 2026 Devs Systems</Typography>}
       >
         <MainContentView>
           <header>
@@ -82,7 +82,7 @@ export const DashboardPage = () => {
             </Typography>
           </header>
 
-          {/* Aquí iría un Grid de tarjetas, por ejemplo */}
+          {/* Grid example */}
           <div style={{ marginTop: '2rem' }}>
             <Typography variant="body">
               {selectedIds.length > 0 

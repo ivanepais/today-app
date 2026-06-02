@@ -1,21 +1,5 @@
 import styled from 'styled-components';
 
-/*
-export const PageWrapper = styled.div`
-  width: 100%;
-  background: radial-gradient(
-    circle at top center,
-    oklch(25% 0.12 250) 0%,
-    ${({ theme }) => theme.colors.background} 100%
-  );
-  display: flex;
-  justify-content: center;
-  border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.md};
-`;
-*/
-
 export const PageWrapper = styled.div`
   width: 100%;
   background: radial-gradient(
@@ -30,7 +14,7 @@ export const PageWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.md};
   box-shadow: 
     0 30px 60px oklch(0% 0 0 / 30%),
-    inset 0 1px 0px oklch(100% 0 0 / 12%); /* Reflejo superior estilo cristal */
+    inset 0 1px 0px oklch(100% 0 0 / 12%);
   }
 `;
 
@@ -48,7 +32,6 @@ export const HeaderSection = styled.header`
   
   h1 {
     margin-bottom: ${({ theme }) => theme.spacing.xs};
-    /* Un pequeño brillo de texto para el título */
     text-shadow: 0 0 20px ${({ theme }) => theme.colors.primary}40;
   }
 `;

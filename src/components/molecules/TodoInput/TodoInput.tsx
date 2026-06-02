@@ -15,13 +15,13 @@ export const TodoInput = ({
   const [taskText, setTaskText] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault(); // Evitamos que la página se recargue
+    e.preventDefault();
 
     const trimmedText = taskText.trim();
 
     if (trimmedText) {
       onAdd(trimmedText);
-      setTaskText(''); // Limpiamos el input tras añadir
+      setTaskText(''); // clean input
     }
   };
 

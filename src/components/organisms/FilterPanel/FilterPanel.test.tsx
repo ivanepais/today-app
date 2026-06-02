@@ -4,30 +4,30 @@ import { FilterPanel } from './FilterPanel';
 
 describe('Organism: FilterPanel', () => {
   const mockCategories = [
-    { id: '1', label: 'Trabajo', count: 3 },
-    { id: '2', label: 'Hogar', count: 5 },
-    { id: '3', label: 'Estudios', count: 2 },
+    { id: '1', label: 'Work', count: 3 },
+    { id: '2', label: 'Home', count: 5 },
+    { id: '3', label: 'Studies', count: 2 },
   ];
 
   const mockOnToggle = vi.fn();
 
-  it('should render the title and all categories initially', () => {
+  it('render the title and all categories initially', () => {
     render(
       <FilterPanel 
         categories={mockCategories} 
         selectedIds={['1']} 
         onToggleCategory={mockOnToggle} 
-        title="Mis Etiquetas"
+        title="My Tags"
       />
     );
 
-    expect(screen.getByText('Mis Etiquetas')).toBeInTheDocument();
-    expect(screen.getByText('Trabajo')).toBeInTheDocument();
-    expect(screen.getByText('Hogar')).toBeInTheDocument();
-    expect(screen.getByText('Estudios')).toBeInTheDocument();
+    expect(screen.getByText('My Tags')).toBeInTheDocument();
+    expect(screen.getByText('Work')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Studies')).toBeInTheDocument();
   });
 
-  it('should filter the list when typing in the search input', () => {
+  it('filter the list when typing in the search input', () => {
     render(
       <FilterPanel 
         categories={mockCategories} 
@@ -38,15 +38,15 @@ describe('Organism: FilterPanel', () => {
 
     const input = screen.getByPlaceholderText(/buscar categorías.../i);
     
-    // Filtramos por "Hogar"
-    fireEvent.change(input, { target: { value: 'Hogar' } });
+    // Filter
+    fireEvent.change(input, { target: { value: 'Home' } });
 
-    // "Hogar" debe seguir ahí, pero "Trabajo" debe desaparecer
-    expect(screen.getByText('Hogar')).toBeInTheDocument();
-    expect(screen.queryByText('Trabajo')).not.toBeInTheDocument();
+    // "Home" must remain, "Work" must disappear
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.queryByText('Work')).not.toBeInTheDocument();
   });
 
-  it('should show the empty state when no category matches the search', () => {
+  it('show the empty state when no category matches the search', () => {
     render(
       <FilterPanel 
         categories={mockCategories} 
@@ -62,7 +62,7 @@ describe('Organism: FilterPanel', () => {
     expect(screen.queryByRole('list')).toBeEmptyDOMElement();
   });
 
-  it('should call onToggleCategory with the correct ID when an item is clicked', () => {
+  it('call onToggleCategory with the correct ID when an item is clicked', () => {
     render(
       <FilterPanel 
         categories={mockCategories} 
@@ -71,24 +71,23 @@ describe('Organism: FilterPanel', () => {
       />
     );
 
-    // Hacemos click en la categoría "Estudios" (ID: 3)
-    const categoryItem = screen.getByText('Estudios');
+    // Clic "Studies" (ID: 3)
+    const categoryItem = screen.getByText('Studies');
     fireEvent.click(categoryItem);
 
     expect(mockOnToggle).toHaveBeenCalledWith('3');
   });
 
-  it('should identify selected categories correctly', () => {
+  it('identify selected categories correctly', () => {
     render(
       <FilterPanel 
         categories={mockCategories} 
-        selectedIds={['2']} // Marcamos "Hogar"
+        selectedIds={['2']}
         onToggleCategory={mockOnToggle} 
       />
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
-    // El segundo item (Hogar) debería estar marcado
     expect(checkboxes[1]).toBeChecked();
     expect(checkboxes[0]).not.toBeChecked();
   });

@@ -15,14 +15,13 @@ export const ItemContainer = styled.li<StyledItemProps>`
   list-style: none;
   width: 100%;
 
-  /* Efecto Hover: se ilumina sutilmente al pasar el mouse */
   &:hover {
     background: oklch(100% 0 0 / 10%);
     border-color: ${({ theme }) => theme.colors.primary}40;
-    transform: translateX(4px); /* Pequeño desplazamiento orgánico */
+    transform: translateX(4px); /* motion */
   }
 
-  /* Si está completada, suavizamos su presencia */
+  /* Motion */
   ${({ $isCompleted }) =>
     $isCompleted &&
     css`
@@ -36,7 +35,7 @@ export const ContentWrapper = styled.label`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
   flex: 1;
-  min-width: 0; /* Evita que el texto rompa el layout */
+  min-width: 0; /* avoid content breakage */
   cursor: pointer;
   padding: 8px;
 `;

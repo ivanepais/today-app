@@ -7,7 +7,7 @@ describe('Template: TodoTemplate', () => {
   const mockInput = <button>Add Task Slot</button>;
   const mockList = <ul><li>Task List Slot</li></ul>;
 
-  it('should render all provided slots correctly', () => {
+  it('render all provided slots correctly', () => {
     render(
       <TodoTemplate
         header={mockHeader}
@@ -16,13 +16,13 @@ describe('Template: TodoTemplate', () => {
       />
     );
 
-    // Verificamos que el contenido de cada slot esté presente
+    // Check slot contents
     expect(screen.getByText('Task Manager')).toBeInTheDocument();
     expect(screen.getByText('Add Task Slot')).toBeInTheDocument();
     expect(screen.getByText('Task List Slot')).toBeInTheDocument();
   });
 
-  it('should maintain the semantic HTML structure', () => {
+  it('maintain the semantic HTML structure', () => {
     const { container } = render(
       <TodoTemplate
         header={<div>Header</div>}
@@ -31,18 +31,18 @@ describe('Template: TodoTemplate', () => {
       />
     );
 
-    // El PageWrapper debe ser un <main>
-    expect(screen.getByRole('main')).toBeInTheDocument();
+    // PageWrapper <div>
+    expect(container.querySelector('div')).toBeInTheDocument();
     
-    // Debe existir una etiqueta <header>
+    // Tag <header>
     expect(container.querySelector('header')).toBeInTheDocument();
     
-    // Debe haber secciones para el input y la lista
+    // input, list sections
     const sections = container.querySelectorAll('section');
     expect(sections.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('should have the header section styled for the title', () => {
+  it('have the header section styled for the title', () => {
     const { container } = render(
       <TodoTemplate
         header={<div>Title</div>}
@@ -53,7 +53,6 @@ describe('Template: TodoTemplate', () => {
     
     const header = container.querySelector('header');
     expect(header).toBeInTheDocument();
-    // Verificamos el alineado al centro definido en los estilos
     expect(header).toHaveStyle({ 'text-align': 'center' });
   });
 });

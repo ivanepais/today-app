@@ -32,7 +32,7 @@ export const InputGroup = ({
       <GroupHeader>
         <StyledLabel htmlFor={inputId}>{label}</StyledLabel>
 
-        {/* Mostramos el contador solo si el usuario ha empezado a escribir */}
+        {/* Show the counter only if the user has started typing */}
         {value.length > 0 && (
           <Badge count={remaining} overflowCount={maxLength} />
         )}

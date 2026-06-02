@@ -11,42 +11,42 @@ describe('Molecule: InputGroup', () => {
     placeholder: 'Escribe aquí...',
   };
 
-  it('should render the label and input correctly', () => {
+  it('render the label and input', () => {
     render(<InputGroup {...mockProps} />);
 
     expect(screen.getByText('Nombre de la tarea')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Escribe aquí...')).toBeInTheDocument();
   });
 
-  it('should link the label with the input via id', () => {
+  it('link label with input id', () => {
     render(<InputGroup {...mockProps} />);
 
     const label = screen.getByText('Nombre de la tarea');
     const input = screen.getByPlaceholderText('Escribe aquí...');
 
-    // Verificamos que el for del label coincida con el id del input
+    // label's for loop matches the input's id
     expect(label).toHaveAttribute('for', input.id);
   });
 
-  it('should NOT show the character counter when value is empty', () => {
+  it('not show the character counter when value is empty', () => {
     render(<InputGroup {...mockProps} value="" />);
 
-    // El badge no debería estar presente
+    // badge not present
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
-  it('should show the correct remaining characters in the badge', () => {
-    const value = 'Hola'; // 4 caracteres
+  it('show the correct remaining characters in the badge', () => {
+    const value = 'Hola';
     const maxLength = 20;
-    const expectedRemaining = maxLength - value.length; // 16
+    const expectedRemaining = maxLength - value.length;
 
     render(<InputGroup {...mockProps} value={value} maxLength={maxLength} />);
 
-    // El Badge debería mostrar el número 16
+    // show 16
     expect(screen.getByText(expectedRemaining.toString())).toBeInTheDocument();
   });
 
-  it('should call onChange when the user types', () => {
+  it('call onChange when the user types', () => {
     render(<InputGroup {...mockProps} />);
 
     const input = screen.getByRole('textbox');
@@ -55,7 +55,7 @@ describe('Molecule: InputGroup', () => {
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
   });
 
-  it('should be disabled when the prop is passed', () => {
+  it('disabled when the prop is passed', () => {
     render(<InputGroup {...mockProps} disabled />);
 
     expect(screen.getByRole('textbox')).toBeDisabled();

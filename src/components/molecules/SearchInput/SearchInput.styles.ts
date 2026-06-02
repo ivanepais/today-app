@@ -12,16 +12,16 @@ export const SearchIcon = styled.span`
   left: 8px;
   font-size: 0.9rem;
   opacity: 0.5;
-  pointer-events: none; // Para que no interfiera al hacer click en el input
+  pointer-events: none; // Do not interfere when clicking on the input
 `;
 
 export const StyledInput = styled.input`
   width: 100%;
-  padding: 10px 12px 10px 36px; // Espacio extra a la izquierda para el icono
+  padding: 10px 12px 10px 36px; // Extra space on the left for the icon
   
-  /* Estilo Liquid Glass */
+  /* Style */
   background: rgba(255, 255, 255, 0.05); 
-  backdrop-filter: blur(4px); // Efecto de desenfoque detrás del cristal
+  backdrop-filter: blur(4px); // Blur glass
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   
