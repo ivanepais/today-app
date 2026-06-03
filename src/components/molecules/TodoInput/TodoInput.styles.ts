@@ -7,7 +7,7 @@ export const StyledForm = styled.form`
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  
+
   /* Remaining space for input */
   & > *:first-child {
     flex: 1;

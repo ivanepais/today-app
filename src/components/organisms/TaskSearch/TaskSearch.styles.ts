@@ -4,10 +4,8 @@ export const SearchSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  
   padding: ${({ theme }) => theme.spacing.md};
   gap: ${({ theme }) => theme.spacing.sm};
-
   transition: ${({ theme }) => theme.transitions.default};
 
   & > * {

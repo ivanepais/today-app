@@ -15,7 +15,7 @@ const variantStyles = {
     background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.background};
     border: 1px solid ${({ theme }) => theme.colors.primary};
-    
+
     &:hover:not(:disabled) {
       background-color: ${({ theme }) => theme.colors.primaryHover};
       ${mixins.electricGlow}
@@ -24,9 +24,9 @@ const variantStyles = {
   secondary: css`
     ${mixins.glass}
     color: ${({ theme }) => theme.colors.textPrimary};
-    
+
     &:hover:not(:disabled) {
-      background-color: oklch(100% 0 0 / 15%);
+      background-color: oklch(100% 0 0deg / 15%);
       border-color: ${({ theme }) => theme.colors.primary};
     }
   `,
@@ -37,7 +37,7 @@ const variantStyles = {
 
     &:hover:not(:disabled) {
       color: ${({ theme }) => theme.colors.textPrimary};
-      background-color: oklch(100% 0 0 / 5%);
+      background-color: oklch(100% 0 0deg / 5%);
     }
   `,
 };

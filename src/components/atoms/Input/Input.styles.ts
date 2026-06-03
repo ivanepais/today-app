@@ -4,16 +4,16 @@ import { mixins } from '../../../styles/mixins';
 export const StyledInput = styled.input`
   /* Base */
   ${mixins.glass}
-  
+
   width: 100%;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  
+
   /* Typo */
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: ${({ theme }) => theme.typography.fontSize.md};
   color: ${({ theme }) => theme.colors.textPrimary};
-  
+
   /* State */
   transition: ${({ theme }) => theme.transitions.default};
 
@@ -25,7 +25,7 @@ export const StyledInput = styled.input`
   /* Focus */
   &:focus {
     ${mixins.electricGlow}
-    background: oklch(100% 0 0 / 12%);
+    background: oklch(100% 0 0deg / 12%);
     outline: none;
   }
 

@@ -13,7 +13,7 @@ export const CheckboxContainer = styled.div`
 /* hide input, maintain its accessibility */
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
-  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -38,9 +38,9 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
 
   /* Unselected State */
   ${mixins.glass}
-  background: ${({ $checked, theme }) => 
+  background: ${({ $checked, theme }) =>
     $checked ? theme.colors.primary : 'oklch(100% 0 0 / 5%)'};
-  border-color: ${({ $checked, theme }) => 
+  border-color: ${({ $checked, theme }) =>
     $checked ? theme.colors.primary : theme.colors.glassBorder};
 
   /* "Tick" */
@@ -71,8 +71,10 @@ export const LabelText = styled.span`
   color: ${({ theme }) => theme.colors.textPrimary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  cursor: pointer; // Label
-  user-select: none; // Prevents text from being highlighted on click
+  cursor: pointer; /* Label */
+  user-select: none; /* Prevents text from being highlighted on click */
 
-  &:empty { display: none; }
+  &:empty {
+    display: none;
+  }
 `;

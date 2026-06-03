@@ -42,7 +42,7 @@ export const StyledInput = styled.input`
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 0 15px ${({ theme }) => theme.colors.primary}30;
-    background: oklch(100% 0 0 / 8%);
+    background: oklch(100% 0 0deg / 8%);
   }
 
   &:disabled {

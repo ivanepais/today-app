@@ -11,15 +11,14 @@ export const StyledIconButton = styled.button`
   height: 36px;
   padding: 0;
   border-radius: ${({ theme }) => theme.borderRadius.full};
-  
   background: transparent;
   color: ${({ theme }) => theme.colors.textSecondary};
   border: 1px solid transparent;
-  
   transition: ${({ theme }) => theme.transitions.default};
 
   /* Internal icon scaling */
-  svg, span {
+  svg,
+  span {
     display: flex;
     font-size: 1.2rem;
     line-height: 1;

@@ -16,7 +16,7 @@ export const ItemContainer = styled.li<StyledItemProps>`
   width: 100%;
 
   &:hover {
-    background: oklch(100% 0 0 / 10%);
+    background: oklch(100% 0 0deg / 10%);
     border-color: ${({ theme }) => theme.colors.primary}40;
     transform: translateX(4px); /* motion */
   }
@@ -26,7 +26,7 @@ export const ItemContainer = styled.li<StyledItemProps>`
     $isCompleted &&
     css`
       opacity: 0.7;
-      background: oklch(100% 0 0 / 2%);
+      background: oklch(100% 0 0deg / 2%);
     `}
 `;
 
@@ -47,9 +47,9 @@ interface TextProps {
 export const TextContainer = styled.div<TextProps>`
   flex: 1;
   transition: all 0.3s ease;
-  text-decoration: ${({ $isCompleted }) => ($isCompleted ? 'line-through' : 'none')};
+  text-decoration: ${({ $isCompleted }) =>
+    $isCompleted ? 'line-through' : 'none'};
   opacity: ${({ $isCompleted }) => ($isCompleted ? 0.5 : 1)};
   overflow-wrap: break-word;
-  word-break: break-word;
   min-width: 0;
 `;
