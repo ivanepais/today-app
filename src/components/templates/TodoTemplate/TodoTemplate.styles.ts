@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mixins } from '../../../styles/mixins';
 
 export const PageWrapper = styled.div`
   width: 100%;
@@ -12,9 +13,7 @@ export const PageWrapper = styled.div`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.md};
-  box-shadow: 
-    0 30px 60px oklch(0% 0 0deg / 30%),
-    inset 0 1px 0 oklch(100% 0 0deg / 12%);
+  ${mixins.boxElevated}
 `;
 
 export const ContentContainer = styled.div`

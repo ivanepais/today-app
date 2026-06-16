@@ -14,7 +14,14 @@ export const StyledIconButton = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.colors.textSecondary};
   border: 1px solid transparent;
-  transition: ${({ theme }) => theme.transitions.default};
+
+  transition: 
+    transform ${({ theme }) => theme.transitions.default},
+    color ${({ theme }) => theme.transitions.default},
+    background ${({ theme }) => theme.transitions.default},
+    border-color ${({ theme }) => theme.transitions.default},
+    box-shadow ${({ theme }) => theme.transitions.default},
+    opacity ${({ theme }) => theme.transitions.default};
 
   /* Internal icon scaling */
   svg,
@@ -30,16 +37,20 @@ export const StyledIconButton = styled.button`
     background: ${({ theme }) => theme.colors.glass};
     border-color: ${({ theme }) => theme.colors.glassBorder};
     ${mixins.electricGlow}
-    transform: scale(1.1); /* Efecto de expansión sutil */
+    transform: scale(1.1); /* Expansion */
   }
 
   &:active:not(:disabled) {
     transform: scale(0.95);
     filter: brightness(0.8);
+    transition: 
+      transform 0.05s ease-out,     
+      filter 0.05s ease-out;
   }
 
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+    transform: none;
   }
 `;

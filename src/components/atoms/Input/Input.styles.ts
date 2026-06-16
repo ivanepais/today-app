@@ -15,7 +15,11 @@ export const StyledInput = styled.input`
   color: ${({ theme }) => theme.colors.textPrimary};
 
   /* State */
-  transition: ${({ theme }) => theme.transitions.default};
+  transition: 
+    background ${({ theme }) => theme.transitions.default},
+    border-color ${({ theme }) => theme.transitions.default},
+    box-shadow ${({ theme }) => theme.transitions.default},
+    opacity ${({ theme }) => theme.transitions.default};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textSecondary};

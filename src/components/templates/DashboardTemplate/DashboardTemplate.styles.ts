@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mixins } from '../../../styles/mixins';
 
 export const TemplateWrapper = styled.div`
   display: grid;
@@ -13,9 +14,7 @@ export const TemplateWrapper = styled.div`
   color: ${({ theme }) => theme.colors.textPrimary};
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  box-shadow:
-    0 30px 60px oklch(0% 0 0deg / 30%),
-    inset 0 1px 0 oklch(100% 0 0deg / 12%);
+  ${mixins.boxElevated}
 
   @media (width >= 800px) {
     grid-template:
@@ -33,10 +32,8 @@ export const StyledHeader = styled.header`
   background: ${({ theme }) => theme.colors.glass};
   border-radius: 16px 16px 0 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  box-shadow:
-    0 30px 60px oklch(0% 0 0deg / 30%),
-    inset 0 1px 0 oklch(100% 0 0deg / 12%);
-
+  ${mixins.boxElevated}
+  
   @media (width >= 800px) {
     padding: ${({ theme }) => theme.spacing.md}
       ${({ theme }) => theme.spacing.xl};

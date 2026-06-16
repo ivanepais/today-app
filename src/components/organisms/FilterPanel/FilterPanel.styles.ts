@@ -11,8 +11,6 @@ export const PanelContainer = styled.aside`
   width: 100%;
   max-width: 320px;
   height: fit-content;
-  transition: ${({ theme }) => theme.transitions.default};
-
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary}30;
   }

@@ -31,7 +31,6 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   width: 20px;
   height: 20px;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
-  transition: ${({ theme }) => theme.transitions.default};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +42,10 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   border-color: ${({ $checked, theme }) =>
     $checked ? theme.colors.primary : theme.colors.glassBorder};
 
+  transition: 
+    background ${({ theme }) => theme.transitions.default},
+    border-color ${({ theme }) => theme.transitions.default};
+
   /* "Tick" */
   &::after {
     content: '';
@@ -51,10 +54,12 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
     border: solid ${({ theme }) => theme.colors.background};
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(${({ $checked }) => ($checked ? 1 : 0)});
-    transition: transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
     opacity: ${({ $checked }) => ($checked ? 1 : 0)};
+    transition: 
+      transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46),
+      opacity 0.2s ease-in-out;
   }
-
+  
   /* Brightness when selected or in focus */
   ${HiddenCheckbox}:focus-visible + & {
     outline: 2px solid ${({ theme }) => theme.colors.primary};

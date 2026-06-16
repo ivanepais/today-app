@@ -27,7 +27,10 @@ export const StyledInput = styled.input`
   color: #fff;
   font-size: 0.9rem;
   outline: none;
-  transition: all 0.2s ease-in-out;
+  transition: 
+    background ${({ theme }) => theme.transitions.fast},
+    border-color ${({ theme }) => theme.transitions.fast},
+    box-shadow ${({ theme }) => theme.transitions.fast};
 
   &::placeholder {
     color: rgb(255 255 255 / 30%);

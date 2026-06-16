@@ -12,15 +12,14 @@ export const theme = {
     white: 'oklch(100% 0 0)',
   },
 
-  // Tokens específicos de tipografía
   typography: {
     fontFamily: "'Inter', -apple-system, sans-serif",
     fontSize: {
-      xs: '0.75rem',    // 12px
-      sm: '0.875rem',   // 14px
-      md: '1rem',       // 16px
-      lg: '1.5rem',     // 24px
-      xl: '2.25rem',    // 36px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      md: '1rem', // 16px
+      lg: '1.5rem', // 24px
+      xl: '2.25rem', // 36px
     },
     fontWeight: {
       regular: 400,
@@ -31,7 +30,7 @@ export const theme = {
       tight: 1.1,
       normal: 1.5,
       relaxed: 1.6,
-    }
+    },
   },
 
   spacing: {
@@ -46,7 +45,7 @@ export const theme = {
     sm: '0.5rem',
     md: '1rem',
     lg: '1.5rem',
-    full: '9999px', // Para Badges y botones redondos
+    full: '9999px', // Badges and Buttons
   },
 
   effects: {
@@ -54,7 +53,10 @@ export const theme = {
     shadow: '0 8px 32px 0 oklch(0% 0 0 / 30%)',
   },
 
-  // Gestión de capas (Z-Index)
+  shadows: {
+    glassElevated: '0 30px 60px oklch(0% 0 0deg / 30%), inset 0 1px 0 oklch(100% 0 0deg / 12%)',
+  },
+
   zIndex: {
     base: 1,
     dropdown: 10,
@@ -62,11 +64,11 @@ export const theme = {
     modal: 100,
   },
 
-  // Animaciones consistentes
+  /* Animations */
   transitions: {
     default: '0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     fast: '0.1s ease-in-out',
-  }
+  },
 };
 
 export type ThemeType = typeof theme;

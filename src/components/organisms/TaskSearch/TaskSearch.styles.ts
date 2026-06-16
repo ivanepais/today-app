@@ -6,7 +6,6 @@ export const SearchSectionContainer = styled.section`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
   gap: ${({ theme }) => theme.spacing.sm};
-  transition: ${({ theme }) => theme.transitions.default};
 
   & > * {
     max-width: 100%;

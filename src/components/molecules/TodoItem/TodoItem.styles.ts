@@ -15,6 +15,12 @@ export const ItemContainer = styled.li<StyledItemProps>`
   list-style: none;
   width: 100%;
 
+  transition:
+    transform ${({ theme }) => theme.transitions.default},
+    background ${({ theme }) => theme.transitions.default},
+    border-color ${({ theme }) => theme.transitions.default},
+    opacity ${({ theme }) => theme.transitions.default};
+
   &:hover {
     background: oklch(100% 0 0deg / 10%);
     border-color: ${({ theme }) => theme.colors.primary}40;
@@ -46,7 +52,7 @@ interface TextProps {
 
 export const TextContainer = styled.div<TextProps>`
   flex: 1;
-  transition: all 0.3s ease;
+  transition: opacity ${({ theme }) => theme.transitions.fast};
   text-decoration: ${({ $isCompleted }) =>
     $isCompleted ? 'line-through' : 'none'};
   opacity: ${({ $isCompleted }) => ($isCompleted ? 0.5 : 1)};

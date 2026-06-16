@@ -32,7 +32,11 @@ export const StyledInput = styled.input`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: 1rem;
   backdrop-filter: blur(12px);
-  transition: ${({ theme }) => theme.transitions.default};
+  transition: 
+    border-color ${({ theme }) => theme.transitions.default},
+    box-shadow ${({ theme }) => theme.transitions.default},
+    background ${({ theme }) => theme.transitions.default},
+    opacity ${({ theme }) => theme.transitions.default};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textSecondary}80;

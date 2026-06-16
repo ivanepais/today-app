@@ -1,56 +1,60 @@
 import { css } from 'styled-components';
 
 export const mixins = {
-  // 1. El Efecto Estrella: Glassmorphism
+  /* Glass effect */
   glass: css`
     background: ${({ theme }) => theme.colors.glass};
     backdrop-filter: blur(${({ theme }) => theme.effects.blur});
-    -webkit-backdrop-filter: blur(${({ theme }) => theme.effects.blur});
     border: 1px solid ${({ theme }) => theme.colors.glassBorder};
     box-shadow: ${({ theme }) => theme.effects.shadow};
   `,
 
-  // 2. Centrado Perfecto con Flexbox
+  boxElevated: css`
+    box-shadow: ${({ theme }) => theme.shadows.glassElevated};
+  `,
+
+  /* Flexbox center */
   flexCenter: css`
     display: flex;
     justify-content: center;
     align-items: center;
   `,
 
-  // 3. Distribución Espacial para Items (Ej: Tareas del ToDo)
+  /* Distribution */
   flexBetween: css`
     display: flex;
     justify-content: space-between;
     align-items: center;
   `,
 
-  // 4. Truncar Texto (Para nombres de tareas muy largos)
+  /* Trunk Txt */
   textTruncate: css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   `,
 
-  // 5. El "Glow" de Electric Blue (Ideal para botones o inputs activos)
+  /* Input, Button effect */
   electricGlow: css`
-    box-shadow: 0 0 15px 0 oklch(65% 0.22 255 / 40%);
+    box-shadow: 0 0 15px 0 oklch(65% 0.22 255deg / 40%);
     border-color: ${({ theme }) => theme.colors.primary};
   `,
 
-  // 6. Scrollbar Invisible (Para contenedores que deben scrollear sin ruido visual)
+  /* Invisible Scrollbar*/
   noScrollbar: css`
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     &::-webkit-scrollbar {
-      display: none;           /* Chrome, Safari and Opera */
+      display: none; /* Chrome, Safari and Opera */
     }
   `,
 
-  // 7. Animación Suave de Interactividad
+  /* Animation */
   interactive: css`
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform ${({ theme }) => theme.transitions.default};
+
     &:active {
       transform: scale(0.98);
     }
-  `
+  `,
 };

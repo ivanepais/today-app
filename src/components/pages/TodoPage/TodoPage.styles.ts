@@ -8,5 +8,5 @@ const fadeIn = keyframes`
 export const StyledPage = styled.div`
   width: 100%;
   height: 100%;
-  animation: ${fadeIn} 0.6s ease-in-out;
+  animation: ${fadeIn} ${({ theme }) => theme.transitions.default};
 `;
