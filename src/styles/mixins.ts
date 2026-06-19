@@ -4,7 +4,6 @@ export const mixins = {
   /* Glass effect */
   glass: css`
     background: ${({ theme }) => theme.colors.glass};
-    backdrop-filter: blur(${({ theme }) => theme.effects.blur});
     border: 1px solid ${({ theme }) => theme.colors.glassBorder};
     box-shadow: ${({ theme }) => theme.effects.shadow};
   `,

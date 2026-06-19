@@ -80,8 +80,6 @@ export const TodoPage = () => {
             activeFilterId={filter}
             onFilterChange={(id) => setFilter(id)}
           />
-
-          {/* Botón de acción global del sidebar */}
           {stats.completed > 0 && (
             <div style={{ padding: '0 1rem 1rem 1rem', marginTop: '1.5rem' }}>
               <Button
@@ -115,9 +113,6 @@ export const TodoPage = () => {
         }
         inputSlot={<TodoInput onAdd={add} />}
         listSlot={
-          /* 'tasks' filtrado por categoría 
-             y por búsqueda gracias al useMemo del hook.
-          */
           <div data-testid="todo-list-container">
             <TodoList
               todos={tasks}

@@ -47,8 +47,6 @@ export const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
-    transition: ${({ theme }) => theme.transitions.default};
-    
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;

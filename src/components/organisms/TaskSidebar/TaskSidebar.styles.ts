@@ -12,9 +12,7 @@ export const SidebarContainer = styled.aside`
   @media (width >= 800px) {
     width: 280px;
   }
-
   background-color: ${({ theme }) => theme.colors.glass};
-  backdrop-filter: blur(${({ theme }) => theme.effects.blur});
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
   padding: ${({ theme }) => theme.spacing.lg} 0;

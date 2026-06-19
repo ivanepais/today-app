@@ -4,6 +4,7 @@ import { mixins } from '../../../styles/mixins';
 export const StyledIconButton = styled.button`
   /* Reset and Positioning */
   ${mixins.flexCenter}
+  ${mixins.interactive}
   
   /* Dimensions: 1:1 ratio */
   width: 36px;

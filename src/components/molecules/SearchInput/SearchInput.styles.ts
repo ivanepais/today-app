@@ -21,7 +21,6 @@ export const StyledInput = styled.input`
 
   /* Style */
   background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(4px);
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 12px;
   color: #fff;
