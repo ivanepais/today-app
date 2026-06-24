@@ -12,9 +12,8 @@ export const TemplateWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   color: ${({ theme }) => theme.colors.textPrimary};
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  ${mixins.boxElevated}
 
   @media (width >= 800px) {
     grid-template:
@@ -32,7 +31,6 @@ export const StyledHeader = styled.header`
   background: ${({ theme }) => theme.colors.glass};
   border-radius: 16px 16px 0 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.glassBorder};
-  ${mixins.boxElevated}
   
   @media (width >= 800px) {
     padding: ${({ theme }) => theme.spacing.md}

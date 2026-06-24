@@ -10,10 +10,9 @@ export const PageWrapper = styled.div`
   );
   display: flex;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.md};
-  ${mixins.boxElevated}
 `;
 
 export const ContentContainer = styled.div`

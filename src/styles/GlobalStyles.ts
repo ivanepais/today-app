@@ -17,15 +17,10 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${({ theme }) => theme.typography.fontFamily};
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.textPrimary};
-    background-image: 
-      radial-gradient(at 0% 0%, oklch(25% 0.08 260deg / 30%) 0, transparent 50%),
-      radial-gradient(at 100% 100%, oklch(20% 0.12 280deg / 20%) 0, transparent 50%);
     min-height: 100vh;
     line-height: ${({ theme }) => theme.typography.lineHeight.normal};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    justify-content: center;
     padding: ${({ theme }) => theme.spacing.xl};
     overflow-x: hidden;
   }

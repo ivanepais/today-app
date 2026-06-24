@@ -15,6 +15,7 @@ export const theme = {
   typography: {
     fontFamily: "'Inter', -apple-system, sans-serif",
     fontSize: {
+      xxs: '0.625rem', // 10px
       xs: '0.75rem', // 12px
       sm: '0.875rem', // 14px
       md: '1rem', // 16px
@@ -34,23 +35,32 @@ export const theme = {
   },
 
   spacing: {
+    xxs: '0.125rem',
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
     lg: '1.5rem',
     xl: '2rem',
+    xxl: '2.25rem',
+  },
+
+  bordersAndShadows: {
+    xs: '2px',
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
   },
 
   borderRadius: {
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
     full: '9999px', // Badges and Buttons
   },
 
   effects: {
     blur: '12px',
-    shadow: '0 8px 32px 0 oklch(0% 0 0 / 30%)',
   },
 
   shadows: {

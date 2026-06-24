@@ -16,7 +16,7 @@ export const GroupHeader = styled.div`
 
 export const StyledLabel = styled.label`
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   color: ${({ theme }) => theme.colors.textSecondary};
   cursor: pointer;
@@ -30,7 +30,7 @@ export const StyledInput = styled.input`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   color: ${({ theme }) => theme.colors.textPrimary};
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-size: 1rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.md};
   backdrop-filter: blur(12px);
   transition: 
     border-color ${({ theme }) => theme.transitions.default},

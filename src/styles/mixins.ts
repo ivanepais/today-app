@@ -5,7 +5,6 @@ export const mixins = {
   glass: css`
     background: ${({ theme }) => theme.colors.glass};
     border: 1px solid ${({ theme }) => theme.colors.glassBorder};
-    box-shadow: ${({ theme }) => theme.effects.shadow};
   `,
 
   boxElevated: css`

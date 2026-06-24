@@ -43,7 +43,7 @@ export const ContentWrapper = styled.label`
   flex: 1;
   min-width: 0; /* avoid content breakage */
   cursor: pointer;
-  padding: 8px;
+  padding: ${({ theme }) => theme.spacing.sm};
 `;
 
 interface TextProps {

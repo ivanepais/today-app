@@ -7,13 +7,12 @@ export const SidebarContainer = styled.aside`
   width: 100%; 
   height: fit-content;
   min-height: auto;
-  ${mixins.boxElevated}
 
   @media (width >= 800px) {
     width: 280px;
   }
   background-color: ${({ theme }) => theme.colors.glass};
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};
   padding: ${({ theme }) => theme.spacing.lg} 0;
 `;

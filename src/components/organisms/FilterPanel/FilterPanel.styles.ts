@@ -41,12 +41,12 @@ export const CategoryList = styled.ul`
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: ${({ theme }) => theme.spacing.xxs};
 `;
 
 export const EmptyState = styled.p`
   padding: ${({ theme }) => theme.spacing.md};
-  font-size: 0.875rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
   text-align: center;
   font-style: italic;

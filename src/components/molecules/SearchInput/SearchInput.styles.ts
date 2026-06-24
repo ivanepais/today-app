@@ -10,7 +10,7 @@ export const SearchContainer = styled.div`
 export const SearchIcon = styled.span`
   position: absolute;
   left: 8px;
-  font-size: 0.9rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   opacity: 0.5;
   pointer-events: none; /* Do not interfere when clicking on the input */
 `;
@@ -22,9 +22,9 @@ export const StyledInput = styled.input`
   /* Style */
   background: rgb(255 255 255 / 5%);
   border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   color: #fff;
-  font-size: 0.9rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   outline: none;
   transition: 
     background ${({ theme }) => theme.transitions.fast},

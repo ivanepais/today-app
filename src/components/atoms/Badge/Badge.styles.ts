@@ -17,7 +17,7 @@ export const StyledBadge = styled.span`
 
   /* Typo */
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-size: 10px; /* pequeño */
+  font-size: ${({ theme }) => theme.typography.fontSize.xxs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   line-height: 1;
   white-space: nowrap;
