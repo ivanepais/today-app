@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { mixins } from '../../../styles/mixins';
 
 export const PanelContainer = styled.aside`
-  ${mixins.glass}
+  ${mixins.glass};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};

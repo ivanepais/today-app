@@ -6,8 +6,8 @@ interface StyledItemProps {
 }
 
 export const ItemContainer = styled.li<StyledItemProps>`
-  ${mixins.glass}
-  ${mixins.flexCenter}
+  ${mixins.glass};
+  ${mixins.flexCenter};
   justify-content: space-between;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.lg};

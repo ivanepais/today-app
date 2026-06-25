@@ -1,9 +1,9 @@
 export const theme = {
   colors: {
-    background: 'oklch(18% 0.04 258)',
+    background: '#111827',
     glass: 'oklch(100% 0 0 / 8%)',
     glassBorder: 'oklch(100% 0 0 / 15%)',
-    primary: 'oklch(65% 0.22 255)',
+    primary: '#3b82f6',
     primaryHover: 'oklch(70% 0.22 255)',
     textPrimary: 'oklch(98% 0.01 255)',
     textSecondary: 'oklch(75% 0.05 255)',

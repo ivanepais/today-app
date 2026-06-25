@@ -36,9 +36,9 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   justify-content: center;
 
   /* Unselected State */
-  ${mixins.glass}
+  ${mixins.glass};
   background: ${({ $checked, theme }) =>
-    $checked ? theme.colors.primary : 'oklch(100% 0 0 / 5%)'};
+    $checked ? theme.colors.primary : 'rgba(255,255,255,0.05)'};
   border-color: ${({ $checked, theme }) =>
     $checked ? theme.colors.primary : theme.colors.glassBorder};
 
@@ -51,7 +51,8 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
     content: '';
     width: 6px;
     height: 10px;
-    border: solid ${({ theme }) => theme.colors.background};
+    border-style: solid;
+    border-color: ${({ theme }) => theme.colors.background};
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(${({ $checked }) => ($checked ? 1 : 0)});
     opacity: ${({ $checked }) => ($checked ? 1 : 0)};
@@ -68,7 +69,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
 
   ${CheckboxContainer}:hover & {
     border-color: ${({ theme }) => theme.colors.primary};
-    ${({ $checked }) => !$checked && 'background: oklch(100% 0 0 / 10%);'}
+    ${({ $checked }) => !$checked && 'background: rgba(255,255,255,0.10);'}
   }
 `;
 

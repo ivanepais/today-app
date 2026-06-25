@@ -6,7 +6,7 @@ export const StyledBadge = styled.span`
   justify-content: center;
 
   /* Base */
-  min-width: 20px;
+  width: 20px;
   height: 20px;
   padding: 0 6px;
 

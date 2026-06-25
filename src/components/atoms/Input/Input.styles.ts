@@ -3,7 +3,7 @@ import { mixins } from '../../../styles/mixins';
 
 export const StyledInput = styled.input`
   /* Base */
-  ${mixins.glass}
+  ${mixins.glass};
 
   width: 100%;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
@@ -28,7 +28,7 @@ export const StyledInput = styled.input`
 
   /* Focus */
   &:focus {
-    ${mixins.electricGlow}
+    ${mixins.electricGlow};
     background: oklch(100% 0 0deg / 12%);
     outline: none;
   }

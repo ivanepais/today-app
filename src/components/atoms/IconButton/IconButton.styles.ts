@@ -3,8 +3,8 @@ import { mixins } from '../../../styles/mixins';
 
 export const StyledIconButton = styled.button`
   /* Reset and Positioning */
-  ${mixins.flexCenter}
-  ${mixins.interactive}
+  ${mixins.flexCenter};
+  ${mixins.interactive};
   
   /* Dimensions: 1:1 ratio */
   width: 36px;
@@ -36,7 +36,7 @@ export const StyledIconButton = styled.button`
     color: ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.glass};
     border-color: ${({ theme }) => theme.colors.glassBorder};
-    ${mixins.electricGlow}
+    ${mixins.electricGlow};
     transform: scale(1.1); /* Expansion */
   }
 

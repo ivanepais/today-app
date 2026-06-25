@@ -22,7 +22,7 @@ const variantStyles = {
     }
   `,
   secondary: css`
-    ${mixins.glass}
+    ${mixins.glass};
     color: ${({ theme }) => theme.colors.textPrimary};
 
     &:hover:not(:disabled) {
@@ -59,8 +59,8 @@ const sizeStyles = {
 
 export const StyledButton = styled.button<StyledButtonProps>`
   /* Base */
-  ${mixins.flexCenter}
-  ${mixins.interactive}
+  ${mixins.flexCenter};
+  ${mixins.interactive};
   
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};

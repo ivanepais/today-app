@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { mixins } from '../../../styles/mixins';
 
 export const SidebarContainer = styled.aside`
   display: flex;
@@ -9,7 +8,7 @@ export const SidebarContainer = styled.aside`
   min-height: auto;
 
   @media (width >= 800px) {
-    width: 280px;
+    width: 240px;
   }
   background-color: ${({ theme }) => theme.colors.glass};
   border-radius: ${({ theme }) => theme.borderRadius.md};

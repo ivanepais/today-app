@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { mixins } from '../../../styles/mixins';
 
 export const PageWrapper = styled.div`
   width: 100%;
