@@ -70,7 +70,7 @@ export const TodoPage = () => {
 
   return (
     <DashboardTemplate
-      header={<Typography variant="body">Liquid Task</Typography>}
+      header={<Typography variant="appTitle">Today app</Typography>}
       sidebar={
         <div>
           <TaskSidebar

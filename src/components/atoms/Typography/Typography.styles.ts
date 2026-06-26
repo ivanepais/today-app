@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export type TypographyVariant = 'title' | 'body' | 'label';
+export type TypographyVariant = 'title' | 'body' | 'label' | 'appTitle';
 
 interface StyledProps {
   $variant: TypographyVariant;
@@ -26,6 +26,13 @@ const variantStyles = {
     color: ${({ theme }) => theme.colors.textSecondary};
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  `,
+  appTitle: css`
+    font-family: 'Pacifico', cursive;
+    font-size: ${({ theme }) => theme.typography.fontSize.lg};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
+    color: ${({ theme }) => theme.colors.textPrimary};
+    line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
   `,
 };
 

@@ -13,7 +13,7 @@ export const theme = {
   },
 
   typography: {
-    fontFamily: "'Inter', -apple-system, sans-serif",
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI Variable', 'Segoe UI', Roboto, 'Ubuntu', 'Cantarell', 'DejaVu Sans', 'Liberation Sans',  sans-serif",
     fontSize: {
       xxs: '0.625rem', // 10px
       xs: '0.75rem', // 12px
