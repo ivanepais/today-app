@@ -22,19 +22,15 @@ export const FilterContainer = styled.div<{ $isSelected: boolean }>`
 export const BadgeWrapper = styled.div<{ $isVisible: boolean }>`
   display: flex;
   align-items: center;
-
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transform: scale(${({ $isVisible }) => ($isVisible ? 1 : 0)});
-  
   visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
-
   transition: transform ${({ $isVisible }) =>
     $isVisible
       ? '0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
       : '0.12s cubic-bezier(0.4, 0, 1, 1)'},
               opacity 0.12s ease-in-out,
               visibility 0.12s;
-
   max-width: ${({ $isVisible }) => ($isVisible ? '50px' : '0px')};
   pointer-events: ${({ $isVisible }) => ($isVisible ? 'auto' : 'none')};
 

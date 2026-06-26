@@ -14,7 +14,6 @@ export const ItemContainer = styled.li<StyledItemProps>`
   gap: ${({ theme }) => theme.spacing.md};
   list-style: none;
   width: 100%;
-
   transition:
     transform ${({ theme }) => theme.transitions.default},
     background ${({ theme }) => theme.transitions.default},

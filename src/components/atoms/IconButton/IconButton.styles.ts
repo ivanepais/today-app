@@ -14,7 +14,6 @@ export const StyledIconButton = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.colors.textSecondary};
   border: 1px solid transparent;
-
   transition: 
     transform ${({ theme }) => theme.transitions.default},
     color ${({ theme }) => theme.transitions.default},

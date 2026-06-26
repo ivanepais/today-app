@@ -3,8 +3,8 @@ import { css } from 'styled-components';
 export const mixins = {
   /* Glass effect */
   glass: css`
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.15);  
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid rgb(255 255 255 / 15%);  
   `,
 
   boxElevated: css`

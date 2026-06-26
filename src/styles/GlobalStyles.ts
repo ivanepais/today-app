@@ -42,6 +42,7 @@ export const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;

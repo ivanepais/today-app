@@ -10,6 +10,7 @@ export const SidebarContainer = styled.aside`
   @media (width >= 800px) {
     width: 240px;
   }
+
   background-color: ${({ theme }) => theme.colors.glass};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   border: 1px solid ${({ theme }) => theme.colors.glassBorder};

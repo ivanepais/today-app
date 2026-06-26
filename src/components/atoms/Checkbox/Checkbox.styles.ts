@@ -41,7 +41,6 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
     $checked ? theme.colors.primary : 'rgba(255,255,255,0.05)'};
   border-color: ${({ $checked, theme }) =>
     $checked ? theme.colors.primary : theme.colors.glassBorder};
-
   transition: 
     background ${({ theme }) => theme.transitions.default},
     border-color ${({ theme }) => theme.transitions.default};

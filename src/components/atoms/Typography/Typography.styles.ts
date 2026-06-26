@@ -28,7 +28,7 @@ const variantStyles = {
     letter-spacing: 0.05em;
   `,
   appTitle: css`
-    font-family: 'Pacifico', cursive;
+    font-family: Pacifico, cursive;
     font-size: ${({ theme }) => theme.typography.fontSize.lg};
     font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
     color: ${({ theme }) => theme.colors.textPrimary};
