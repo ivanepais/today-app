@@ -55,7 +55,7 @@ describe('Atom: Input', () => {
     const input = screen.getByRole('textbox');
 
     expect(input).toHaveStyle({
-      'background-color': theme.colors.glass,
+      'background-color': 'rgba(255, 255, 255, 0.08)',
       color: theme.colors.textPrimary,
     });
   });

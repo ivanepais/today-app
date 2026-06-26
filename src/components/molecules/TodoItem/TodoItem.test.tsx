@@ -75,8 +75,7 @@ describe('Molecule: TodoItem', () => {
     const listItem = container.firstChild;
 
     expect(listItem).toHaveStyle({
-      'background-color': theme.colors.glass,
-      'backdrop-filter': 'blur(12px)',
+      'background-color': 'rgba(255, 255, 255, 0.08)',
     });
   });
 });

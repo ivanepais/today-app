@@ -8,8 +8,8 @@ vi.mock('../../../../hooks/useTasks');
 describe('TodoPage <-> TodoList Integration', () => {
   const useTasksMock = vi.mocked(useTasksHook.useTasks);
 
-  it('should display search empty state contents when a search query yields no results', () => {
-    // Simulamos un estado de búsqueda activa pero sin tareas que coincidan
+  it('display search empty state contents when a search query yields no results', () => {
+    // Mock search state without task
     useTasksMock.mockReturnValue({
       tasks: [],
       searchQuery: 'Tarea inexistente',
@@ -25,18 +25,18 @@ describe('TodoPage <-> TodoList Integration', () => {
 
     render(<TodoPage />);
 
-    // 1. Aislamos el contenedor que envuelve a la lista presentacional
+    // List Container
     const listContainer = screen.getByTestId('todo-list-container');
 
-    // 2. Evaluamos que TodoPage haya inyectado con éxito los textos de búsqueda
+    // Text for search
     expect(
       within(listContainer).getByText(/no hay coincidencias/i),
     ).toBeInTheDocument();
     expect(within(listContainer).getByText('🔍')).toBeInTheDocument();
   });
 
-  it('should display default empty state contents when search is empty and filter is "all"', () => {
-    // Simulamos la aplicación recién abierta, sin tareas y sin búsquedas
+  it('display default empty state contents when search is empty and filter is "all"', () => {
+    // Mock empty app
     useTasksMock.mockReturnValue({
       tasks: [],
       searchQuery: '',
@@ -54,8 +54,8 @@ describe('TodoPage <-> TodoList Integration', () => {
 
     const listContainer = screen.getByTestId('todo-list-container');
 
-    // Cambiamos el texto esperado a "No hay tareas" 
-    // para cumplir con el diccionario de configuraciones de la categoría 'all'.
+    // Test string
+    // Category 'all'.
     expect(
       within(listContainer).getByText(/^no hay tareas$/i),
     ).toBeInTheDocument();

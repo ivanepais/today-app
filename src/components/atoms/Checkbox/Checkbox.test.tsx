@@ -72,7 +72,7 @@ describe('Atom: Checkbox', () => {
     rerender(<Checkbox id={defaultId} checked={false} onChange={noop} />);
     // When not selected, apply style.
     expect(styledCheckbox).toHaveStyle({
-      'background-color': 'oklch(100% 0 0 / 5%)',
+      'background-color': 'rgba(255,255,255,0.05)',
     });
   });
 
