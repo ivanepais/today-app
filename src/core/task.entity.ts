@@ -1,17 +1,11 @@
-/**
- * Representa la unidad mínima de información de nuestra app.
- * Usamos 'readonly' para asegurar que el estado solo cambie a través del Reducer.
- */
+// readonly: state changes through the Reducer.
 export interface Task {
   readonly id: string;
   readonly content: string;
   readonly isCompleted: boolean;
   readonly createdAt?: number;
-  readonly updatedAt?: number; // Opcional, para futuras ediciones
+  readonly updatedAt?: number;
 }
 
-/**
- * Definimos los filtros posibles como un tipo de unión.
- * Esto evita errores de dedo como escribir 'complete' en lugar de 'completed'.
- */
+// Union type: avoids typing errors.
 export type TaskFilter = 'all' | 'pending' | 'completed';

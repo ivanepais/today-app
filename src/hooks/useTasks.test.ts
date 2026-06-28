@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useTasks } from './useTasks';
 import { storageService } from '@/services/storage.service';
 
-// Mockeamos el servicio de storage
+// Mock storage
 vi.mock('@/services/storage.service', () => ({
   storageService: {
     load: vi.fn(),
@@ -14,11 +14,12 @@ vi.mock('@/services/storage.service', () => ({
 describe('useTasks Hook', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Por defecto, el storage empieza vacío
+
+    // Storage starts empty
     vi.mocked(storageService.load).mockReturnValue([]);
   });
 
-  it('debería inicializar con tareas desde el storage si existen', () => {
+  it('initialize tasks from storage if they exist', () => {
     const mockTasks = [
       { id: '1', content: 'Persistida', isCompleted: false, createdAt: 123 },
     ];
@@ -30,34 +31,35 @@ describe('useTasks Hook', () => {
     expect(result.current.tasks[0].content).toBe('Persistida');
   });
 
-  it('debería filtrar tareas por el searchQuery (case insensitive)', () => {
+  it('filter tasks by searchQuery (case insensitive)', () => {
     const { result } = renderHook(() => useTasks());
 
     act(() => {
       result.current.add('Comprar Pan');
       result.current.add('Lavar Auto');
-      result.current.setSearchQuery('PAN'); // Testeamos case insensitivity
+      result.current.setSearchQuery('PAN');
     });
 
     expect(result.current.tasks).toHaveLength(1);
     expect(result.current.tasks[0].content).toBe('Comprar Pan');
   });
 
-  it('debería combinar filtro de estado y búsqueda', () => {
+  it('status filter and search', () => {
     const { result } = renderHook(() => useTasks());
 
+    // Pending
     act(() => {
-      result.current.add('Aprender Vitest'); // Pendiente
-      result.current.add('Aprender React'); // Pendiente
+      result.current.add('Aprender Vitest');
+      result.current.add('Aprender React');
     });
 
-    // Marcamos una como completada
+    // Marked as completed
     act(() => {
       const id = result.current.tasks[0].id;
       result.current.toggle(id);
     });
 
-    // Aplicamos ambos filtros
+    // Apply filter
     act(() => {
       result.current.setFilter('completed');
       result.current.setSearchQuery('Vitest');
@@ -67,7 +69,7 @@ describe('useTasks Hook', () => {
     expect(result.current.tasks[0].content).toBe('Aprender Vitest');
   });
 
-  it('las estadísticas deben basarse en TODAS las tareas, no solo las filtradas', () => {
+  it('general statistics', () => {
     const { result } = renderHook(() => useTasks());
 
     act(() => {
@@ -76,9 +78,10 @@ describe('useTasks Hook', () => {
       result.current.setSearchQuery('Algo que no existe');
     });
 
-    // El listado de tareas está vacío por la búsqueda
+    // Task list empty in search
     expect(result.current.tasks).toHaveLength(0);
-    // Pero las estadísticas siguen contando el total real
+
+    // Statistics count all
     expect(result.current.stats.total).toBe(2);
   });
 });

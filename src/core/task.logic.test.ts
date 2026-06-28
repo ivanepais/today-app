@@ -1,10 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import * as TaskLogic from './task.logic';
-//import type { Task } from './task.entity';
 
 describe('Task Logic (Domain)', () => {
   describe('createTask', () => {
-    it('debería crear una tarea válida con contenido limpio', () => {
+    it('create a valid task with clean content', () => {
       // Arrange
       const content = '  Nueva Tarea  ';
 
@@ -12,19 +11,20 @@ describe('Task Logic (Domain)', () => {
       const task = TaskLogic.createTask(content);
 
       // Assert
-      expect(task.content).toBe('Nueva Tarea'); // Verifica el .trim()
+      // Check .trim()
+      expect(task.content).toBe('Nueva Tarea');
       expect(task.isCompleted).toBe(false);
       expect(task.id).toBeDefined();
       expect(typeof task.createdAt).toBe('number');
     });
 
-    it('debería lanzar un error si el contenido está vacío', () => {
+    it('throw an error if the content is empty', () => {
       expect(() => TaskLogic.createTask('   ')).toThrow();
     });
   });
 
   describe('toggleStatus', () => {
-    it('debería invertir el estado de completado e incluir updatedAt', () => {
+    it('reverse the completed state and include updatedAt', () => {
       // Arrange
       const initialTask = TaskLogic.createTask('Test');
 
@@ -34,14 +34,15 @@ describe('Task Logic (Domain)', () => {
       // Assert
       expect(updatedTask.isCompleted).toBe(true);
       expect(updatedTask.updatedAt).toBeDefined();
-      // Prueba de Inmutabilidad:
+      
+      // Immutability test: different objects in memory
       expect(initialTask.isCompleted).toBe(false);
-      expect(initialTask).not.toBe(updatedTask); // Son objetos diferentes en memoria
+      expect(initialTask).not.toBe(updatedTask);
     });
   });
 
   describe('updateContent', () => {
-    it('debería actualizar el contenido si es válido', () => {
+    it('Update the content if it is valid', () => {
       const task = TaskLogic.createTask('Viejo');
       const updated = TaskLogic.updateContent(task, 'Nuevo');
 
@@ -49,12 +50,15 @@ describe('Task Logic (Domain)', () => {
       expect(updated.updatedAt).toBeDefined();
     });
 
-    it('no debería actualizar si el nuevo contenido es vacío', () => {
+    it('do not update if the new content is empty.', () => {
       const task = TaskLogic.createTask('Importante');
       const updated = TaskLogic.updateContent(task, '   ');
 
-      expect(updated.content).toBe('Importante'); // Mantiene el original
-      expect(updated).toBe(task); // Pragmático: devuelve la misma referencia si no hay cambio
+      // original
+      expect(updated.content).toBe('Importante');
+      
+      // returns the same reference if there is no change
+      expect(updated).toBe(task);
     });
   });
 });

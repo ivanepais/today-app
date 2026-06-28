@@ -2,15 +2,16 @@ import { describe, it, expect } from 'vitest';
 import { taskReducer, initialState, TaskState } from './task.reducer';
 
 describe('Task Reducer', () => {
-  it('debería retornar el estado inicial por defecto', () => {
-    // Enviamos una acción inexistente
+  it('return to the default initial state', () => {
+    
+    // Send a non-existent action
     const result = taskReducer(initialState, {
       type: 'UNKNOWN',
     } as unknown as TaskAction);
     expect(result).toBe(initialState);
   });
 
-  it('debería manejar ADD_TASK añadiendo una nueva tarea', () => {
+  it('handle ADD_TASK by adding a new task', () => {
     const action = { type: 'ADD_TASK' as const, payload: 'Nueva Tarea' };
 
     const newState = taskReducer(initialState, action);
@@ -20,8 +21,9 @@ describe('Task Reducer', () => {
     expect(newState.tasks[0].isCompleted).toBe(false);
   });
 
-  it('debería manejar TOGGLE_TASK cambiando el estado de una tarea', () => {
-    // Arrange: Creamos un estado con una tarea previa
+  it('handle TOGGLE_TASK by changing the state of a task', () => {
+    
+    // Arrange: create a state with a previous task
     const stateWithTask: TaskState = {
       ...initialState,
       tasks: [
@@ -40,12 +42,14 @@ describe('Task Reducer', () => {
 
     // Assert
     expect(newState.tasks[0].isCompleted).toBe(true);
-    // Verificamos inmutabilidad
+    
+    // Immutability
     expect(newState).not.toBe(stateWithTask);
     expect(newState.tasks).not.toBe(stateWithTask.tasks);
   });
 
-  it('debería manejar REMOVE_TASK eliminando la tarea correcta', () => {
+  it('handle REMOVE_TASK removing the correct task', () => {
+    
     // Arrange
     const stateWithTasks: TaskState = {
       ...initialState,
@@ -62,11 +66,12 @@ describe('Task Reducer', () => {
     // Assert
     expect(newState.tasks).toHaveLength(1);
     expect(newState.tasks[0].id).toBe('2');
-    // Verificamos inmutabilidad del array
+    
+    // Array immutability
     expect(newState.tasks).not.toBe(stateWithTasks.tasks);
   });
 
-  it('debería manejar SET_FILTER actualizando el filtro actual', () => {
+  it('handle SET_FILTER by updating the current filter', () => {
     const action = {
       type: 'SET_FILTER' as const,
       payload: 'completed' as const,
@@ -77,10 +82,9 @@ describe('Task Reducer', () => {
     expect(newState.filter).toBe('completed');
   });
 
-  it('debería volver al filtro "all" si se selecciona el filtro que ya está activo', () => {
-    /**
-     * Arrange: Partimos de un estado donde el filtro ya es 'pending'
-     */
+  it('back to "all" filter if the filter that is already active is selected.', () => {
+
+     // Arrange: start in 'pending'
     const stateWithFilter: TaskState = {
       ...initialState,
       filter: 'pending',
@@ -94,14 +98,11 @@ describe('Task Reducer', () => {
     // Act
     const newState = taskReducer(stateWithFilter, action);
 
-    /**
-     * Assert: Al ser el mismo, el reducer debe "apagarlo"
-     * y devolvernos al origen ('all')
-     */
+    // Assert: reducer turns it off and returns us to the origin.
     expect(newState.filter).toBe('all');
   });
 
-  it('debería mantenerse en "all" si se selecciona "all" estando ya en "all"', () => {
+  it('stay on "all" if "all" is selected while already on "all"', () => {
     const action = {
       type: 'SET_FILTER' as const,
       payload: 'all' as const,
@@ -112,7 +113,7 @@ describe('Task Reducer', () => {
     expect(newState.filter).toBe('all');
   });
 
-  it('debería manejar SET_SEARCH_QUERY actualizando el texto de búsqueda', () => {
+  it('handle GET_SEARCH_QUERY by updating the search text', () => {
     const action = {
       type: 'SET_SEARCH_QUERY' as const,
       payload: 'comprar pan',
@@ -123,7 +124,7 @@ describe('Task Reducer', () => {
     expect(newState.searchQuery).toBe('comprar pan');
   });
 
-  it('debería manejar CLEAR_COMPLETED eliminando solo las tareas hechas', () => {
+  it('Handle CLEAR_COMPLETED by removing only completed tasks', () => {
     const stateWithMix: TaskState = {
       ...initialState,
       tasks: [

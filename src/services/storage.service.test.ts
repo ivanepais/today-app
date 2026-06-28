@@ -5,10 +5,12 @@ import { Task } from '@/core/task.entity';
 describe('Storage Service', () => {
   beforeEach(() => {
     localStorage.clear();
-    vi.clearAllMocks(); // Limpia los espías entre tests
+    
+    // Clean spys
+    vi.clearAllMocks();
   });
 
-  it('should save tasks as a JSON string', () => {
+  it('save tasks as a JSON string', () => {
     const mockTasks: Partial<Task>[] = [{ id: '1', content: 'Test' }];
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
 
@@ -20,14 +22,16 @@ describe('Storage Service', () => {
     );
   });
 
-  it('should return an empty array if localStorage is empty', () => {
+  it('return an empty array if localStorage is empty', () => {
     const tasks = storageService.load();
     expect(tasks).toEqual([]);
   });
 
-  it('should handle corrupted JSON gracefully', () => {
+  it('handle corrupted JSON gracefully', () => {
     localStorage.setItem('v1_tasks_data', '{ corrupted [');
     const tasks = storageService.load();
-    expect(tasks).toEqual([]); // El catch del servicio debería salvarnos
+    
+    // Cache saves us
+    expect(tasks).toEqual([]);
   });
 });

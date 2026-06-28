@@ -4,31 +4,34 @@ import { storageService } from '@/services/storage.service';
 import type { TaskFilter } from '@/core/task.entity';
 
 export const useTasks = () => {
-  // 1. Inicializamos el estado cargando desde el storage
+
+  // Initialize the state by loading from storage
   const [state, dispatch] = useReducer(taskReducer, initialState, (init) => {
     const savedTasks = storageService.load();
     return savedTasks.length > 0 ? { ...init, tasks: savedTasks } : init;
   });
 
-  // 2. Sincronización automática: cada vez que tasks cambie, guardamos
+  // Sync: change state and save
   useEffect(() => {
     storageService.save(state.tasks);
   }, [state.tasks]);
 
-  // 3. Estado derivado: Filtrado combinado
+  // Derived state: Combined filtering
   const filteredTasks = useMemo(() => {
-    // Pre-procesamos la búsqueda una sola vez por cada cambio de query
+
+    // Pre-process the search only once for each query change.
     const cleanQuery = (state.searchQuery || '').toString().toLowerCase();
     const activeFilter = state.filter;
 
     return state.tasks.filter((task) => {
-      // 1. Filtro de estado (muy rápido, comparaciones simples)
+
+      // Filter
       const matchesFilter =
         activeFilter === 'all' ||
         (activeFilter === 'pending' && !task.isCompleted) ||
         (activeFilter === 'completed' && task.isCompleted);
 
-      // 2. Filtro de búsqueda (usamos cleanQuery ya procesada)
+      // Search filter (with cleanQuery)
       const matchesSearch = (task.content || '')
         .toLowerCase()
         .includes(cleanQuery);
@@ -37,7 +40,7 @@ export const useTasks = () => {
     });
   }, [state.tasks, state.filter, state.searchQuery]);
 
-  // Estadísticas memoizadas
+  // Statistics memo
   const stats = useMemo(
     () => ({
       total: state.tasks.length,
@@ -47,7 +50,7 @@ export const useTasks = () => {
     [state.tasks],
   );
 
-  // 4. API pública del Hook (Acciones simplificadas)
+  // Hook public API
   const add = (content: string) =>
     dispatch({ type: 'ADD_TASK', payload: content });
   const toggle = (id: string) => dispatch({ type: 'TOGGLE_TASK', payload: id });

@@ -1,14 +1,14 @@
 import type { Task, TaskFilter } from '@/core/task.entity';
 import * as TaskLogic from '@/core/task.logic';
 
-// Definimos el estado global de esta característica
+// Global state
 export interface TaskState {
   tasks: Task[];
   filter: TaskFilter;
   searchQuery: string;
 }
 
-// Discriminante de acciones: El compilador sabrá qué payload tiene cada una
+// Actions and payloads
 export type TaskAction =
   | { type: 'ADD_TASK'; payload: string }
   | { type: 'TOGGLE_TASK'; payload: string }
@@ -29,7 +29,8 @@ export const taskReducer = (
 ): TaskState => {
   switch (action.type) {
     case 'ADD_TASK':
-      // Usamos lógica de dominio
+      
+      // Using domain
       return {
         ...state,
         tasks: [...state.tasks, TaskLogic.createTask(action.payload)],

@@ -1,9 +1,6 @@
 import type { Task } from './task.entity';
 
-/**
- * Fábrica de tareas.
- * Valida reglas de negocio: no tareas vacías, no espacios extra.
- */
+// Task Factory: business rules: no empty tasks, no extra spaces
 export const createTask = (content: string): Task => {
   const trimmedContent = content.trim();
 
@@ -12,30 +9,27 @@ export const createTask = (content: string): Task => {
   }
 
   return {
-    id: crypto.randomUUID(), // Estándar moderno en navegadores y Node
+    id: crypto.randomUUID(),
     content: trimmedContent,
     isCompleted: false,
     createdAt: Date.now(),
   };
 };
 
-/**
- * Cambia el estado de completado.
- * Retorna una COPIA de la tarea con el valor invertido.
- */
+// Change completed state.
+// Return copy, value reversed.
 export const toggleStatus = (task: Task): Task => ({
   ...task,
   isCompleted: !task.isCompleted,
   updatedAt: Date.now(),
 });
 
-/**
- * Actualiza el contenido de una tarea existente.
- */
+// Update content if task exist
 export const updateContent = (task: Task, newContent: string): Task => {
   const trimmed = newContent.trim();
 
-  if (!trimmed) return task; // Si está vacío, ignoramos el cambio
+  // If it's empty, ignore change
+  if (!trimmed) return task;
 
   return {
     ...task,
