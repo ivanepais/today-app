@@ -4,15 +4,15 @@ import { TaskSidebar } from './TaskSidebar';
 
 describe('Organism: TaskSidebar', () => {
   const mockCategories = [
-    { id: 'work', label: 'Trabajo', count: 10 },
-    { id: 'personal', label: 'Personal', count: 5 },
+    { id: 'pending' as const, label: 'Pendientes', count: 10 },
+    { id: 'completed'as const, label: 'Completadas', count: 5 },
   ];
 
   const mockProps = {
     searchQuery: '',
     onSearchChange: vi.fn(),
     categories: mockCategories,
-    activeFilterId: 'work',
+    activeFilterId: 'pending' as const,
     onFilterChange: vi.fn(),
   };
 
@@ -41,20 +41,20 @@ describe('Organism: TaskSidebar', () => {
     render(<TaskSidebar {...mockProps} />);
 
     // Rol checkbox
-    const personalFilter = screen.getByRole('checkbox', { name: /personal/i });
+    const personalFilter = screen.getByRole('checkbox', { name: /completadas/i });
     fireEvent.click(personalFilter);
 
-    expect(mockProps.onFilterChange).toHaveBeenCalledWith('personal');
+    expect(mockProps.onFilterChange).toHaveBeenCalledWith('completed');
   });
 
   it('display selection status based on activeFilterId', () => {
-    render(<TaskSidebar {...mockProps} activeFilterId="work" />);
+    render(<TaskSidebar {...mockProps} activeFilterId="pending" />);
 
     const workCheckbox = screen.getByRole('checkbox', {
-      name: /trabajo/i,
+      name: /pendientes/i,
     }) as HTMLInputElement;
     const personalCheckbox = screen.getByRole('checkbox', {
-      name: /personal/i,
+      name: /completadas/i,
     }) as HTMLInputElement;
 
     expect(workCheckbox.checked).toBe(true);

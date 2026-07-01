@@ -1,7 +1,7 @@
-import { render, RenderOptions } from '@testing-library/react';
+import { render, type RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (

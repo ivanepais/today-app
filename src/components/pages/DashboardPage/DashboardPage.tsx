@@ -45,7 +45,7 @@ export const DashboardPage = () => {
 
   // Slots
   const headerContent = (
-    <Typography variant="h2" color="primary">
+    <Typography variant="body">
       Tech Learning Dashboard
     </Typography>
   );
@@ -76,8 +76,8 @@ export const DashboardPage = () => {
       >
         <MainContentView>
           <header>
-            <Typography variant="h1">Cursos Disponibles</Typography>
-            <Typography variant="body" color="textSecondary">
+            <Typography variant="body">Cursos Disponibles</Typography>
+            <Typography variant="body">
               Explora nuestra selección basada en {selectedIds.length} filtros activos.
             </Typography>
           </header>

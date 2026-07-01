@@ -2,6 +2,7 @@ import { TaskSearch } from '../TaskSearch/TaskSearch';
 import { CategoryFilter } from '../CategoryFilter/CategoryFilter';
 import { SidebarContainer, SectionSpacer } from './TaskSidebar.styles';
 import type { Category } from '../CategoryFilter/CategoryFilter';
+import type { TaskFilter } from '@/core/task.entity';
 
 interface TaskSidebarProps {
   // TaskSearch props
@@ -10,8 +11,8 @@ interface TaskSidebarProps {
 
   // CategoryFilter props
   categories: Category[];
-  activeFilterId: string;
-  onFilterChange: (id: string) => void;
+  activeFilterId: TaskFilter;
+  onFilterChange: (id: TaskFilter) => void;
 }
 
 export const TaskSidebar = ({

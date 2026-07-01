@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { storageService } from './storage.service';
-import { Task } from '@/core/task.entity';
+import type { Task } from '@/core/task.entity';
 
 describe('Storage Service', () => {
   beforeEach(() => {

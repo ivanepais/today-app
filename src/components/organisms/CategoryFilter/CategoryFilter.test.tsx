@@ -4,14 +4,14 @@ import { CategoryFilter } from './CategoryFilter';
 
 describe('Organism: CategoryFilter', () => {
   const mockCategories = [
-    { id: 'all', label: 'Todas', count: 10 },
-    { id: 'work', label: 'Trabajo', count: 5 },
-    { id: 'personal', label: 'Personal', count: 0 },
+    { id: 'all' as const, label: 'Todas', count: 10 },
+    { id: 'pending' as const, label: 'Pendientes', count: 5 },
+    { id: 'completed' as const, label: 'Completadas', count: 0 },
   ];
 
   const defaultProps = {
     categories: mockCategories,
-    activeFilterId: 'all',
+    activeFilterId: 'all' as const,
     onFilterChange: vi.fn(),
   };
 
@@ -35,18 +35,18 @@ describe('Organism: CategoryFilter', () => {
 
     // Item and click
     // Search by text
-    const workItem = screen.getByText('Trabajo');
-    fireEvent.click(workItem);
+    const pendingItem = screen.getByText('Pendientes');
+    fireEvent.click(pendingItem);
 
-    expect(onFilterChange).toHaveBeenCalledWith('work');
+    expect(onFilterChange).toHaveBeenCalledWith('pending');
   });
 
   it('mark as selected only the active category', () => {
-    render(<CategoryFilter {...defaultProps} activeFilterId="work" />);
+    render(<CategoryFilter {...defaultProps} activeFilterId="pending" />);
 
     // Check by rol and filter (regex)
     const workCheckbox = screen.getByRole('checkbox', {
-      name: /trabajo/i,
+      name: /pendientes/i,
     }) as HTMLInputElement;
     const allCheckbox = screen.getByRole('checkbox', {
       name: /todas/i,
@@ -57,7 +57,7 @@ describe('Organism: CategoryFilter', () => {
   });
 
   it('show badge in active category if count > 0', () => {
-    render(<CategoryFilter {...defaultProps} activeFilterId="work" />);
+    render(<CategoryFilter {...defaultProps} activeFilterId="pending" />);
 
     // Count badge
     expect(screen.getByText('5')).toBeInTheDocument();

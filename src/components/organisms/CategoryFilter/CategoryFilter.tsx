@@ -12,8 +12,8 @@ export interface Category {
 
 interface CategoryFilterProps {
   categories: Category[];
-  activeFilterId: string;
-  onFilterChange: (id: string) => void;
+  activeFilterId: TaskFilter;
+  onFilterChange: (id: TaskFilter) => void;
   title?: string;
 }
 

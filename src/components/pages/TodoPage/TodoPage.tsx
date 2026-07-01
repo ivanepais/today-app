@@ -8,6 +8,8 @@ import { TodoInput } from '../../molecules/TodoInput/TodoInput';
 import { Typography } from '../../atoms/Typography/Typography';
 import { Button } from '../../atoms/Button/Button';
 
+import type { Category } from '../../organisms/CategoryFilter/CategoryFilter';
+
 export const TodoPage = () => {
   // Extraemos todo del hook, con las funciones
   const {
@@ -24,7 +26,7 @@ export const TodoPage = () => {
   } = useTasks();
 
   // Mapeamos las categorías para el CategoryFilter
-  const categories = useMemo(
+  const categories = useMemo<Category[]>(
     () => [
       { id: 'all', label: 'Todas', count: stats.total },
       { id: 'pending', label: 'Pendientes', count: stats.pending },

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { taskReducer, initialState, TaskState } from './task.reducer';
+import { taskReducer, initialState, type TaskAction, type TaskState } from './task.reducer';
 
 describe('Task Reducer', () => {
   it('return to the default initial state', () => {

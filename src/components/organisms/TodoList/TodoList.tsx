@@ -34,11 +34,11 @@ export const TodoList = ({
             {emptyIcon}
           </span>
 
-          <Typography variant="body" style={{ fontWeight: 'bold' }}>
+          <Typography variant="body">
             {emptyTitle}
           </Typography>
 
-          <Typography variant="body" style={{ marginTop: '8px', opacity: 0.8 }}>
+          <Typography variant="body">
             {emptyDescription}
           </Typography>
         </EmptyState>

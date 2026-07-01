@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '../../../test/utils';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TodoItem } from './TodoItem';
-import { theme } from '../../../styles/theme';
 
 describe('Molecule: TodoItem', () => {
   const mockProps = {

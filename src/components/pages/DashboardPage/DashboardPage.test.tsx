@@ -1,5 +1,5 @@
-import { render, screen, waitFor, fireEvent } from '../../../test/utils';
-import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '../../../test/utils';
+import { describe, it, expect} from 'vitest';
 import { DashboardPage } from './DashboardPage';
 
 describe('Page: DashboardPage', () => {
