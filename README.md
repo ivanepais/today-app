@@ -9,7 +9,7 @@ Una aplicación web de productividad minimalista diseñada para optimizar la ges
 
 ## 💻 App
 
-> 🚀 **¡Probá la aplicación en tiempo real!** Podés usar la app siguiendo el enlace: **[example.app](https://tu-url.app)**
+> 🚀 **¡Probá la aplicación en tiempo real!** Podés usar la app siguiendo el enlace: **[today-app](https://ivanepais.github.io/today-app)**
 
 
 ## 🌟 Features
