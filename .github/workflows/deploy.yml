@@ -20,22 +20,25 @@ jobs:
     runs-on: ubuntu-latest # runs on a Linux virtual machine
     steps:
       - name: 📥 Download source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🟢 Config Node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm' # Dependency caching for fast future builds
 
       - name: 📦 Install dependencies
         run: npm ci # Clean and strict installation based on package-lock.json
 
+      - name: 🧪 Run unit tests
+        run: npm run test:run
+
       - name: 🏗️ Compile application (Build)
         run: npm run build
 
       - name: ⚙️ Config GitHub Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: 📤 Upload the production output (Artifact)
         uses: actions/upload-pages-artifact@v3

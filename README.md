@@ -1,25 +1,29 @@
 # 🎯 Today App
 
-[![React](https://img.shields.io/badge/React-19.0-61dafb?style=flat-square&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.0-646cff?style=flat-square&logo=vite)](https://vite.dev/)
+<p align="center">
+  <a href="https://ivanepais.github.io/today-app/">
+    <img src=".github/assets/banner.svg" alt="Today App Banner" width="100%">
+  </a>
+</p>
 
-Una aplicación web de productividad minimalista diseñada para optimizar la gestión de tareas diarias mediante una interfaz fluida con busqueda y filtrado por categorias, junto con persistencia de datos local. El proyecto se desarrolló enfocandose en la separación de responsabilidades y principios de arquitectura limpia por capas basandose en las prácticas de `DDD` (Domain-Driven Design) y `Atomic Design` (UI/UX) para garantizar código robusto, mantenible y escalable.
+Una aplicación web de productividad minimalista diseñada para optimizar la gestión de tareas diarias mediante una interfaz fluida con busqueda, filtrado y persistencia de datos local. El proyecto se desarrolló enfocandose en la separación de responsabilidades y principios de arquitectura limpia por capas, basandose en las prácticas de `DDD` (Domain-Driven Design) y `Atomic Design` (UI/UX) para garantizar código robusto, mantenible y escalable.
 
+---
 
 ## 💻 App
 
-> 🚀 **¡Probá la aplicación en tiempo real!** Podés usar la app siguiendo el enlace: **[today-app](https://ivanepais.github.io/today-app)**
+> 🚀 **¡Probá la aplicación en tiempo real!** siguiendo el enlace: **[today-app](https://ivanepais.github.io/today-app)** o haciendo click en el banner.
 
+---
 
 ## 🌟 Features
 
-* **Arquitectura por Capas:** Implementación de un Dominio, Estado y Presentación. Usando interfaces, hooks y componentes para asegurar un contrato solido.
-* **Componentes Modulares y Estilizados:** Interfaz minimalista construida íntegramente con `Styled Components`, asegurando un aislamiento absoluto de estilos y un diseño altamente responsivo.
-* **Búsqueda y Filtrado Dinámico:** Sistema de filtrado y búsqueda ágil en tiempo real integrado en la interfaz para segmentar y localizar tareas de forma inmediata.
-* **Persistencia de Datos Local:** Todas las tareas están a salvó en el navegador!
-* **Fácil de Usar:** Una UI pensada para la comodidad visual y de uso. Se divide en una sección dedicada a la busqueda y filtrado para dar paso al corazón de la app: Anotar todas tus tareas que necesitas cumplir! 
+* **Arquitectura:** Implementación de un Dominio, Estado y Presentación. Usando interfaces, hooks y componentes para asegurar un contrato solido.
+* **Componentes Modulares y Estilizados:** Interfaz minimalista construida íntegramente con `Styled Components`, asegurando un aislamiento absoluto de estilos y un diseño responsivo.
+* **Persistencia de Datos Local:** Todas las tareas están a salvó en el navegador.
+* **Fácil de Usar:** Una UI pensada para la comodidad visual y de uso. Se divide en una sección dedicada a la busqueda y filtrado para dar paso al corazón de la app: Anotar lo que tengas que hacer hoy! 
 
+---
 
 ## 🛠️ Stack Tecnológico
 
@@ -32,10 +36,11 @@ Una aplicación web de productividad minimalista diseñada para optimizar la ges
 | **Calidad de Código** | EsLint y StyleLint | Analizadores estáticos para asegurar las mejores prácticas de código. |
 | **Entorno de Pruebas** | Vitest y RTL | Suite de testing moderna y de alto rendimiento, totalmente integrada con la configuración nativa del empaquetador. |
 
+---
 
 ## 🏗️ Arquitectura y Estructura de Carpetas
 
-El proyecto implementa un enfoque modular basado en la separación absoluta de responsabilidades (Separation of Concerns). Los componentes visuales, la lógica de estado global y los esquemas de tipado se encuentran estrictamente desacoplados:
+El proyecto implementa un enfoque modular. Los componentes visuales, la lógica de estado global y los esquemas de tipado se encuentran estrictamente desacoplados:
 
 ```text
 src/
@@ -61,25 +66,27 @@ src/
 └── main.tsx                # Punto de entrada de la aplicación y renderizado en el DOM
 ```
 
+---
+
 ## 🚀 Instalación y Ejecución Local
 
-Para levantar el entorno de desarrollo local y ejecutar la aplicación en tu computadora, seguí estos pasos secuenciales:
+Para levantar el entorno de desarrollo local y ejecutar la aplicación en tu computadora:
 
 1. **Clonar el repositorio:**
-   Descargá una copia completa del proyecto a tu máquina local mediante la terminal.
+   Descargá una copia completa del proyecto a tu máquina mediante la terminal.
    ```sh
-   git clone [https://github.com/tu-usuario/today-app.git](https://github.com/tu-usuario/today-app.git)
+   git clone [https://github.com/ivanepais/today-app.git](https://github.com/ivanepais/today-app.git)
    ```
 
 2. Acceder al directorio:
-Navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
+Descomprimi el zip y navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
 
 ```sh
 cd today-app
 ```
 
 3. Instalar dependencias:
-Descargá e instalá todos los paquetes y librerías necesarias especificadas en el archivo de configuración
+Si tienes NodeJS podes descargar e instalar todos los paquetes y librerías necesarias especificadas en el archivo de configuración
 
 ```sh
 npm install
@@ -92,6 +99,7 @@ Levantá el servidor local para visualizar y probar la aplicación en tiempo rea
 npm run dev
 ```   
 
+---
 
 **Suite de Pruebas (Testing):**
 
