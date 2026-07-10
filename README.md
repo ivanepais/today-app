@@ -1,5 +1,3 @@
-# 🎯 Today App
-
 <p align="center">
   <a href="https://ivanepais.github.io/today-app/">
     <img src=".github/assets/banner.svg" alt="Today App Banner" width="100%">
@@ -27,7 +25,7 @@ Una aplicación web de productividad minimalista diseñada para optimizar la ges
 
 ## 🛠️ Stack Tecnológico
 
-| Categoría | Tecnología | Propósito / Justificación |
+| Categoría | Tecnología | Propósito |
 | :--- | :--- | :--- |
 | **Core Frontend** | React | Construcción de una interfaz de usuario declarativa, basada en componentes modulares. |
 | **Lenguaje** | TypeScript | Implementación de tipado estricto para garantizar la robustez del código y prevenir errores en desarrollo. |
@@ -78,21 +76,21 @@ Descargá una copia completa del proyecto a tu máquina mediante la terminal.
 git clone https://github.com/ivanepais/today-app.git
 ```
 
-2. Acceder al directorio:
+2. **Acceder al directorio:**
 Descomprimi el zip y navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
 
 ```sh
 cd today-app
 ```
 
-3. Instalar dependencias:
+3. **Instalar dependencias:**
 Si tienes NodeJS podes descargar e instalar todos los paquetes y librerías necesarias especificadas en el archivo de configuración
 
 ```sh
 npm install
 ```
 
-4. Iniciar el servidor de desarrollo
+4. **Iniciar el servidor de desarrollo:**
 Levantá el servidor local para visualizar y probar la aplicación en tiempo real en tu navegador
 
 ```sh
