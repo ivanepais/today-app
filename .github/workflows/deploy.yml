@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest # runs on a Linux virtual machine
     steps:
       - name: 📥 Download source code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: 🟢 Config Node.js environment
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'npm' # Dependency caching for fast future builds
@@ -38,10 +38,10 @@ jobs:
         run: npm run build
 
       - name: ⚙️ Config GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v4
 
       - name: 📤 Upload the production output (Artifact)
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './dist' # Upload only the folder compiled by Vite
 
