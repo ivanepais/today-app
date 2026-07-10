@@ -74,8 +74,8 @@ Para levantar el entorno de desarrollo local y ejecutar la aplicación en tu com
 
 1. **Clonar el repositorio:**
 Descargá una copia completa del proyecto a tu máquina mediante la terminal.
-```
-git clone [https://github.com/ivanepais/today-app.git](https://github.com/ivanepais/today-app.git)
+```sh
+git clone https://github.com/ivanepais/today-app.git
 ```
 
 2. Acceder al directorio:
