@@ -73,10 +73,10 @@ src/
 Para levantar el entorno de desarrollo local y ejecutar la aplicación en tu computadora:
 
 1. **Clonar el repositorio:**
-   Descargá una copia completa del proyecto a tu máquina mediante la terminal.
-   ```sh
-   git clone [https://github.com/ivanepais/today-app.git](https://github.com/ivanepais/today-app.git)
-   ```
+Descargá una copia completa del proyecto a tu máquina mediante la terminal.
+```
+git clone [https://github.com/ivanepais/today-app.git](https://github.com/ivanepais/today-app.git)
+```
 
 2. Acceder al directorio:
 Descomprimi el zip y navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
