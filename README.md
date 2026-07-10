@@ -77,7 +77,7 @@ git clone https://github.com/ivanepais/today-app.git
 ```
 
 2. **Acceder al directorio:**
-Descomprimi el zip y navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
+Navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
 
 ```sh
 cd today-app
