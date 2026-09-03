@@ -4,94 +4,92 @@
   </a>
 </p>
 
-Una aplicación web de productividad minimalista diseñada para optimizar la gestión de tareas diarias mediante una interfaz fluida con busqueda, filtrado y persistencia de datos local. El proyecto se desarrolló enfocandose en la separación de responsabilidades y principios de arquitectura limpia por capas, basandose en las prácticas de `DDD` (Domain-Driven Design) y `Atomic Design` (UI/UX) para garantizar código robusto, mantenible y escalable.
+Today App | Your Tasks Now.
 
 ---
 
 ## 💻 App
 
-> 🚀 **¡Probá la aplicación en tiempo real!** siguiendo el enlace: **[today-app](https://ivanepais.github.io/today-app)** o haciendo click en el banner.
+> 🚀 **Try the app!** follow the link: **[today-app](https://ivanepais.github.io/today-app)** or click on the banner.
 
 ---
 
 ## 🌟 Features
 
-* **Arquitectura:** Implementación de un Dominio, Estado y Presentación. Usando interfaces, hooks y componentes para asegurar un contrato solido.
-* **Componentes Modulares y Estilizados:** Interfaz minimalista construida íntegramente con `Styled Components`, asegurando un aislamiento absoluto de estilos y un diseño responsivo.
-* **Persistencia de Datos Local:** Todas las tareas están a salvó en el navegador.
-* **Fácil de Usar:** Una UI pensada para la comodidad visual y de uso. Se divide en una sección dedicada a la busqueda y filtrado para dar paso al corazón de la app: Anotar lo que tengas que hacer hoy! 
+* **Local Data Persistence:** All tasks are saved in the browser.
+* **Fácil de Usar:** A UI designed for visual and usability comfort. It's divided into a section dedicated to search and filtering, leading to the heart of the app: noting what you have to do today! 
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
-| Categoría | Tecnología | Propósito |
 | :--- | :--- | :--- |
-| **Core Frontend** | React | Construcción de una interfaz de usuario declarativa, basada en componentes modulares. |
-| **Lenguaje** | TypeScript | Implementación de tipado estricto para garantizar la robustez del código y prevenir errores en desarrollo. |
-| **Empaquetador** | Vite | Entorno de desarrollo ultra veloz con hot-reload inmediato y optimización avanzada del build de producción gracias Rolldown a escrito en Rust. |
-| **Estilos** | Styled Components | Estilos encapsulados a nivel de componente (CSS-in-JS), facilitando el mantenimiento y evitando colisiones globales. |
-| **Calidad de Código** | EsLint y StyleLint | Analizadores estáticos para asegurar las mejores prácticas de código. |
-| **Entorno de Pruebas** | Vitest y RTL | Suite de testing moderna y de alto rendimiento, totalmente integrada con la configuración nativa del empaquetador. |
+| **Core Frontend** | React | Building an interface based on modular components. |
+| **Language** | TypeScript | Implementation of strict typing to ensure code robustness and prevent development errors. |
+| **Builder** | Vite | Ultra-fast development environment with immediate hot-reload and advanced production build optimization thanks to Rolldown, written in Rust. |
+| **Styles/CSS** | Styled Components | Encapsulated styles at the component level (CSS-in-JS), facilitating maintenance and avoiding global collisions. |
+| **Code Quality** | EsLint & StyleLint | Static analyzers to ensure best coding practices. |
+| **Testing Environment** | Vitest & RTL | Modern, high-performance testing suite, fully integrated with the packer's native configuration. |
 
 ---
 
-## 🏗️ Arquitectura y Estructura de Carpetas
+## 🏗️ Architecture & Structure
 
-El proyecto implementa un enfoque modular. Los componentes visuales, la lógica de estado global y los esquemas de tipado se encuentran estrictamente desacoplados:
+The project implements a modular approach:
 
 ```text
 src/
-├── components/             # Capa de Presentación: Componentes de la interfaz de usuario (UI)
-│   ├── atoms/              # Componentes atómicos reutilizables e indivisibles (Button, Input, etc)
-│   ├── molecules/          # Unidades funcionales que combinan componentes atómicos
-│   ├── organisms/          # Componentes con características completas: pueden manejar eventos y lógica de ui interna
-│   ├── pages/              # Componentes inteligentes que unen las capas de la aplicación
-│   └── templates/          # Componentes estructurales de UI la aplicación
-├── core/                   # Capa de Dominio: define entidades y reglas de negocio
-│   ├── task.entity.ts      # Define la fuente de verdad del dominio, qué datos se aceptan
-│   └── task.logic.ts       # Comportamiento del dominio: funciones puras asociadas a la entidad. Define cómo se usaran los datos
-├── hooks/                  # Capa de Estado: Custom Hooks para extraer la lógica
-│   └── useTasks.ts         # Orquestador entre la UI y el sistema para exponer las acciones que puede realizar en la app
-├── services/               # Da acceso al almacenamiento de datos
-│   └── storage.service.ts  # Servicio que hace posible la persistencia de datos       
-├── store/                  # Define las Acciones: lenguaje con el que la interfaz de usuario se comunica con el estado de la aplicación
-│   └── task.reducer.ts     # Define los cambios que se producen en el sistema
-├── styles/                 # Define los estilos que se usan en la app
-│   ├── GlobalStyles.ts     # Estilo base de la aplicación
-│   └── theme.ts            # Tokens de estilo que consumiran los componentes
-├── App.tsx                 # Componente raíz y Orquestador de la aplicación
-└── main.tsx                # Punto de entrada de la aplicación y renderizado en el DOM
+├── components/             # Presentation Layer: User Interface (UI) Components
+│   ├── atoms/              # Reusable and indivisible atomic components (Button, Input, etc.)
+│   ├── molecules/          # Functional units that combine atomic components
+│   ├── organisms/          # Components with full features: they can handle events and internal UI logic
+│   ├── pages/              # Intelligent components that bridge the layers of the application
+│   └── templates/          # UI structural components of the application
+├── core/                   # Domain Layer: defines entities and business rules
+│   ├── task.entity.ts      # Define the domain's source of truth, what data is accepted
+│   └── task.logic.ts       # Domain behavior: pure functions associated with the entity. Defines how the data will be used
+├── hooks/                  # State Layer: Custom Hooks to extract the logic
+│   └── useTasks.ts         # Orchestrator between the UI and the system to expose the actions that can be performed in the app
+├── services/               # Provides access to data storage.
+│   └── storage.service.ts  # A service that enables data persistence       
+├── store/                  # Define the Actions: the language with which the user interface communicates with the application state
+│   └── task.reducer.ts     # Define the changes that occur in the system
+├── styles/                 # Define the styles used in the app
+│   ├── GlobalStyles.ts     # Basic style of the application
+│   └── theme.ts            # Style tokens that the components will consume
+├── App.tsx                 # Root component and application orchestrator
+└── main.tsx                # Application entry point and rendering in the DOM
 ```
 
 ---
 
-## 🚀 Instalación y Ejecución Local
+## 🚀 Local Installation & Implementation
 
-Para levantar el entorno de desarrollo local y ejecutar la aplicación en tu computadora:
+To set up the local development environment and run the application on your computer:
 
-1. **Clonar el repositorio:**
-Descargá una copia completa del proyecto a tu máquina mediante la terminal.
+1. **Clone the repo:**
+Download the project to your computer.
+
 ```sh
 git clone https://github.com/ivanepais/today-app.git
 ```
 
-2. **Acceder al directorio:**
-Navegá hacia la carpeta raíz donde se encuentra la configuración del proyecto.
+2. **Access the directory:**
+Navigate to the root folder where the project settings are located..
 
 ```sh
 cd today-app
 ```
 
-3. **Instalar dependencias:**
-Si tienes NodeJS podes descargar e instalar todos los paquetes y librerías necesarias especificadas en el archivo de configuración
+3. **Install dependencies:**
+With NodeJS you can download and install all the necessary packages and libraries specified in the configuration file
 
 ```sh
 npm install
 ```
 
-4. **Iniciar el servidor de desarrollo:**
-Levantá el servidor local para visualizar y probar la aplicación en tiempo real en tu navegador
+4. **Start the development server:**
+Start the local server to view and test the application in real time in your browser
 
 ```sh
 npm run dev
@@ -101,18 +99,23 @@ npm run dev
 
 **Suite de Pruebas (Testing):**
 
-El proyecto cuenta con una cobertura de pruebas automatizadas para validar la consistencia de la lógica de negocio y las transiciones del estado global.
+The project includes automated testing coverage to validate the consistency of business logic and global state transitions.
 
-Ejecutar tests en modo interactivo (Watch Mode):
-Ideal para el flujo de trabajo diario mientras modificás el código fuente
+Run tests in interactive mode (Watch Mode):
+Ideal for daily workflow while modifying source code.
 
 ```sh
 npm run test
 ```
 
-Ejecutar tests en modo de producción (CI Run)
-Realiza una pasada única y completa de toda la suite de pruebas, ideal para entornos de integración continua
+Run tests in production mode (CI Run)
+Perform a single, complete pass of the entire test suite, ideal for continuous integration environments
 
 ```sh
 npm run test:run
 ```
+
+## 📄 License
+
+This project is licensed under the MIT License.
+See the file [LICENSE](LICENSE) for more details.
