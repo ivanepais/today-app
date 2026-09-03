@@ -23,6 +23,7 @@ Today App | Your Tasks Now.
 
 ## 🛠️ Tech Stack
 
+| Category | Tech | Purpose |
 | :--- | :--- | :--- |
 | **Core Frontend** | React | Building an interface based on modular components. |
 | **Language** | TypeScript | Implementation of strict typing to ensure code robustness and prevent development errors. |
