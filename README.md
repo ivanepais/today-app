@@ -17,7 +17,7 @@ Today App | Your Tasks Now.
 ## 🌟 Features
 
 * **Local Data Persistence:** All tasks are saved in the browser.
-* **Fácil de Usar:** A UI designed for visual and usability comfort. It's divided into a section dedicated to search and filtering, leading to the heart of the app: noting what you have to do today! 
+* **Easy to Use:** A UI designed for visual and usability comfort. It's divided into a section dedicated to search and filtering, leading to the heart of the app: noting what you have to do today! 
 
 ---
 
